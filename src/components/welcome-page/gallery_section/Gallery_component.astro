@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+
+import photo1 from '../../../assets/gero.jpg';
+import photo2 from '../../../assets/gero.jpg';
+import photo3 from '../../../assets/gero.jpg';
+import photo4 from '../../../assets/gero.jpg';
+import photo5 from '../../../assets/gero.jpg';
+
+const photos = [
+    { src: photo1, alt: "Holowanie wózka widłowego - Michalak24" },
+    { src: photo2, alt: "Pomoc drogowa przy wypadku - Michalak24" },
+    { src: photo3, alt: "Laweta na drodze - Michalak24" },
+    { src: photo4, alt: "Transport auta przy stadionie - Michalak24" },
+    { src: photo5, alt: "Holowanie w deszczu - Michalak24" },
+];
+---
+
+<section class="bg-black pt-20">
+
+
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-12">
+        <div class="max-w-2xl">
+            <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Galeria</span>
+            <h2 class="mt-2 text-4xl md:text-5xl font-black text-white leading-tight uppercase">
+                Zobacz nas <span class="text-yellow-400">w akcji</span>
+            </h2>
+            <p class="mt-4 text-zinc-400 text-base leading-relaxed">
+                Pomoc drogowa w realnych warunkach — śnieg, błoto, nocne wezwania.
+            </p>
+            <p class="mt-2 text-zinc-400 text-base leading-relaxed">
+                W każdej sytuacji jesteśmy przygotowani, by bezpiecznie zabrać Twój pojazd z miejsca zdarzenia. Laweta Poznań? To my — bez pośredników, bez opóźnień.
+            </p>
+        </div>
+    </div>
+
+    <div class="flex w-full overflow-hidden">
+        {photos.map((photo) => (
+                <div class="relative flex-1 min-w-0 overflow-hidden group cursor-pointer">
+                    <Image
+                            src={photo.src}
+                            alt={photo.alt}
+                            class="w-full h-64 md:h-80 lg:h-96 object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                    />
+                    <!-- dark overlay lifted on hover -->
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-all duration-500"></div>
+                    <!-- yellow bottom accent on hover -->
+                    <div class="absolute bottom-0 left-0 right-0 h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                </div>
+        ))}
+    </div>
+
+    <!-- Yellow bottom bar -->
+    <div class="h-4 bg-yellow-400 w-full"></div>
+
+</section>

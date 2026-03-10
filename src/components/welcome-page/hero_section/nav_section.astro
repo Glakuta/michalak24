@@ -1,0 +1,17 @@
+---
+import Image from 'astro/components/Image.astro';
+import "../../../styles/global.css"
+import logo1 from "../../../assets/logo3.png"
+---
+
+
+<nav class="z-20 bg-gray-900 flex items-center justify-between px-10">
+    <Image src={logo1} alt="Michalak24" class="w-64 h-full" />
+    <div class="hidden lg:flex flex-wrap justify-center text-white gap-4 text-base leading-relaxed">
+        <a>Strona główna</a>
+        <a>Nasze usługi</a>
+        <a>O nas</a>
+        <a>Aktualności</a>
+        <a>Kontakt</a>
+    </div>
+</nav>

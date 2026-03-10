@@ -1,0 +1,89 @@
+---
+import { Image } from 'astro:assets';
+import truck from '../../../assets/20210524_094107.jpg';
+---
+
+<section class="bg-black py-16 px-6 md:px-12 lg:px-20">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+        <!-- Left: Image -->
+        <div class="rounded-2xl overflow-hidden h-[480px]">
+            <Image
+                    src={truck}
+                    alt="Michalak24 - Pomoc Drogowa"
+                    class="w-full h-full object-cover object-center"
+            />
+        </div>
+
+        <!-- Right: Content -->
+        <div class="flex flex-col gap-6">
+            <h2 class="text-4xl md:text-5xl font-black text-white leading-tight">
+                Dlaczego <span class="text-yellow-400">warto nam</span> zaufać?
+            </h2>
+
+            <p class="text-zinc-400 text-base leading-relaxed">
+                Nie ryzykuj — wybierz sprawdzoną pomoc drogową, która działa szybko i skutecznie. Oto dlaczego klienci wybierają Michalak24:
+            </p>
+
+            <!-- Checklist -->
+            <ul class="flex flex-col gap-5">
+                <li class="flex items-start gap-4">
+                    <div class="mt-1 w-6 h-6 min-w-[24px] bg-yellow-400 rounded flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-white font-bold text-base">Błyskawiczny czas reakcji.</p>
+                        <p class="text-zinc-400 text-sm leading-relaxed mt-0.5">Docieramy na miejsce w ciągu 30 minut — 24 godziny na dobę, 7 dni w tygodniu.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-4">
+                    <div class="mt-1 w-6 h-6 min-w-[24px] bg-yellow-400 rounded flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-white font-bold text-base">Współpraca z ubezpieczalniami.</p>
+                        <p class="text-zinc-400 text-sm leading-relaxed mt-0.5">Obsługujemy zlecenia PZU, Warty, Allianz i wielu innych — bez zbędnych formalności dla klienta.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-4">
+                    <div class="mt-1 w-6 h-6 min-w-[24px] bg-yellow-400 rounded flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-white font-bold text-base">Ponad 20 lat doświadczenia.</p>
+                        <p class="text-zinc-400 text-sm leading-relaxed mt-0.5">Tysiące skutecznie zakończonych interwencji na drogach całej Polski i za granicą.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-4">
+                    <div class="mt-1 w-6 h-6 min-w-[24px] bg-yellow-400 rounded flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-white font-bold text-base">Przejrzyste ceny, zero ukrytych kosztów.</p>
+                        <p class="text-zinc-400 text-sm leading-relaxed mt-0.5">Wycenę otrzymujesz przed przystąpieniem do pracy — zawsze uczciwie i transparentnie.</p>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- CTA Button -->
+
+            href="tel:+48123456789"
+            class="inline-flex items-center gap-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black text-lg px-8 py-4 rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-yellow-400/20 w-fit mt-2"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/>
+            </svg>
+            +48 123 456 789
+            </a>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,110 @@
+---
+
+const posts = [
+    {
+        slug: "co-robic-gdy-auto-sie-psuje",
+        date: "12 maja 2025",
+        category: "Porady",
+        title: "Co zrobić gdy auto się psuje na autostradzie?",
+        excerpt: "Awaria na autostradzie to stresująca sytuacja. Dowiedz się jak zachować spokój, zadbać o bezpieczeństwo i szybko uzyskać pomoc drogową.",
+        readTime: "4 min",
+    },
+    {
+        slug: "holowanie-za-granica",
+        date: "28 kwietnia 2025",
+        category: "Holowanie",
+        title: "Holowanie za granicą — co warto wiedzieć przed wyjazdem?",
+        excerpt: "Wyjeżdżasz za granicę? Sprawdź jakie prawa przysługują Ci w razie awarii w Europie i jak działa pomoc drogowa poza Polską.",
+        readTime: "6 min",
+    },
+    {
+        slug: "ubezpieczenie-assistance",
+        date: "10 kwietnia 2025",
+        category: "Ubezpieczenia",
+        title: "Assistance w ubezpieczeniu OC — czy naprawdę Cię chroni?",
+        excerpt: "Wielu kierowców nie wie co obejmuje ich polisa assistance. Wyjaśniamy czego możesz oczekiwać od ubezpieczyciela i kiedy warto dopłacić za rozszerzony pakiet.",
+        readTime: "5 min",
+    },
+];
+---
+
+<section class="bg-black py-20 px-6 md:px-12 lg:px-20">
+    <div class="max-w-7xl mx-auto flex flex-col gap-12">
+
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+                <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Wiedza i porady</span>
+                <h2 class="mt-2 text-4xl md:text-5xl font-black text-white leading-tight">
+                    Ostatnie <span class="text-yellow-400">wpisy</span>
+                </h2>
+            </div>
+
+            <a href="/blog"
+            class="inline-flex items-center gap-2 border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black font-bold px-6 py-3 rounded-xl transition-all duration-200 w-fit"
+            >
+            Zobacz wszystkie wpisy
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+            </a>
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {posts.map((post, i) => (
+
+                <a href={`/blog/${post.slug}`}
+                class="group flex flex-col bg-zinc-900 border border-zinc-800 hover:border-yellow-400/50 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-yellow-400/5"
+                    >
+                    <!-- Category + date bar -->
+                        <div class="px-6 pt-6 flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-widest text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full">
+              {post.category}
+            </span>
+                            <span class="text-xs text-zinc-500">{post.date}</span>
+                        </div>
+
+
+                        <div class="flex flex-col gap-3 px-6 py-5 flex-1">
+                            <h3 class="text-white font-bold text-lg leading-snug group-hover:text-yellow-400 transition-colors duration-200">
+                                {post.title}
+                            </h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed line-clamp-3">
+                                {post.excerpt}
+                            </p>
+                        </div>
+
+
+                        <div class="px-6 pb-6 flex items-center justify-between border-t border-zinc-800 pt-4 mt-auto">
+            <span class="text-xs text-zinc-500 flex items-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+                {post.readTime} czytania
+            </span>
+                            <span class="text-yellow-400 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+              Czytaj
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+                        </div>
+                </a>
+                ))}
+        </div>
+
+
+        <div class="flex justify-center">
+
+            <a href="/blog"
+            class="inline-flex items-center gap-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black text-base px-10 py-4 rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-yellow-400/20"
+            >
+            Przejdź do bloga
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+            </a>
+        </div>
+
+    </div>
+</section>
