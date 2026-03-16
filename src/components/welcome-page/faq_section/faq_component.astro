@@ -1,120 +1,140 @@
 ---
 import "../../../styles/global.css"
 ---
-<section class="w-full h-full flex flex-col lg:flex-row items-center justify-center gap-12 text-gr bg-gray-950">
+
+<style>
+    details summary::-webkit-details-marker { display: none; }
+
+    details .chevron {
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    details[open] .chevron {
+        transform: rotate(180deg);
+    }
+
+    details .faq-answer {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    details[open] .faq-answer {
+        grid-template-rows: 1fr;
+    }
+    details .faq-answer > div {
+        overflow: hidden;
+    }
+
+    details summary .faq-question-text { color: #8a96a8; }
+    details[open] summary .faq-question-text { color: #F5A623; }
+
+    details summary .chevron { color: #8a96a8; }
+    details[open] summary .chevron { color: #F5A623; }
+</style>
+
+<section class="w-full h-full flex flex-col lg:flex-row items-center justify-center bg-black">
     <div class="w-full max-w-6xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-16">
+
         <div class="flex-shrink-0 md:w-80 flex flex-col gap-6 md:pt-2">
             <h1 class="text-5xl font-extrabold leading-tight" style="color: #c8ced8;">
-                Najczęściej <br>Zadawane<br>Pytania
+                Najczęściej<br>Zadawane<br>Pytania
             </h1>
             <p class="text-sm font-light leading-relaxed" style="color: #6b7a90;">
                 Zaufały nam już setki klientów
             </p>
         </div>
 
+        <div class="flex-1 flex flex-col rounded-xl p-8" style="color:black">
 
-        <div class="flex-1 flex flex-col" style="background-color: #364153; border-radius: 12px; padding: 2rem;">
-            <div class="faq-item active py-5 cursor-pointer" onclick="toggleFaq(this)">
-                <div class="flex items-center justify-between gap-4">
-          <span class="faq-question-text text-base text-yellow-400 font-medium transition-colors duration-300">
-            How do I update my billing information?
-          </span>
-                    <svg class="chevron flex-shrink-0 w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
-                    </svg>
-                </div>
-                <div class="faq-answer open mt-4">
-                    <p class="text-sm leading-relaxed" style="color: #8a96a8;">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ante vitae purus tempus egestas. Curabitur euismod purus sed elit faucibus. Vivamus in ante sed libero feugiat fermentum.
-                    </p>
-                </div>
-            </div>
-
-            <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
-                <div class="flex items-center justify-between gap-4">
-          <span class="faq-question-text text-base font-medium transition-colors duration-300" style="color: #8a96a8;">
-            How do I cancel my subscription?
-          </span>
-                    <svg class="chevron flex-shrink-0 w-5 h-5" style="color: #8a96a8;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <details class="border-b border-white/10 py-5" open>
+                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none">
+                    <span class="faq-question-text text-base font-medium transition-colors duration-300">
+                        How do I update my billing information?
+                    </span>
+                    <svg class="chevron flex-shrink-0 w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                     </svg>
+                </summary>
+                <div class="faq-answer">
+                    <div>
+                        <p class="text-sm leading-relaxed pt-4" style="color: #8a96a8;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ante vitae purus tempus egestas. Curabitur euismod purus sed elit faucibus. Vivamus in ante sed libero feugiat fermentum.
+                        </p>
+                    </div>
                 </div>
-                <div class="faq-answer mt-4">
-                    <p class="text-sm leading-relaxed" style="color: #8a96a8;">
-                        You can cancel your subscription at any time from your account settings. Navigate to Billing and click "Cancel Subscription." Access remains active until end of current billing period.
-                    </p>
-                </div>
-            </div>
+            </details>
 
-            <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
-                <div class="flex items-center justify-between gap-4">
-          <span class="faq-question-text text-base font-medium transition-colors duration-300" style="color: #8a96a8;">
-            Can I change my plan at any time?
-          </span>
-                    <svg class="chevron flex-shrink-0 w-5 h-5" style="color: #8a96a8;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <details class="border-b border-white/10 py-5">
+                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none">
+                    <span class="faq-question-text text-base font-medium transition-colors duration-300">
+                        How do I cancel my subscription?
+                    </span>
+                    <svg class="chevron flex-shrink-0 w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                     </svg>
+                </summary>
+                <div class="faq-answer">
+                    <div>
+                        <p class="text-sm leading-relaxed pt-4" style="color: #8a96a8;">
+                            You can cancel your subscription at any time from your account settings. Navigate to Billing and click "Cancel Subscription." Access remains active until end of current billing period.
+                        </p>
+                    </div>
                 </div>
-                <div class="faq-answer mt-4">
-                    <p class="text-sm leading-relaxed" style="color: #8a96a8;">
-                        Yes, you can upgrade or downgrade at any time. Changes take effect immediately. Upgrades are billed pro-rata for the remaining billing period.
-                    </p>
-                </div>
-            </div>
+            </details>
 
-            <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
-                <div class="flex items-center justify-between gap-4">
-          <span class="faq-question-text text-base font-medium transition-colors duration-300" style="color: #8a96a8;">
-            Is my payment information secure?
-          </span>
-                    <svg class="chevron flex-shrink-0 w-5 h-5" style="color: #8a96a8;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <details class="border-b border-white/10 py-5">
+                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none">
+                    <span class="faq-question-text text-base font-medium transition-colors duration-300">
+                        Can I change my plan at any time?
+                    </span>
+                    <svg class="chevron flex-shrink-0 w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                     </svg>
+                </summary>
+                <div class="faq-answer">
+                    <div>
+                        <p class="text-sm leading-relaxed pt-4" style="color: #8a96a8;">
+                            Yes, you can upgrade or downgrade at any time. Changes take effect immediately. Upgrades are billed pro-rata for the remaining billing period.
+                        </p>
+                    </div>
                 </div>
-                <div class="faq-answer mt-4">
-                    <p class="text-sm leading-relaxed" style="color: #8a96a8;">
-                        Absolutely. We use 256-bit SSL encryption and are fully PCI-DSS compliant. We never store your full card details — all payments go through Stripe securely.
-                    </p>
-                </div>
-            </div>
+            </details>
 
-            <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)" style="border-bottom: none;">
-                <div class="flex items-center justify-between gap-4">
-          <span class="faq-question-text text-base font-medium transition-colors duration-300" style="color: #8a96a8;">
-            Do you offer refunds?
-          </span>
-                    <svg class="chevron flex-shrink-0 w-5 h-5" style="color: #8a96a8;" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <details class="border-b border-white/10 py-5">
+                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none">
+                    <span class="faq-question-text text-base font-medium transition-colors duration-300">
+                        Is my payment information secure?
+                    </span>
+                    <svg class="chevron flex-shrink-0 w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
                     </svg>
+                </summary>
+                <div class="faq-answer">
+                    <div>
+                        <p class="text-sm leading-relaxed pt-4" style="color: #8a96a8;">
+                            Absolutely. We use 256-bit SSL encryption and are fully PCI-DSS compliant. We never store your full card details — all payments go through Stripe securely.
+                        </p>
+                    </div>
                 </div>
-                <div class="faq-answer mt-4">
-                    <p class="text-sm leading-relaxed" style="color: #8a96a8;">
-                        We offer a 30-day money-back guarantee on all new subscriptions. Contact support within 30 days of purchase and we'll issue a full refund, no questions asked.
-                    </p>
+            </details>
+
+            <details class="py-5">
+                <summary class="flex items-center justify-between gap-4 cursor-pointer list-none">
+                    <span class="faq-question-text text-base font-medium transition-colors duration-300">
+                        Do you offer refunds?
+                    </span>
+                    <svg class="chevron flex-shrink-0 w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="faq-answer">
+                    <div>
+                        <p class="text-sm leading-relaxed pt-4" style="color: #8a96a8;">
+                            We offer a 30-day money-back guarantee on all new subscriptions. Contact support within 30 days of purchase and we'll issue a full refund, no questions asked.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </details>
 
         </div>
     </div>
-
 </section>
-
-<!--<script>-->
-<!--    function toggleFaq(item) {-->
-<!--        const isActive = item.classList.contains('active');-->
-<!--        document.querySelectorAll('.faq-item').forEach(item => {-->
-<!--            item.classList.remove('active');-->
-<!--            item.querySelector('.faq-answer')?.classList.remove('open');-->
-<!--            item.querySelector('.faq-question-text').sty-->
-<!--            item.querySelector('.chevron')?.style.color = '#8a96a8';-->
-<!--        })-->
-<!--        if (!isActive) {-->
-<!--            item.classList.add('active');-->
-<!--            item.querySelector('.faq-answer').classList.add('open');-->
-<!--            item.querySelector('.faq-question-text').style.color = '#F5A623';-->
-<!--            item.querySelector('.chevron').style.color = '#F5A623';-->
-<!--        }-->
-
-<!--    }-->
-
-<!--</script>-->

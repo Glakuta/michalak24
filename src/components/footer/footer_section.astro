@@ -1,0 +1,193 @@
+---
+// src/components/Footer.astro
+
+const currentYear = new Date().getFullYear();
+
+const links = [
+    { label: "Strona główna", href: "/" },
+    { label: "O nas", href: "/o-nas" },
+    { label: "Usługi", href: "/uslugi" },
+    { label: "Realizacje", href: "/realizacje" },
+    { label: "Blog", href: "/blog" },
+    { label: "Kontakt", href: "/kontakt" },
+];
+
+const services = [
+    { label: "Holowanie pojazdów", href: "/uslugi/holowanie" },
+    { label: "Pomoc drogowa 24h", href: "/uslugi/pomoc-drogowa" },
+    { label: "Transport lawetą", href: "/uslugi/laweta" },
+    { label: "Obsługa ubezpieczeń", href: "/uslugi/ubezpieczenia" },
+    { label: "Holowanie za granicą", href: "/uslugi/zagranica" },
+];
+
+// Ostatnie wpisy - podmień na dane z WP API lub przekaż jako props
+const recentPosts = [
+    {
+        slug: "co-robic-gdy-auto-sie-psuje",
+        title: "Co zrobić gdy auto się psuje na autostradzie?",
+        date: "12 maja 2025",
+        image: "/images/blog/post1.jpg",
+    },
+    {
+        slug: "holowanie-za-granica",
+        title: "Holowanie za granicą — co warto wiedzieć?",
+        date: "28 kwietnia 2025",
+        image: "/images/blog/post2.jpg",
+    },
+];
+---
+
+<footer class="bg-zinc-950 text-white">
+    <div class="w-full h-64 relative overflow-hidden grayscale brightness-75">
+        <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.123456789!2d16.9!3d52.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDI0JzAwLjAiTiAxNsKwNTQnMDAuMCJF!5e0!3m2!1spl!2spl!4v1234567890"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="absolute inset-0 w-full h-full"
+        ></iframe>
+    </div>
+
+    <div class="border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 17l4-8h14l4 8"/><path d="M5 17h14"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/>
+                    </svg>
+                </div>
+                <span class="text-xl font-black tracking-tight">Michalak<span class="text-yellow-400">24</span></span>
+            </div>
+
+
+            <p class="text-zinc-400 text-sm text-center">
+                Pomoc drogowa dostępna <span class="text-yellow-400 font-bold">24/7</span> — jesteśmy tam, gdzie nas potrzebujesz.
+            </p>
+
+            <a href="tel:+48123456789"
+            class="flex items-center gap-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black px-5 py-3 rounded-xl transition-all duration-200 whitespace-nowrap"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/>
+            </svg>
+            +48 123 456 789
+            </a>
+        </div>
+    </div>
+
+
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-14">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div class="flex flex-col gap-4">
+                <div>
+                    <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Nawigacja</p>
+                    <h3 class="text-white font-black text-lg">Usługi</h3>
+                </div>
+                <ul class="flex flex-col gap-2">
+                    {services.map(link => (
+                            <li>
+
+                                <a href={link.href}
+                                class="text-zinc-400 hover:text-yellow-400 text-sm transition-colors duration-200 flex items-center gap-2 group"
+                                >
+                                <span class="w-1 h-1 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                {link.label}
+                                </a>
+                            </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <div>
+                    <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Blog</p>
+                    <h3 class="text-white font-black text-lg">Ostatnie wpisy</h3>
+                </div>
+                <div class="flex flex-col gap-4">
+                    {recentPosts.map(post => (
+                            <a href={`/blog/${post.slug}`} class="flex items-start gap-3 group">
+                                <div
+                                        class="w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-zinc-800"
+                                        style={`background-image: url('${post.image}'); background-size: cover; background-position: center;`}
+                                ></div>
+                                <div class="flex flex-col gap-1 min-w-0">
+                                    <p class="text-zinc-300 group-hover:text-yellow-400 text-sm font-semibold leading-snug transition-colors line-clamp-2">
+                                        {post.title}
+                                    </p>
+                                    <p class="text-zinc-600 text-xs">{post.date}</p>
+                                </div>
+                            </a>
+                    ))}
+                </div>
+            </div>
+            <div class="flex flex-col gap-4">
+                <div>
+                    <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Kontakt</p>
+                    <h3 class="text-white font-black text-lg">Znajdź nas</h3>
+                </div>
+                <ul class="flex flex-col gap-3">
+                    <li class="flex items-start gap-3 text-sm text-zinc-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        ul. Przykładowa 12, 60-001 Poznań
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-zinc-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C10.61 21 3 13.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z"/>
+                        </svg>
+                        +48 123 456 789
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-zinc-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        kontakt@michalak24.pl
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-zinc-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        Dostępni <span class="text-yellow-400 font-bold ml-1">24/7</span>
+                    </li>
+                </ul>
+
+                <!-- Social -->
+                <div class="flex gap-3 mt-2">
+                    <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-zinc-400 group-hover:text-black" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-zinc-400 group-hover:text-black" viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-zinc-400 group-hover:text-black" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="border-t border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p class="text-zinc-600 text-sm">
+                © {currentYear} Michalak24. Wszelkie prawa zastrzeżone.
+            </p>
+            <div class="flex items-center gap-5">
+                <a href="/polityka-prywatnosci" class="text-zinc-600 hover:text-zinc-400 text-sm transition-colors">Polityka prywatności</a>
+                <a href="/regulamin" class="text-zinc-600 hover:text-zinc-400 text-sm transition-colors">Regulamin</a>
+            </div>
+        </div>
+    </div>
+
+</footer>

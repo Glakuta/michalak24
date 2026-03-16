@@ -1,0 +1,201 @@
+---
+// src/pages/blog/index.astro
+import Layout from '../../../layouts/Layout.astro'
+
+const posts = [
+    {
+        slug: "co-robic-gdy-auto-sie-psuje",
+        date: "12 maja 2025",
+        category: "Porady",
+        title: "Co zrobić gdy auto się psuje na autostradzie?",
+        excerpt: "Awaria na autostradzie to stresująca sytuacja. Dowiedz się jak zachować spokój, zadbać o bezpieczeństwo i szybko uzyskać pomoc drogową.",
+        author: "Michalak24",
+        keywords: ["awaria", "autostrada", "bezpieczeństwo", "pomoc drogowa"],
+        image: "/images/blog/post1.jpg",
+    },
+    {
+        slug: "holowanie-za-granica",
+        date: "28 kwietnia 2025",
+        category: "Holowanie",
+        title: "Holowanie za granicą — co warto wiedzieć przed wyjazdem?",
+        excerpt: "Wyjeżdżasz za granicę? Sprawdź jakie prawa przysługują Ci w razie awarii w Europie i jak działa pomoc drogowa poza Polską.",
+        author: "Michalak24",
+        keywords: ["holowanie", "zagranica", "Europa", "ubezpieczenie"],
+        image: "/images/blog/post2.jpg",
+    },
+    {
+        slug: "ubezpieczenie-assistance",
+        date: "10 kwietnia 2025",
+        category: "Ubezpieczenia",
+        title: "Assistance w ubezpieczeniu OC — czy naprawdę Cię chroni?",
+        excerpt: "Wielu kierowców nie wie co obejmuje ich polisa assistance. Wyjaśniamy czego możesz oczekiwać od ubezpieczyciela i kiedy warto dopłacić za rozszerzony pakiet.",
+        author: "Michalak24",
+        keywords: ["assistance", "OC", "polisa", "ubezpieczenie"],
+        image: "/images/blog/post3.jpg",
+    },
+    {
+        slug: "laweta-czy-holowanie",
+        date: "2 kwietnia 2025",
+        category: "Porady",
+        title: "Laweta czy holowanie na sztywno? Czym różnią się te usługi?",
+        excerpt: "Nie każdy wie że laweta i holowanie to dwie różne usługi. Sprawdź kiedy użyć której i jak to wpływa na stan Twojego pojazdu.",
+        author: "Michalak24",
+        keywords: ["laweta", "holowanie", "usługi", "pojazd"],
+        image: "/images/blog/post4.jpg",
+    },
+    {
+        slug: "nocna-pomoc-drogowa",
+        date: "20 marca 2025",
+        category: "Realizacje",
+        title: "Nocna pomoc drogowa — jak wyglądają interwencje po zmroku?",
+        excerpt: "Awarie zdarzają się o każdej porze. Opowiadamy jak wygląda praca ekipy Michalak24 w nocy i dlaczego czas reakcji jest kluczowy.",
+        author: "Michalak24",
+        keywords: ["noc", "interwencja", "24h", "czas reakcji"],
+        image: "/images/blog/post5.jpg",
+    },
+    {
+        slug: "przygotowanie-auta-na-zime",
+        date: "5 marca 2025",
+        category: "Porady",
+        title: "Jak przygotować auto na zimę i uniknąć awarii w mróz?",
+        excerpt: "Zima to najtrudniejszy okres dla kierowców. Podpowiadamy co sprawdzić zanim temperatura spadnie poniżej zera i jak uniknąć kosztownych niespodzianek.",
+        author: "Michalak24",
+        keywords: ["zima", "mróz", "przegląd", "awaria"],
+        image: "/images/blog/post6.jpg",
+    },
+];
+
+// Featured = pierwszy wpis, reszta w gridzie
+const [featured, ...rest] = posts;
+---
+
+<Layout>
+    <main class="bg-black min-h-screen">
+
+        <!-- Page Hero -->
+        <div class="bg-zinc-950 border-b border-zinc-800 py-16 px-6 md:px-12 lg:px-20">
+            <div class="max-w-7xl mx-auto">
+                <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Wiedza i porady</span>
+                <h1 class="mt-2 text-5xl md:text-6xl font-black text-white leading-tight">
+                    Blog <span class="text-yellow-400">Michalak24</span>
+                </h1>
+                <p class="mt-4 text-zinc-400 text-lg max-w-xl leading-relaxed">
+                    Porady, realizacje i wszystko co powinieneś wiedzieć o pomocy drogowej i ubezpieczeniach.
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 flex flex-col gap-8">
+
+            <!-- Featured post -->
+
+            <a href={`/blog/${featured.slug}`}
+            class="group relative rounded-2xl overflow-hidden h-[480px] md:h-[560px] block"
+            style={`background-image: url('${featured.image}'); background-size: cover; background-position: center;`}
+            >
+            <!-- Gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent group-hover:via-black/40 transition-all duration-500"></div>
+            <!-- Yellow accent -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-yellow-400"></div>
+
+            <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                <div class="flex items-center gap-3 mb-4">
+            <span class="text-xs font-bold uppercase tracking-widest text-black bg-yellow-400 px-3 py-1 rounded-full">
+              {featured.category}
+            </span>
+                    <span class="text-zinc-400 text-sm">Wyróżniony wpis</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-white leading-tight max-w-3xl group-hover:text-yellow-400 transition-colors duration-300">
+                    {featured.title}
+                </h2>
+                <p class="mt-3 text-zinc-300 text-base max-w-2xl leading-relaxed line-clamp-2">
+                    {featured.excerpt}
+                </p>
+                <div class="mt-6 flex items-center gap-6">
+                    <div class="flex items-center gap-2 text-zinc-400 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        {featured.author}
+                    </div>
+                    <div class="flex items-center gap-2 text-zinc-400 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        {featured.date}
+                    </div>
+                    <span class="text-yellow-400 font-bold text-sm flex items-center gap-1.5 group-hover:gap-3 transition-all duration-200">
+              Czytaj więcej
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+                </div>
+                <!-- Keywords -->
+                <div class="mt-4 flex flex-wrap gap-2">
+                    {featured.keywords.map(kw => (
+                            <span class="text-xs text-zinc-500 border border-zinc-700 px-2 py-0.5 rounded-full">#{kw}</span>
+                    ))}
+                </div>
+            </div>
+            </a>
+
+            <!-- Posts grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {rest.map((post) => (
+
+                   <a href={`/blog/${post.slug}`}
+                    class="group relative rounded-2xl overflow-hidden h-80 block"
+                    style={`background-image: url('${post.image}'); background-size: cover; background-position: center;`}
+                    >
+                    <!-- Gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent group-hover:via-black/30 transition-all duration-500"></div>
+                    <!-- Yellow left border accent on hover -->
+                    <div class="absolute inset-y-0 left-0 w-1 bg-yellow-400 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"></div>
+
+                    <!-- Category badge -->
+                    <div class="absolute top-4 left-4">
+              <span class="text-xs font-bold uppercase tracking-widest text-black bg-yellow-400 px-3 py-1 rounded-full">
+                {post.category}
+              </span>
+                    </div>
+
+                    <!-- Content bottom -->
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <h3 class="text-white font-black text-lg leading-snug group-hover:text-yellow-400 transition-colors duration-200">
+                            {post.title}
+                        </h3>
+                        <p class="mt-2 text-zinc-400 text-sm leading-relaxed line-clamp-2">
+                            {post.excerpt}
+                        </p>
+
+                        <!-- Meta -->
+                        <div class="mt-3 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                  <span class="text-zinc-500 text-xs flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                    </svg>
+                      {post.author}
+                  </span>
+                                <span class="text-zinc-500 text-xs">{post.date}</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </div>
+
+
+                        <div class="mt-3 flex flex-wrap gap-1.5">
+                            {post.keywords.map(kw => (
+                                    <span class="text-xs text-zinc-500 border border-zinc-800 bg-black/40 px-2 py-0.5 rounded-full">#{kw}</span>
+                            ))}
+                        </div>
+                    </div>
+                    </a>
+                    ))}
+            </div>
+
+        </div>
+    </main>
+</Layout>
