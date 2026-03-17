@@ -4,6 +4,7 @@ import "../../../assets/styles/global.css"
 import logo1 from "../../../assets/logo4.png"
 import truckBg from "../../../assets/DAF_hero.jpg"
 import Hamburger from "../../../assets/hamburger-menu-icon.svg"
+import Caroseul_component from "./caroseul_component.astro";
 ---
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,25 +12,28 @@ import Hamburger from "../../../assets/hamburger-menu-icon.svg"
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet" />
 
 <section
-        class="min-h-screen overflow-hidden relative"
-        style={`background-image: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${truckBg.src}); background-size: cover; background-position: center;`}
+        class="h-screen overflow-hidden relative flex flex-col"
+        style={`background-image: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${truckBg.src}); background-size: cover;  background-position: center;`}
 >
 
-    >
-    <nav class="z-20 flex  items-center justify-between px-10">
-        <Image src={logo1} alt="Michalak24" class="w-64 h-full" />
-        <Hamburger class="openMenuButton block lg:hidden w-16 h-16"/>
-        <div class="hidden lg:flex flex-wrap justify-center text-white gap-4 text-base leading-relaxed">
-            <a>Strona główna</a>
-            <a>Nasze usługi</a>
-            <a>O nas</a>
-            <a>Aktualności</a>
-            <a>Kontakt</a>
+    <nav class="bg-yellow-400 z-20 flex items-center justify-between px-10 h-18 shrink-0">
+        <Image
+                src={logo1}
+                alt="Michalak24"
+                class="w-[240px] h-full object-cover"
+        />
+        <Hamburger class="openMenuButton block lg:hidden w-10 h-10 text-black" />
+        <div class="hidden lg:flex items-center gap-6 text-sm">
+            <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">Strona główna</a>
+            <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">Nasze usługi</a>
+            <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">O nas</a>
+            <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">Aktualności</a>
+            <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">Kontakt</a>
         </div>
     </nav>
 
 
-    <div class=" z-30 flex flex-col justify-center items-center min-h-[calc(100vh-88px)] px-10 md:px-16 pb-16 md:pb-20">
+    <div class=" z-30 flex flex-col justify-center items-center flex-1 px-10 md:px-16 pb-16 md:pb-20">
         <div class="flex flex-col items-center gap-5 max-w-lg">
             <p
                     class="text-yellow-400 text-sm font-semibold tracking-[0.2em] uppercase"
@@ -54,13 +58,18 @@ import Hamburger from "../../../assets/hamburger-menu-icon.svg"
             <div class="flex items-center gap-4 mt-2 flex-wrap">
 
                 <a href="tel:571531112"
-                   class="flex items-center gap-2 bg-red-600 hover:bg-yellow-300 animate-pulse text-yellow-300 hover:text-red-600 font-bold text-sm tracking-widest uppercase px-7 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(250,204,21,.5)]"
+                   class="relative flex items-center gap-3 bg-white text-black font-black text-sm tracking-widest uppercase px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(255,255,255,0.25)] overflow-hidden group"
                    style="font-family:'Barlow Condensed',sans-serif; letter-spacing:.12em;"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
-                    </svg>
-                    Zadzwoń teraz – 571 531 112
+
+                    <span class="relative flex items-center justify-center w-8 h-8 bg-green-500 rounded-full shrink-0 group-hover:bg-green-400 transition-colors duration-200">
+
+    <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-50"></span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white relative z-10 rotate-12" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
+    </svg>
+  </span>
+                    Kliknij aby wezwać pomoc – 571 531 112
                 </a>
             </div>
             <div class="flex items-center gap-6 mt-1 flex-wrap">
@@ -74,6 +83,9 @@ import Hamburger from "../../../assets/hamburger-menu-icon.svg"
 
         </div>
     </div>
+    <Caroseul_component />
+
+
 </section>
 
 

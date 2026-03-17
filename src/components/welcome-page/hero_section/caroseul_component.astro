@@ -1,0 +1,39 @@
+---
+const keywords = [
+    "Pomoc drogowa Kalisz",
+    "Laweta Kalisz",
+    "Holowanie 24/7",
+    "Awaria na drodze",
+    "Transport pojazdu",
+    "Pomoc drogowa Ostrów",
+    "Laweta całą dobę",
+    "Wypadek drogowy",
+    "Holowanie za granicą",
+    "Assistance OC",
+    "Pomoc drogowa A2",
+    "Szybki dojazd 15 min",
+];
+---
+
+<div class="bg-yellow-400  flex justify-center items-center  overflow-hidden py-2.5">
+    <div class="flex animate-marquee whitespace-nowrap">
+        {[...keywords, ...keywords].map((kw) => (
+                <span class="inline-flex items-center gap-2 mx-6 text-black text-base font-black uppercase tracking-widest shrink-0">
+                    {kw}
+      </span>
+        ))}
+    </div>
+</div>
+
+<style>
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+        animation: marquee 22s linear infinite;
+    }
+    .animate-marquee:hover {
+        animation-play-state: paused;
+    }
+</style>
