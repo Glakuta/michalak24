@@ -11,7 +11,9 @@ export default defineConfig({
   integrations: [react()],
   output: 'server',
   adapter: vercel(),
-
+  image: {
+      domains: [],
+    },
   vite: {
     plugins: [tailwindcss()]
   }
