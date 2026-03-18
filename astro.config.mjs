@@ -10,7 +10,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   integrations: [react()],
   output: 'server',
-  adapter: vercel(),
+  adapter: adapter: vercel({
+               imageService: true,
+             }),,
   image: {
       domains: [],
     },
