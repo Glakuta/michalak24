@@ -1,1 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Twoja+Czcionka&display=swap');
 @import "tailwindcss";
+@theme {
+    --font-sans: 'Poppins', sans-serif;
+}

@@ -1,0 +1,212 @@
+---
+// src/pages/uslugi/index.astro
+import Layout from '../../layouts/Layout.astro';
+
+const services = [
+    {
+        slug: "holowanie-laweta",
+        title: "Holowanie i laweta",
+        short: "Bezpieczny transport każdego pojazdu",
+        desc: "Profesjonalne holowanie i transport lawetą dla osobówek, busów i pojazdów ciężarowych. Działamy 24/7 na terenie Kalisza, regionu i całej Polski.",
+        bullets: ["Załadunek najazdowy", "Pojazdy do 7 ton", "Holowanie krajowe i zagraniczne"],
+        img: "/images/services/laweta.jpg",
+        featured: true,
+    },
+    {
+        slug: "pomoc-drogowa-24h",
+        title: "Pomoc drogowa 24h",
+        short: "Jesteśmy tam, gdzie nas potrzebujesz",
+        desc: "Awaria o każdej porze? Docieramy średnio w 15–30 minut. Działamy całą dobę, przez cały rok — bez wyjątków i bez dodatkowych opłat za nocne wezwania.",
+        bullets: ["Dojazd 15–30 min", "Bez dopłat w nocy", "Cały rok, 365 dni"],
+        img: "/images/services/pomoc-drogowa.jpg",
+        featured: true,
+    },
+    {
+        slug: "pomoc-przy-wypadku",
+        title: "Pomoc przy wypadku",
+        short: "Szybka reakcja w najtrudniejszych chwilach",
+        desc: "Wypadek drogowy to sytuacja kryzysowa. Zabezpieczymy miejsce zdarzenia, zadbamy o bezpieczną ewakuację pojazdu i pomożemy w kontakcie z ubezpieczycielem.",
+        bullets: ["Zabezpieczenie miejsca zdarzenia", "Ewakuacja pojazdu", "Wsparcie z ubezpieczycielem"],
+        img: "/images/services/wypadek.jpg",
+        featured: false,
+    },
+    {
+        slug: "uruchomienie-auta-akumulator",
+        title: "Uruchomienie auta",
+        short: "Martwy akumulator? Zrestartujemy Cię w minuty",
+        desc: "Rozładowany akumulator, zatrzaśnięte kluczyki, brak paliwa — to najczęstsze przyczyny unieruchomienia auta. Przyjedziemy i rozwiążemy problem na miejscu.",
+        bullets: ["Rozruch z kabli", "Wymiana akumulatora", "Otwarcie pojazdu bez uszkodzeń"],
+        img: "/images/services/akumulator.jpg",
+        featured: false,
+    },
+];
+
+const featured = services.filter(s => s.featured);
+const rest = services.filter(s => !s.featured);
+---
+
+<main class="bg-black min-h-screen" style="font-family:'Barlow Condensed',sans-serif;">
+
+    <!-- HERO -->
+    <div class="relative h-64 md:h-80 overflow-hidden flex items-end bg-zinc-900">
+        <div class="absolute inset-0 bg-gradient-to-br from-zinc-900 to-zinc-800 flex items-center justify-center">
+            <span class="text-zinc-800 text-sm uppercase tracking-widest">[ Twoje zdjęcie tła ]</span>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+        <div class="absolute top-0 left-0 right-0 h-1 bg-yellow-400"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-12 w-full">
+            <div class="flex items-center gap-2 text-sm text-zinc-400 mb-3">
+                <a href="/" class="hover:text-yellow-400 transition-colors">Strona główna</a>
+                <span>/</span>
+                <span class="text-zinc-500">Usługi</span>
+            </div>
+            <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Co oferujemy</span>
+            <h1 class="mt-1 text-5xl md:text-6xl font-black text-white leading-tight uppercase">
+                Nasze <span class="text-yellow-400">usługi</span>
+            </h1>
+        </div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-12 border-b border-zinc-800">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <p class="text-zinc-400 text-lg max-w-2xl leading-relaxed">
+                Specjalizujemy się w kompleksowej pomocy drogowej na terenie Kalisza i całego regionu.
+                Każde zlecenie realizujemy szybko, uczciwie i bez ukrytych kosztów.
+            </p>
+
+            href="tel:571531112"
+            class="flex items-center gap-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm tracking-widest uppercase px-6 py-3.5 rounded-full transition-all duration-200 hover:-translate-y-0.5 shrink-0"
+            >
+            <span class="relative flex items-center justify-center w-7 h-7 bg-black rounded-full shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-yellow-400 rotate-12" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
+            </svg>
+          </span>
+            <a> Zadzwoń — 571 531 112
+            </a>
+        </div>
+    </div>
+
+    <!-- FEATURED — 2 duże karty -->
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {featured.map((s) => (
+                    <div
+                            class="group relative rounded-2xl overflow-hidden h-96 flex flex-col justify-end cursor-pointer"
+                            style={`background-image: url('${s.img}'); background-size: cover; background-position: center;`}
+                    >
+                        <!-- Placeholder gdy brak zdjęcia -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+                            <span class="text-zinc-700 text-xs uppercase tracking-widest">[ {s.title} ]</span>
+                        </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent group-hover:via-black/30 transition-all duration-500"></div>
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-yellow-400"></div>
+                        <div class="absolute inset-y-0 left-0 w-1 bg-yellow-400 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"></div>
+
+                        <div class="relative z-10 p-8 flex flex-col gap-3">
+                            <p class="text-yellow-400 text-xs font-bold uppercase tracking-[0.2em]">{s.short}</p>
+                            <h2 class="text-3xl font-black text-white uppercase leading-tight group-hover:text-yellow-400 transition-colors duration-200">
+                                {s.title}
+                            </h2>
+                            <p class="text-zinc-300 text-sm leading-relaxed max-w-sm">{s.desc}</p>
+
+                            <ul class="flex flex-wrap gap-2 mt-1">
+                                {s.bullets.map(b => (
+                                        <li class="flex items-center gap-1.5 text-xs text-black font-bold bg-yellow-400 px-3 py-1 rounded-full uppercase">
+                                            <span class="w-1 h-1 rounded-full bg-black/40 inline-block"></span>
+                                            {b}
+                                        </li>
+                                ))}
+                            </ul>
+
+
+                            <a href={`/uslugi/${s.slug}`}
+                               class="mt-2 inline-flex items-center gap-2 bg-white hover:bg-yellow-400 text-black font-black text-xs tracking-widest uppercase px-5 py-2.5 rounded-full transition-all duration-200 w-fit"
+                            >
+                                Dowiedz się więcej
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+            ))}
+        </div>
+    </div>
+
+    <!-- POZOSTAŁE uslugi -->
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {rest.map((s) => (
+                    <div
+                            class="group relative rounded-2xl overflow-hidden h-72 flex flex-col justify-end cursor-pointer"
+                            style={`background-image: url('${s.img}'); background-size: cover; background-position: center;`}
+                    >
+                        <div class="absolute inset-0 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-center justify-center">
+                            <span class="text-zinc-700 text-xs uppercase tracking-widest">[ {s.title} ]</span>
+                        </div>
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent group-hover:via-black/20 transition-all duration-500"></div>
+                        <div class="absolute inset-y-0 left-0 w-1 bg-yellow-400 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"></div>
+
+                        <div class="relative z-10 p-6 flex flex-col gap-2">
+                            <p class="text-yellow-400 text-xs font-bold uppercase tracking-[0.2em]">{s.short}</p>
+                            <h2 class="text-2xl font-black text-white uppercase leading-tight group-hover:text-yellow-400 transition-colors duration-200">
+                                {s.title}
+                            </h2>
+                            <p class="text-zinc-300 text-sm leading-relaxed">{s.desc}</p>
+
+                            <ul class="flex flex-wrap gap-2 mt-1">
+                                {s.bullets.map(b => (
+                                        <li class="flex items-center gap-1.5 text-xs text-black font-bold bg-yellow-400 px-3 py-1 rounded-full uppercase">
+                                            <span class="w-1 h-1 rounded-full bg-black/40 inline-block"></span>
+                                            {b}
+                                        </li>
+                                ))}
+                            </ul>
+
+
+                            <a href={`/uslugi/${s.slug}`}
+                               class="mt-2 inline-flex items-center gap-2 bg-white hover:bg-yellow-400 text-black font-black text-xs tracking-widest uppercase px-5 py-2.5 rounded-full transition-all duration-200 w-fit"
+                            >
+                                Dowiedz się więcej
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+            ))}
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-yellow-400 py-16 px-6 md:px-12 lg:px-20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-black text-black uppercase leading-tight">
+                    Nie wiesz której usługi potrzebujesz?
+                </h2>
+                <p class="text-black/60 font-bold mt-1 uppercase tracking-wide text-sm">
+                    Zadzwoń — doradzimy i wyślemy właściwy pojazd
+                </p>
+            </div>
+
+            <a href="tel:571531112"
+               class="flex items-center gap-3 bg-black text-white font-black text-sm tracking-widest uppercase px-8 py-4 rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl shrink-0"
+            >
+                <span class="relative flex items-center justify-center w-8 h-8 bg-green-500 rounded-full shrink-0">
+            <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-50"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white relative z-10 rotate-12" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
+            </svg>
+          </span>
+                Zadzwoń — 571 531 112
+            </a>
+        </div>
+    </div>
+
+</main>

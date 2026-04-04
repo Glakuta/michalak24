@@ -1,0 +1,20 @@
+---
+import logo1 from "../../../assets/Michalak24_logo_v2.png";
+import Hamburger from "../../../assets/hamburger-menu-icon.svg";
+import Image from "astro/components/Image.astro";
+---
+<nav class="bg-yellow-400 w-full z-20 flex items-center justify-between px-10 h-18 shrink-0 fixed">
+    <Image
+            src={logo1}
+            alt="Michalak24"
+            class="w-[240px] h-full object-cover"
+    />
+    <Hamburger class="openMenuButton block lg:hidden w-10 h-10 text-black" />
+    <div class="hidden lg:flex items-center gap-6 text-sm">
+        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">Strona główna</a>
+        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">Nasze usługi</a>
+        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">O nas</a>
+        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">Aktualności</a>
+        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity">Kontakt</a>
+    </div>
+</nav>
