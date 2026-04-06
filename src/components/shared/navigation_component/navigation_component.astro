@@ -1,20 +1,120 @@
 ---
-import logo1 from "../../../assets/Michalak24_logo_v2.png";
-import Hamburger from "../../../assets/hamburger-menu-icon.svg";
-import Image from "astro/components/Image.astro";
+import Image from 'astro/components/Image.astro';
+import "../../../assets/styles/global.css"
+import logo1 from "../../../assets/Michalak24_logo_v2.png"
 ---
-<nav class="bg-yellow-400 w-full z-20 flex items-center justify-between px-10 h-18 shrink-0 fixed">
-    <Image
-            src={logo1}
-            alt="Michalak24"
-            class="w-[240px] h-full object-cover"
-    />
-    <Hamburger class="openMenuButton block lg:hidden w-10 h-10 text-black" />
+
+<nav class="bg-yellow-400 z-50 flex items-center justify-between px-10 h-18 w-full shrink-0 relative">
+    <a href="/">
+        <Image
+                src={logo1}
+                alt="Michalak24"
+                class="w-[240px] h-full object-cover"
+        />
+    </a>
+    <button
+            id="menuToggle"
+            class="flex lg:hidden w-10 h-10 cursor-pointer text-black flex-col items-center justify-center gap-1.5 shrink-0"
+            aria-label="Menu"
+    >
+        <span class="hamburger-line block w-6 h-0.5 bg-black transition-all duration-300 origin-center"></span>
+        <span class="hamburger-line block w-6 h-0.5 bg-black transition-all duration-300"></span>
+        <span class="hamburger-line block w-6 h-0.5 bg-black transition-all duration-300 origin-center"></span>
+    </button>
+
+
     <div class="hidden lg:flex items-center gap-6 text-sm">
-        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity" href="/">Strona główna</a>
-        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity" href="/uslugi">Nasze usługi</a>
-        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity" href="/o-nas">O nas</a>
-        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity" href="/wpisy">Aktualności</a>
-        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity" href="/kontakt">Kontakt</a>
+        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity cursor-pointer" href="/">Strona główna</a>
+        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity cursor-pointer" href="/uslugi">Nasze usługi</a>
+        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity cursor-pointer" href="/o-nas">O nas</a>
+        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity cursor-pointer" href="/wpisy">Aktualności</a>
     </div>
 </nav>
+
+<div
+        id="mobileMenu"
+        class="fixed inset-0 bg-yellow-400 z-40 flex flex-col translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
+        style="top: 0;"
+>
+    <div class="flex items-center justify-between px-10 h-18 shrink-0 border-b border-black/10">
+        <a href="/"><Image
+                src={logo1}
+                alt="Michalak24"
+                class="w-[200px] h-full object-cover"
+        /></a>
+        <button
+                id="menuClose"
+                class="w-10 h-10 flex flex-col items-center justify-center gap-1.5"
+                aria-label="Zamknij menu"
+        >
+            <span class="block w-6 h-0.5 bg-black rotate-45 translate-y-[3px]"></span>
+            <span class="block w-6 h-0.5 bg-black -rotate-45 -translate-y-[3px]"></span>
+        </button>
+    </div>
+
+    <div class="flex flex-col flex-1 justify-center px-10 gap-2">
+        {[
+            { href: "/", label: "Strona główna" },
+            { href: "/uslugi", label: "Nasze usługi" },
+            { href: "/o-nas", label: "O nas" },
+            { href: "/wpisy", label: "Aktualności" },
+        ].map((link, i) => (
+
+                <a  href={link.href}
+                    class="group flex items-center gap-4 py-4 border-b border-black/10 last:border-0"
+                    style={`animation-delay: ${i * 60}ms`}
+                >
+            <span class="text-4xl font-black uppercase tracking-tight text-black leading-none group-hover:translate-x-2 transition-transform duration-200">
+          {link.label}
+        </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-black/40 group-hover:text-black group-hover:translate-x-1 transition-all duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+        ))}
+    </div>
+
+
+    <div class="px-10 pb-10">
+        <a href="tel:571531112"
+           class="flex items-center justify-center gap-3 bg-black text-white font-black text-sm tracking-widest uppercase px-6 py-4 rounded-full w-full transition-all duration-200 active:scale-95"
+        >
+        <span class="relative flex items-center justify-center w-7 h-7 bg-green-500 rounded-full shrink-0">
+        <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-50"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-white relative z-10 rotate-12" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
+        </svg>
+      </span>
+            Zadzwoń — 571 531 112
+        </a>
+    </div>
+</div>
+
+<script>
+    const toggle = document.getElementById('menuToggle');
+    const close = document.getElementById('menuClose');
+    const menu = document.getElementById('mobileMenu');
+
+    function openMenu() {
+        menu?.classList.remove('translate-x-full');
+        menu?.classList.add('translate-x-0');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        menu?.classList.remove('translate-x-0');
+        menu?.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+    }
+
+    toggle?.addEventListener('click', openMenu);
+    close?.addEventListener('click', closeMenu);
+
+    menu?.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+    });
+</script>
