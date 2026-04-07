@@ -11,10 +11,10 @@ import Caroseul_component from "./caroseul_component.astro";
 
 <section
         class="h-screen overflow-hidden relative flex flex-col"
-        style={`background-image: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${truckBg.src}); background-size: cover;  background-position: center;`}
+        style={`background-image: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${truckBg.src}); background-size: cover; background-position: center;`}
 >
 
-    <div class=" z-30 flex flex-col justify-center items-center flex-1 px-10 md:px-16 pb-16 md:pb-20">
+    <div class="z-30 flex flex-col justify-center items-center flex-1 min-h-0 px-10 md:px-16">
         <div class="flex flex-col items-center gap-5 max-w-lg">
             <p
                     class="text-yellow-400 text-base font-semibold tracking-[0.5em] uppercase"
@@ -37,23 +37,20 @@ import Caroseul_component from "./caroseul_component.astro";
             </p>
 
             <div class="flex items-center gap-4 mt-2 flex-wrap">
-
                 <a href="tel:571531112"
                    class="relative flex items-center gap-3 bg-white text-black font-black text-sm tracking-widest uppercase px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(255,255,255,0.25)] overflow-hidden group"
                    style="font-family:'Poppins',sans-serif; letter-spacing:.12em;"
                 >
-
-
                     Kliknij aby wezwać pomoc – 571 531 112
                     <span class="relative flex items-center justify-center w-12 h-12 bg-green-500 rounded-full shrink-0 group-hover:bg-green-400 transition-colors duration-200">
-
-    <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-50"></span>
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white relative z-10 rotate-12" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
-    </svg>
-  </span>
+            <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-50"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white relative z-10 rotate-12" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
+            </svg>
+          </span>
                 </a>
             </div>
+
             <div class="flex items-center gap-6 mt-1 flex-wrap">
                 {["Dostępni 24/7", "Szybki dojazd", "Kalisz i region"].map(item => (
                         <span class="flex items-center gap-1.5 text-white/80 text-xs tracking-wide uppercase">
@@ -62,14 +59,15 @@ import Caroseul_component from "./caroseul_component.astro";
           </span>
                 ))}
             </div>
-
         </div>
     </div>
-    <Caroseul_component />
 
+    
+    <div class="shrink-0">
+        <Caroseul_component />
+    </div>
 
 </section>
-
 
 <script>
     const button = document.getElementsByClassName('openMenuButton');

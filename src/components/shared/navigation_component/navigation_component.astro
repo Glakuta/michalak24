@@ -1,20 +1,20 @@
 ---
 import Image from 'astro/components/Image.astro';
 import "../../../assets/styles/global.css"
-import logo1 from "../../../assets/Michalak24_logo_v2.png"
+import logo1 from "../../../assets/logo-glowne.png"
 ---
 
-<nav class="bg-yellow-400 z-50 flex items-center justify-between px-10 h-18 w-full shrink-0 relative">
-    <a href="/">
+<nav class="bg-yellow-400 z-50 flex items-center justify-between px-7 h-18 w-full shrink-0 relative">
+    <a href="/" class="w-3xs h-full">
         <Image
                 src={logo1}
                 alt="Michalak24"
-                class="w-[240px] h-full object-cover"
+                class="w-full h-full object-contain"
         />
     </a>
     <button
             id="menuToggle"
-            class="flex lg:hidden w-10 h-10 cursor-pointer text-black flex-col items-center justify-center gap-1.5 shrink-0"
+            class="flex lg:hidden w-8 h-8 cursor-pointer text-black flex-col items-center justify-center gap-1.5 shrink-0"
             aria-label="Menu"
     >
         <span class="hamburger-line block w-6 h-0.5 bg-black transition-all duration-300 origin-center"></span>
