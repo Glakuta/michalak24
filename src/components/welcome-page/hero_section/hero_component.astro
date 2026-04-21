@@ -19,8 +19,8 @@ import Caroseul_component from "./caroseul_component.astro";
         class:list={["bg-[image:var(--mobile-bg)] lg:bg-[image:var(--desktop-bg)]"]}
 >
 
-    <div class="w-full z-30 flex flex-col flex-1 md:items-center md:justify-center my-[15vh] md:my-0">
-        <div class="w-full flex flex-col items-center gap-6 lg:gap-10 px-5">
+    <div class="w-full z-30 flex flex-col flex-1 md:items-center md:justify-center px-5 lg:px-0 my-[10vh] md:my-0">
+        <div class="w-full flex flex-col items-center gap-6 lg:gap-10 lg:max-w-lg">
             <div class="flex w-full items-center justify-around gap-2 lg:gap-6 mt-1">
                 {["Awaria?", "Kolizja?", "Wypadek?"].map(item => (
                         <span class="flex items-center gap-1.5 text-yellow-400 text-base md:text-lg font-semibold uppercase whitespace-nowrap">
@@ -30,11 +30,11 @@ import Caroseul_component from "./caroseul_component.astro";
             </div>
 
             <h1
-                    class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap"
+                    class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap flex flex-col items-center justify-center"
 
             >
                 Pomoc Drogowa<br/>
-                <span class="text-yellow-400">Kalisz</span>
+                <span class="text-yellow-400 ">Kalisz</span>
             </h1>
 
             <div class="w-full flex items-center gap-4 mt-2">
@@ -54,7 +54,16 @@ import Caroseul_component from "./caroseul_component.astro";
 
             <div class="flex items-center gap-2 lg:gap-6 mt-1">
                 {["Dostępni 24/7", "Szybki dojazd", "Kalisz i okolice"].map(item => (
-                        <span class="flex items-center gap-1.5 text-white/80 text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
+                        <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
+            <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
+                            {item}
+          </span>
+                ))}
+            </div>
+
+            <div class="flex items-center gap-2 lg:gap-6 mt-1">
+                {["Osobowe", "Dostawcze", "Ciężarowe"].map(item => (
+                        <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
             <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
                             {item}
           </span>
