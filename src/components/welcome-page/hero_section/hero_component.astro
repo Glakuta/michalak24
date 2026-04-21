@@ -19,8 +19,8 @@ import Caroseul_component from "./caroseul_component.astro";
         class:list={["bg-[image:var(--mobile-bg)] lg:bg-[image:var(--desktop-bg)]"]}
 >
 
-    <div class="z-30 flex flex-col flex-1 md:items-center md:justify-center px-10 md:px-16 my-[15vh] md:my-0">
-        <div class="flex flex-col items-center gap-6 lg:gap-10 max-w-lg">
+    <div class="w-full z-30 flex flex-col flex-1 md:items-center md:justify-center my-[15vh] md:my-0">
+        <div class="w-full flex flex-col items-center gap-6 lg:gap-10 px-5">
             <div class="flex w-full items-center justify-around gap-2 lg:gap-6 mt-1">
                 {["Awaria?", "Kolizja?", "Wypadek?"].map(item => (
                         <span class="flex items-center gap-1.5 text-yellow-400 text-base md:text-lg font-semibold uppercase whitespace-nowrap">
@@ -37,10 +37,10 @@ import Caroseul_component from "./caroseul_component.astro";
                 <span class="text-yellow-400">Kalisz</span>
             </h1>
 
-            <div class="flex items-center gap-4 mt-2 flex-wrap">
+            <div class="w-full flex items-center gap-4 mt-2">
                 <a href="tel:571531112"
-                   class="relative flex items-center gap-3 bg-white text-black font-black text-xs md:text-sm tracking-widest uppercase px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(255,255,255,0.25)] overflow-hidden group"
-                   style="font-family:'Poppins',sans-serif; letter-spacing:.12em;"
+                   class="relative flex items-center gap-3 bg-white text-black font-black font-sans text-xs md:text-sm tracking-widest uppercase px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(255,255,255,0.25)] overflow-hidden group"
+
                 >
                     Kliknij aby wezwać pomoc – 571 531 112
                     <span class="relative flex items-center justify-center w-12 h-12 bg-green-500 rounded-full shrink-0 group-hover:bg-green-400 transition-colors duration-200">
