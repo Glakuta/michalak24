@@ -19,9 +19,9 @@ import Caroseul_component from "./caroseul_component.astro";
         class:list={["bg-[image:var(--mobile-bg)] lg:bg-[image:var(--desktop-bg)]"]}
 >
 
-    <div class="w-full z-30 flex flex-col flex-1 md:items-center md:justify-center px-5 lg:px-0 my-[10vh] md:my-0">
-        <div class="w-full flex flex-col items-center gap-6 lg:gap-10 lg:max-w-lg">
-            <div class="flex w-full items-center justify-around gap-2 lg:gap-6 mt-1">
+    <div class="w-full z-30 flex flex-col flex-1 md:items-center md:justify-center px-5 lg:px-0 my-[9vh] md:my-0">
+        <div class="w-full flex flex-col items-center gap-8 lg:gap-10 lg:max-w-lg">
+            <div class="flex w-full items-center justify-around gap-2 lg:gap-6 -mt-3 pb-3">
                 {["Awaria?", "Kolizja?", "Wypadek?"].map(item => (
                         <span class="flex items-center gap-1.5 text-yellow-400 text-base md:text-lg font-semibold uppercase whitespace-nowrap">
                             {item}
@@ -30,14 +30,14 @@ import Caroseul_component from "./caroseul_component.astro";
             </div>
 
             <h1
-                    class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap flex flex-col items-center justify-center"
+                    class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap flex flex-col items-center justify-center -mt-3"
 
             >
                 Pomoc Drogowa<br/>
                 <span class="text-yellow-400 ">Kalisz</span>
             </h1>
 
-            <div class="w-full flex items-center gap-4 mt-2">
+            <div class="w-full flex items-center gap-4 mt-7">
                 <a href="tel:571531112"
                    class="relative flex items-center gap-3 bg-white text-black font-black font-sans text-xs md:text-sm tracking-widest uppercase px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(255,255,255,0.25)] overflow-hidden group"
 
@@ -52,22 +52,28 @@ import Caroseul_component from "./caroseul_component.astro";
                 </a>
             </div>
 
-            <div class="flex items-center gap-2 lg:gap-6 mt-1">
-                {["Dostępni 24/7", "Szybki dojazd", "Kalisz i okolice"].map(item => (
-                        <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
+            <div class="w-full flex flex-col items-center gap-4 mt-7">
+                <div class="flex items-center gap-2 lg:gap-6 mt-1">
+                    {["Dostępni 24/7", "Szybki dojazd", "Kalisz i okolice"].map(item => (
+                            <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
             <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
-                            {item}
+                                {item}
           </span>
-                ))}
-            </div>
+                    ))}
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 lg:gap-6 mt-1">
+                        {["Osobowe", "Dostawcze", "Ciężarowe"].map(item => (
+                                <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
+            <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
+                                    {item}
+          </span>
+                        ))}
+                    </div>
+                </div>
 
-            <div class="flex items-center gap-2 lg:gap-6 mt-1">
-                {["Osobowe", "Dostawcze", "Ciężarowe"].map(item => (
-                        <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
-            <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
-                            {item}
-          </span>
-                ))}
+
+
             </div>
         </div>
     </div>
