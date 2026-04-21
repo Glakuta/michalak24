@@ -11,7 +11,7 @@ import Caroseul_component from "./caroseul_component.astro";
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 <section
-        class="h-[90vh] overflow-hidden relative flex flex-col justify-between"
+        class="h-[90vh] lg:h-[95vh] overflow-hidden relative flex flex-col justify-between"
         style={`
     --mobile-bg: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${mobileBg.src}); background-size: cover; background-position: center;
     --desktop-bg: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${truckBg.src}); background-size: cover; background-position: center;
@@ -19,18 +19,19 @@ import Caroseul_component from "./caroseul_component.astro";
         class:list={["bg-[image:var(--mobile-bg)] lg:bg-[image:var(--desktop-bg)]"]}
 >
 
-    <div class="z-30 flex flex-col justify-center items-center  flex-1 px-10 md:px-16">
-        <div class="flex flex-col items-center gap-5 max-w-lg">
-            <p
-                    class="text-yellow-400 text-xs md:text-base font-semibold tracking-[0.5em] uppercase"
-                    style="font-family:'Poppins',sans-serif;"
-            >
-                Awaria?&nbsp; Kolizja?&nbsp; Wypadek?
-            </p>
+    <div class="z-30 flex flex-col flex-1 md:items-center md:justify-center px-10 md:px-16 my-[15vh] md:my-0">
+        <div class="flex flex-col items-center gap-6 lg:gap-10 max-w-lg">
+            <div class="flex w-full items-center justify-around gap-2 lg:gap-6 mt-1">
+                {["Awaria?", "Kolizja?", "Wypadek?"].map(item => (
+                        <span class="flex items-center gap-1.5 text-yellow-400 text-base md:text-lg font-semibold uppercase whitespace-nowrap">
+                            {item}
+          </span>
+                ))}
+            </div>
 
             <h1
-                    class="text-white font-black leading-[1.20] tracking-wider"
-                    style="font-family:'Poppins',sans-serif; font-size:clamp(44px,6vw,76px);"
+                    class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap"
+
             >
                 Pomoc Drogowa<br/>
                 <span class="text-yellow-400">Kalisz</span>
@@ -51,9 +52,9 @@ import Caroseul_component from "./caroseul_component.astro";
                 </a>
             </div>
 
-            <div class="flex items-center gap-6 mt-1 flex-wrap">
-                {["Dostępni 24/7", "Szybki dojazd", "Kalisz i region"].map(item => (
-                        <span class="flex items-center gap-1.5 text-white/80 text-xs tracking-wide uppercase">
+            <div class="flex items-center gap-2 lg:gap-6 mt-1">
+                {["Dostępni 24/7", "Szybki dojazd", "Kalisz i okolice"].map(item => (
+                        <span class="flex items-center gap-1.5 text-white/80 text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
             <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
                             {item}
           </span>
