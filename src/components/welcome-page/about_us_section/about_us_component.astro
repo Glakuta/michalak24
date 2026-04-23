@@ -11,31 +11,6 @@ import alianz from '../../../assets/allianz.png'
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            <div class="relative">
-                <div class="relative rounded-2xl overflow-hidden">
-                    <Image
-                            src={truck}
-                            alt="Michalak24 - Pomoc Drogowa"
-                            class="w-full h-[480px] object-cover object-center"
-                    />
-                    <div class="absolute inset-y-0 left-0 w-1 bg-yellow-400"></div>
-
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                </div>
-
-
-                <div class="absolute -bottom-6 left-6 right-6 bg-zinc-900 border border-zinc-700 rounded-xl px-6 py-4 flex-col sm:flex-row sm:items-center gap-6 shadow-2xl">
-                    <span class="text-xs text-zinc-400 uppercase tracking-widest font-semibold whitespace-nowrap">Współpraca z:</span>
-                    <div class="flex items-center gap-5 flex-wrap">
-
-                        <Image src={pzu} alt="Michalak24 - PZU"  class="w-16 h-16"/>
-                        <Image src={warta} alt="Michalak24 - Warta"  class="w-24 h-16" />
-                        <Image src={alianz} alt="Michalak24 - Alianz" class="w-24 h-16"/>
-                    </div>
-                </div>
-            </div>
-
-
             <div class="flex flex-col gap-6 lg:pt-0 pt-8">
                 <div>
                     <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Kim jesteśmy</span>
@@ -67,6 +42,30 @@ import alianz from '../../../assets/allianz.png'
                         <path d="M7 17L17 7M17 7H7M17 7v10"/>
                     </svg>
                 </a>
+            </div>
+
+            <div class="relative">
+                <div class="relative rounded-2xl overflow-hidden">
+                    <Image
+                            src={truck}
+                            alt="Michalak24 - Pomoc Drogowa"
+                            class="w-full h-[480px] object-cover object-center"
+                    />
+                    <div class="absolute inset-y-0 left-0 w-1 bg-yellow-400"></div>
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                </div>
+
+
+                <div class="absolute -bottom-6 left-6 right-6 bg-zinc-900 border border-zinc-700 rounded-xl px-6 py-4 flex-col sm:flex-row sm:items-center gap-6 shadow-2xl">
+                    <span class="text-xs text-zinc-400 uppercase tracking-widest font-semibold whitespace-nowrap">Współpraca z:</span>
+                    <div class="flex items-center gap-5 flex-wrap">
+
+                        <Image src={pzu} alt="Michalak24 - PZU"  class="w-16 h-16"/>
+                        <Image src={warta} alt="Michalak24 - Warta"  class="w-24 h-16" />
+                        <Image src={alianz} alt="Michalak24 - Alianz" class="w-24 h-16"/>
+                    </div>
+                </div>
             </div>
         </div>
 
