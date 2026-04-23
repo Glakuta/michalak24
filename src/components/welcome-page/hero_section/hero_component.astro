@@ -13,7 +13,7 @@ import Caroseul_component from "./caroseul_component.astro";
 <section
         class="h-[90vh] lg:h-[95vh] overflow-hidden relative flex flex-col justify-between"
         style={`
-    --mobile-bg: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${mobileBg.src}); background-size: cover; background-position: center;
+    --mobile-bg: linear-gradient(to top, rgba(0,0,0,.15), rgba(0,0,0,.60)), url(${mobileBg.src}); background-size: cover; background-position: center;
     --desktop-bg: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${truckBg.src}); background-size: cover; background-position: center;
   `}
         class:list={["bg-[image:var(--mobile-bg)] lg:bg-[image:var(--desktop-bg)]"]}
@@ -21,7 +21,7 @@ import Caroseul_component from "./caroseul_component.astro";
 
     <div class="w-full z-30 flex flex-col flex-1 md:items-center md:justify-center px-5 lg:px-0 my-[9vh] md:my-0">
         <div class="w-full flex flex-col items-center gap-8 lg:gap-10 lg:max-w-lg">
-            <div class="flex w-full items-center justify-around gap-2 lg:gap-6 -mt-3 pb-3">
+            <div class="flex w-full items-center justify-around gap-2 lg:gap-6 -mt-4 pb-3">
                 {["Awaria?", "Kolizja?", "Wypadek?"].map(item => (
                         <span class="flex items-center gap-1.5 text-yellow-400 text-base md:text-lg font-semibold uppercase whitespace-nowrap">
                             {item}
@@ -30,7 +30,7 @@ import Caroseul_component from "./caroseul_component.astro";
             </div>
 
             <h1
-                    class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap flex flex-col items-center justify-center -mt-3"
+                    class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap flex flex-col items-center justify-center -mt-4"
 
             >
                 Pomoc Drogowa<br/>
@@ -52,7 +52,7 @@ import Caroseul_component from "./caroseul_component.astro";
                 </a>
             </div>
 
-            <div class="w-full flex flex-col items-center gap-4 mt-10">
+            <div class="w-full flex flex-col items-center gap-4 mt-12">
                 <div class="flex items-center gap-2 lg:gap-6 mt-1">
                     {["Dostępni 24/7", "Szybki dojazd", "Kalisz i okolice"].map(item => (
                             <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
