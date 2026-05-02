@@ -2,7 +2,7 @@
 import "../../../assets/styles/global.css"
 import truckBg from "../../../assets/DAF_hero.jpg"
 import mobileBg from "../../../assets/mobile-bg.jpg"
-import Caroseul_component from "./caroseul_component.astro";
+import video from "../../../../public/WhatsApp Video 2026-05-02 at 15.20.31.mp4"
 
 ---
 
@@ -10,45 +10,125 @@ import Caroseul_component from "./caroseul_component.astro";
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-<section
-        class="h-[90vh] lg:h-[95vh] overflow-hidden relative flex flex-col justify-between"
-        style={`
-    --mobile-bg: linear-gradient(to top, rgba(0,0,0,.15), rgba(0,0,0,.60)), url(${mobileBg.src}); background-size: cover; background-position: center;
-    --desktop-bg: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${truckBg.src}); background-size: cover; background-position: center;
-  `}
-        class:list={["bg-[image:var(--mobile-bg)] lg:bg-[image:var(--desktop-bg)]"]}
->
+<!--Wstawić video-->
 
+<!--<section-->
+<!--        class="h-[90vh] lg:h-[95vh] overflow-hidden relative flex flex-col justify-between"-->
+<!--        style={`-->
+<!--    &#45;&#45;mobile-bg: linear-gradient(to top, rgba(0,0,0,.15), rgba(0,0,0,.60)), url(${mobileBg.src}); background-size: cover; background-position: center;-->
+<!--    &#45;&#45;desktop-bg: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,.85)), url(${truckBg.src}); background-size: cover; background-position: center;-->
+<!--  `}-->
+<!--        class:list={["bg-[image:var(&#45;&#45;mobile-bg)] lg:bg-[image:var(&#45;&#45;desktop-bg)]"]}-->
+<!--&gt;-->
+<!--    <video class="w-full h-full object-cover z-10 relative" autoplay muted loop playsinline>-->
+<!--        <source src={video} />-->
+<!--    </video>-->
+
+<!--    <div class="w-full z-30 flex flex-col flex-1 md:items-center md:justify-center px-5 lg:px-0 my-[9vh] md:my-0">-->
+<!--        <div class="w-full flex flex-col items-center gap-8 lg:gap-10 lg:max-w-lg">-->
+<!--            <div class="flex w-full items-center justify-around gap-2 lg:gap-6 -mt-4 pb-3">-->
+<!--                {["Awaria?", "Kolizja?", "Wypadek?"].map(item => (-->
+<!--                        <span class="flex items-center gap-1.5 text-yellow-400 text-base md:text-lg font-semibold uppercase whitespace-nowrap">-->
+<!--                            {item}-->
+<!--          </span>-->
+<!--                ))}-->
+<!--            </div>-->
+
+<!--            <h1-->
+<!--                    class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap flex flex-col items-center justify-center -mt-4"-->
+
+<!--            >-->
+<!--                Pomoc Drogowa<br/>-->
+<!--                <span class="text-yellow-400 ">Kalisz</span>-->
+<!--            </h1>-->
+
+<!--            <div class="w-full flex items-center gap-4 mt-10">-->
+<!--                <a href="tel:571531112"-->
+<!--                   class="relative flex items-center gap-3 bg-white text-black font-black font-sans text-xs md:text-sm tracking-widest uppercase px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(255,255,255,0.25)] overflow-hidden group"-->
+
+<!--                >-->
+<!--                    Kliknij aby wezwać pomoc – 571 531 112-->
+<!--                    <span class="relative flex items-center justify-center w-12 h-12 bg-green-500 rounded-full shrink-0 group-hover:bg-green-400 transition-colors duration-200">-->
+<!--            <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-50"></span>-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white relative z-10 rotate-12" fill="currentColor" viewBox="0 0 24 24">-->
+<!--              <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>-->
+<!--            </svg>-->
+<!--          </span>-->
+<!--                </a>-->
+<!--            </div>-->
+
+<!--            <div class="w-full flex flex-col items-center gap-4 mt-12">-->
+<!--                <div class="flex items-center gap-2 lg:gap-6 mt-1">-->
+<!--                    {["Dostępni 24/7", "Szybki dojazd", "Kalisz i okolice"].map(item => (-->
+<!--                            <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">-->
+<!--            <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>-->
+<!--                                {item}-->
+<!--          </span>-->
+<!--                    ))}-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <div class="flex items-center gap-2 lg:gap-6 mt-3">-->
+<!--                        {["Osobowe", "Dostawcze", "Ciężarowe"].map(item => (-->
+<!--                                <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">-->
+<!--            <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>-->
+<!--                                    {item}-->
+<!--          </span>-->
+<!--                        ))}-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+<!--</section>-->
+
+<section class="h-[90vh] lg:h-[95vh] overflow-hidden relative flex flex-col justify-between bg-black">
+    <!-- 1. Video Background -->
+    <video
+            class="absolute inset-0 w-full z-0"
+            autoplay
+            muted
+            loop
+            playsinline
+    >
+        <source src={video} type="video/mp4" />
+    </video>
+
+    <!-- 2. Overlay (Przyciemnienie, aby napisy były czytelne) -->
+    <div class="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/40 to-black/80"></div>
+
+    <!-- 3. Content (z-30 zapewnia, że treść jest nad wideo i overlayem) -->
     <div class="w-full z-30 flex flex-col flex-1 md:items-center md:justify-center px-5 lg:px-0 my-[9vh] md:my-0">
         <div class="w-full flex flex-col items-center gap-8 lg:gap-10 lg:max-w-lg">
             <div class="flex w-full items-center justify-around gap-2 lg:gap-6 -mt-4 pb-3">
                 {["Awaria?", "Kolizja?", "Wypadek?"].map(item => (
                         <span class="flex items-center gap-1.5 text-yellow-400 text-base md:text-lg font-semibold uppercase whitespace-nowrap">
-                            {item}
-          </span>
+                        {item}
+                    </span>
                 ))}
             </div>
 
-            <h1
-                    class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap flex flex-col items-center justify-center -mt-4"
-
-            >
+            <h1 class="text-white font-black leading-[1.20] tracking-wider font-sans text-4xl lg:text-5xl whitespace-nowrap flex flex-col items-center justify-center -mt-4">
                 Pomoc Drogowa<br/>
                 <span class="text-yellow-400 ">Kalisz</span>
             </h1>
 
-            <div class="w-full flex items-center gap-4 mt-10">
+            <div class="w-full flex items-center gap-4 mt-10 justify-center">
                 <a href="tel:571531112"
                    class="relative flex items-center gap-3 bg-white text-black font-black font-sans text-xs md:text-sm tracking-widest uppercase px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(255,255,255,0.25)] overflow-hidden group"
-
                 >
                     Kliknij aby wezwać pomoc – 571 531 112
                     <span class="relative flex items-center justify-center w-12 h-12 bg-green-500 rounded-full shrink-0 group-hover:bg-green-400 transition-colors duration-200">
-            <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-50"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white relative z-10 rotate-12" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
-            </svg>
-          </span>
+                        <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-50"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white relative z-10 rotate-12" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
+                        </svg>
+                    </span>
                 </a>
             </div>
 
@@ -56,30 +136,22 @@ import Caroseul_component from "./caroseul_component.astro";
                 <div class="flex items-center gap-2 lg:gap-6 mt-1">
                     {["Dostępni 24/7", "Szybki dojazd", "Kalisz i okolice"].map(item => (
                             <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
-            <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
+                            <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
                                 {item}
-          </span>
+                        </span>
                     ))}
                 </div>
-                <div>
-                    <div class="flex items-center gap-2 lg:gap-6 mt-3">
-                        {["Osobowe", "Dostawcze", "Ciężarowe"].map(item => (
-                                <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
-            <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
-                                    {item}
-          </span>
-                        ))}
-                    </div>
+                <div class="flex items-center gap-2 lg:gap-6 mt-3">
+                    {["Osobowe", "Dostawcze", "Ciężarowe"].map(item => (
+                            <span class="flex items-center gap-1.5 text-white text-xs lg:text-base tracking-wide uppercase whitespace-nowrap">
+                            <span class="w-1 h-1 rounded-full bg-yellow-400 inline-block"></span>
+                                {item}
+                        </span>
+                    ))}
                 </div>
-
-
-
             </div>
         </div>
     </div>
-
-
-
 </section>
 
 <script>
