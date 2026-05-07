@@ -50,12 +50,7 @@ const navLinks = [
         class="fixed inset-0 bg-yellow-400 z-40 flex flex-col translate-x-full transition-transform duration-300 ease-in-out lg:hidden"
         style="top: 0;"
 >
-    <div class="flex items-center justify-between px-10 h-18 shrink-0 border-b border-black/10">
-        <a href="/"><Image
-                src={logo1}
-                alt="Michalak24"
-                class="w-[200px] h-full object-cover"
-        /></a>
+    <div class="flex items-center justify-end px-10 h-18 shrink-0 border-b border-black/10">
         <button
                 id="menuClose"
                 class="w-10 h-10 flex flex-col items-center justify-center gap-1.5"
@@ -67,14 +62,13 @@ const navLinks = [
     </div>
 
     <div class="flex flex-col flex-1 justify-center px-10 gap-2">
-        {navLinks.map((link, i) => (
+        {navLinks.map((link) => (
 
                 <a  href={link.href}
                     class="group flex items-center gap-4 py-4 border-b border-black/10 last:border-0"
-                    style={`animation-delay: ${i * 60}ms`}
                 >
             <span class="text-4xl font-black uppercase tracking-tight text-black leading-none group-hover:translate-x-2 transition-transform duration-200">
-          {link}
+          {link.name}
         </span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-black/40 group-hover:text-black group-hover:translate-x-1 transition-all duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
