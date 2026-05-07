@@ -1,61 +1,67 @@
 ---
 import "../../../assets/styles/global.css"
 import Image from 'astro/components/Image.astro';
-import transport from "../../../assets/pomoc drogowa - michalak24.png"
+import pomocDrogowa from '../../../assets/pomoc drogowa - michalak24.png'
+import transport from '../../../assets/transport auta - michalak 24.png'
+import tyre from "../../../assets/przebita opona.png"
+import battery from "../../../assets/akumulator-michalak24.png"
+import fuel from "../../../assets/car.png"
+
+const data = [
+    {
+        title: "Pomoc drogowa",
+        points: ["Awarie", "Kolizje", "Wypadkie"],
+        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        icon: pomocDrogowa,
+    },
+    {
+        title: "Transport pojazdu",
+        points: ["Osobowe", "Dostawcze", "Ciężarowe"],
+        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        icon: transport
+    },
+    {
+        title: "Wymiana koła",
+        points: ["Osobowe", "Dostawcze", "Ciężarowe"],
+        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        icon: tyre
+    },
+    {
+        title: "Odpalanie z kabli",
+        points: ["Awarie", "Kolizje", "Wypadkie"],
+        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        icon: battery
+    },
+    {
+        title: "Dowóz paliwa",
+        points: ["Benzyna", "Olej napędowy"],
+        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        icon: fuel
+    },
+]
+
 ---
 
 <section class="bg-yellow-400 py-20 px-6 md:px-12 lg:px-20">
     <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <li class="bg-white/20 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-20 h-20 m-auto  rounded-xl flex items-center justify-center">
-                <Image src={transport} alt="Transport auta - Michalak24" class="w-16 h-16 object-contain"/>
-            </div>
-            <div class="flex flex-col gap-1">
-                <h3 class="font-extrabold text-xl text-black tracking-tight mx-auto">Pomoc drogowa 24</h3>
-                <span class="font-semibold text-sm text-black/70 uppercase tracking-wide mx-auto">Awarie. Kolizje. Wypadki.</span>
-            </div>
-            <p class="text-black/80 text-sm leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </li>
-        <li class="bg-white/20 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-20 h-20 m-auto  rounded-xl flex items-center justify-center">
-                <Image src={transport} alt="Transport auta - Michalak24" class="w-16 h-16 object-contain"/>
-            </div>
-            <div class="flex flex-col gap-1">
-                <h3 class="font-extrabold text-xl text-black tracking-tight mx-auto">Holowanie pojazdów</h3>
-                <span class="font-semibold text-sm text-black/70 uppercase tracking-wide mx-auto">Osobowe. Dostawcze. Ciężarowe.</span>
-            </div>
-            <p class="text-black/80 text-sm leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </li>
-
-        <li class="bg-white/20 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-20 h-20 m-auto  rounded-xl flex items-center justify-center">
-                <Image src={transport} alt="Transport auta - Michalak24" class="w-16 h-16 object-contain"/>
-            </div>
-            <div class="flex flex-col gap-1">
-                <h3 class="font-extrabold text-xl text-black tracking-tight">Lorem ipsum</h3>
-                <span class="font-semibold text-sm text-black/70 uppercase tracking-wide">Lorem ipsum sdkaopskdap</span>
-            </div>
-            <p class="text-black/80 text-sm leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </li>
-        <li class="bg-white/20 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-20 h-20 m-auto bg-black/10 rounded-xl flex items-center justify-center">
-                <Image src={transport} alt="Transport auta - Michalak24" class="w-16 h-16 object-contain"/>
-            </div>
-            <div class="flex flex-col gap-1">
-                <h3 class="font-extrabold text-xl text-black tracking-tight">Lorem ipsum</h3>
-                <span class="font-semibold text-sm text-black/70 uppercase tracking-wide">Lorem ipsum sdkaopskdap</span>
-            </div>
-            <p class="text-black/80 text-sm leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </li>
-        <li class="bg-white/20 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300">
-            <div class="w-20 h-20 m-auto bg-black/10 rounded-xl flex items-center justify-center">
-                <Image src={transport} alt="Transport auta - Michalak24" class="w-16 h-16 object-contain"/>
-            </div>
-            <div class="flex flex-col gap-1">
-                <h3 class="font-extrabold text-xl text-black tracking-tight">Lorem ipsum</h3>
-                <span class="font-semibold text-sm text-black/70 uppercase tracking-wide">Lorem ipsum sdkaopskdap</span>
-            </div>
-            <p class="text-black/80 text-sm leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </li>
+        {data.map((item, index) => (
+                <li class="bg-white/20 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300">
+                    <div class="w-20 h-20 m-auto  rounded-xl flex items-center justify-center">
+                        <Image src={item.icon} alt="Transport auta - Michalak24" class="w-16 h-16 object-contain"/>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <h3 class="font-extrabold text-xl text-black tracking-tight mx-auto">{item.title}</h3>
+                        <div class="flex items-center justify-center gap-2 font-semibold text-sm text-black/70 uppercase tracking-wide mx-auto">
+                            {[item.points].map((item, index) => (
+                                    <>
+                                        <span>{item}</span>
+                                        {index < 1 && <span class="text-black-500 font-bold">·</span>}
+                                    </>
+                            ))}
+                        </div>
+                    </div>
+                    <p class="text-black/80 text-sm leading-relaxed">{item.description}</p>
+                </li>
+        ))}
     </ul>
 </section>

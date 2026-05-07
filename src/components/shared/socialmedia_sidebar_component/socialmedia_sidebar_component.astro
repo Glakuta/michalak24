@@ -1,0 +1,138 @@
+---
+import Image from 'astro/components/Image.astro';
+import facebook from "../../../assets/facebook_2931615.png"
+import instagram from "../../../assets/instagram_1946461.png"
+import youtube from "../../../assets/video_15522190.png"
+
+const socials = [
+    {
+        name: "Facebook",
+        url: "https://facebook.com",
+        icon: facebook
+    },
+    {
+        name: "Instagram",
+        url: "https://instagram.com",
+        icon: instagram,
+    },
+    {
+        name: "YouTube",
+        url: "https://youtube.com",
+        icon: youtube,
+    },
+];
+---
+
+<div
+        id="social-sidebar"
+        class="
+    fixed
+    top-1/2
+    left-0
+    -translate-y-1/2
+    z-50
+    transition-transform
+    duration-300
+  "
+>
+    <div class="flex items-center">
+
+        <ul
+                class="
+        space-y-6
+        bg-yellow-500
+        py-3
+        pr-2
+        rounded-r-2xl
+        shadow-xl
+      "
+        >
+            {
+                socials.map((social) => (
+                        <li>
+                            <a
+                                    href={social.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="
+                flex
+                items-center
+                justify-center
+                w-14
+                h-14
+                ml-2
+                text-2xl
+                text-white
+                hover:scale-110
+                transition
+              "
+                                    aria-label={social.name}
+                            >
+                                <Image src={social.icon} alt={"default"}/>
+                            </a>
+                        </li>
+                ))
+            }
+        </ul>
+        <button
+                id="sidebar-toggle"
+                class="
+        bg-yellow-500
+        text-white
+        h-16
+        w-8
+        flex
+        items-center
+        justify-center
+        rounded-r-xl
+        shadow-lg
+        hover:w-10
+        transition-all
+      "
+        >
+            ➜
+        </button>
+    </div>
+</div>
+
+<script>
+    const sidebar = document.getElementById("social-sidebar");
+    const toggle = document.getElementById("sidebar-toggle");
+
+    let opened = false;
+
+    sidebar.style.transform = "translate(-75%, -50%)";
+
+    const handleHeroVisibility = () => {
+        const hero = document.getElementById("hero");
+
+        if (!hero) return;
+
+        const rect = hero.getBoundingClientRect();
+
+        if (rect.bottom > 200) {
+            if (!opened) {
+                sidebar.style.transform = "translate(-75%, -50%)";
+            }
+        } else {
+            if (!opened) {
+                sidebar.style.transform = "translate(-100%, -50%)";
+            }
+        }
+    };
+
+    handleHeroVisibility();
+
+    window.addEventListener("scroll", handleHeroVisibility);
+    toggle.addEventListener("click", () => {
+        opened = !opened;
+
+        if (opened) {
+            sidebar.style.transform = "translate(0%, -50%)";
+            toggle.innerHTML = "⬅";
+        } else {
+            handleHeroVisibility();
+            toggle.innerHTML = "➜";
+        }
+    });
+</script>

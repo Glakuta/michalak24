@@ -2,9 +2,16 @@
 import Image from 'astro/components/Image.astro';
 import "../../../assets/styles/global.css"
 import logo1 from "../../../assets/Logo-michalak-removebg.png"
+
+const navLinks = [
+    { name: "Strona główna", href: "/" },
+    { name: "Nasze usługi", href: "/uslugi" },
+    { name: "O nas", href: "/o-nas" },
+    { name: "Aktualności", href: "/wpisy" },
+];
 ---
 
-<nav class="bg-yellow-400 z-50 flex items-center justify-between px-4 h-18 w-full shrink-0 relative">
+<nav id="navbar" class="bg-yellow-400 z-50 flex items-center justify-between px-4 h-18 w-full shrink-0  fixed top-0">
     <a href="/">
         <Image
                 src={logo1}
@@ -21,13 +28,20 @@ import logo1 from "../../../assets/Logo-michalak-removebg.png"
         <span class="hamburger-line block w-6 h-0.5 bg-black transition-all duration-300"></span>
         <span class="hamburger-line block w-6 h-0.5 bg-black transition-all duration-300 origin-center"></span>
     </button>
-
-
     <div class="hidden lg:flex items-center gap-6 text-sm">
-        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity cursor-pointer" href="/">Strona główna</a>
-        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity cursor-pointer" href="/uslugi">Nasze usługi</a>
-        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity cursor-pointer" href="/o-nas">O nas</a>
-        <a class="text-black font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity cursor-pointer" href="/wpisy">Aktualności</a>
+        {navLinks.map((item) => (
+                <a
+                        href={item.href}
+                        class="text-black font-bold uppercase tracking-wider opacity-75 transition-all cursor-pointer
+             hover:opacity-100
+             hover:underline
+             hover:underline-offset-[5px]
+             hover:decoration-yellow-400
+             hover:decoration-2"
+                >
+                    {item.name}
+                </a>
+        ))}
     </div>
 </nav>
 
@@ -53,19 +67,14 @@ import logo1 from "../../../assets/Logo-michalak-removebg.png"
     </div>
 
     <div class="flex flex-col flex-1 justify-center px-10 gap-2">
-        {[
-            { href: "/", label: "Strona główna" },
-            { href: "/uslugi", label: "Nasze usługi" },
-            { href: "/o-nas", label: "O nas" },
-            { href: "/wpisy", label: "Aktualności" },
-        ].map((link, i) => (
+        {navLinks.map((link, i) => (
 
                 <a  href={link.href}
                     class="group flex items-center gap-4 py-4 border-b border-black/10 last:border-0"
                     style={`animation-delay: ${i * 60}ms`}
                 >
             <span class="text-4xl font-black uppercase tracking-tight text-black leading-none group-hover:translate-x-2 transition-transform duration-200">
-          {link.label}
+          {link}
         </span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-black/40 group-hover:text-black group-hover:translate-x-1 transition-all duration-200 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14M12 5l7 7-7 7"/>

@@ -1,5 +1,4 @@
 ---
-// src/pages/o-nas.astro
 
 
 import Footer_section from "../shared/footer_component/footer_section.astro";
@@ -70,7 +69,6 @@ const areas = ["Kalisz", "Ostrów Wielkopolski", "Jarocin", "Pleszew", "Kępno",
         <Navigation_component />
         <div class="relative h-72 md:h-96 overflow-hidden flex items-end">
             <div class="absolute inset-0 bg-zinc-900">
-                <!-- placeholder: podmień na własne zdjęcie -->
                 <div class="w-full h-full bg-gradient-to-br from-zinc-900 to-zinc-800 flex items-center justify-center">
                     <span class="text-zinc-700 text-sm uppercase tracking-widest">[ Twoje zdjęcie tła ]</span>
                 </div>
@@ -90,8 +88,6 @@ const areas = ["Kalisz", "Ostrów Wielkopolski", "Jarocin", "Pleszew", "Kępno",
                 </h1>
             </div>
         </div>
-
-        <!-- STATS -->
         <div class="bg-yellow-400">
             <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-2 lg:grid-cols-4">
                 {stats.map((s, i) => (
@@ -103,18 +99,18 @@ const areas = ["Kalisz", "Ostrów Wielkopolski", "Jarocin", "Pleszew", "Kępno",
             </div>
         </div>
 
-        <!-- HISTORIA + ZDJĘCIE -->
+
         <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-20">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-                <!-- Zdjęcie placeholder -->
+
                 <div class="relative rounded-2xl overflow-hidden h-96 bg-zinc-900 flex items-center justify-center">
                     <div class="absolute inset-y-0 left-0 w-1 bg-yellow-400"></div>
                     <span class="text-zinc-700 text-sm uppercase tracking-widest">[ Twoje zdjęcie ]</span>
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent h-32"></div>
                 </div>
 
-                <!-- Tekst -->
+
                 <div class="flex flex-col gap-6">
                     <div>
                         <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Nasza historia</span>
@@ -135,7 +131,7 @@ const areas = ["Kalisz", "Ostrów Wielkopolski", "Jarocin", "Pleszew", "Kępno",
             </div>
         </div>
 
-        <!-- WARTOŚCI -->
+
         <div class="border-t border-zinc-800 py-20 px-6 md:px-12 lg:px-20 bg-zinc-950">
             <div class="max-w-7xl mx-auto">
                 <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Czym się kierujemy</span>

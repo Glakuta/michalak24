@@ -2,6 +2,10 @@
 import "../assets/styles/global.css"
 import Footer_section from "../components/shared/footer_component/footer_section.astro";
 import Navigation_component from "../components/shared/navigation_component/navigation_component.astro";
+import Socialmedia_sidebar_component
+    from "../components/shared/socialmedia_sidebar_component/socialmedia_sidebar_component.astro";
+const {pathname} = Astro.url
+const isHome = pathname === "/" || pathname === "/index.html";
 ---
 
 <!doctype html>
@@ -16,6 +20,7 @@ import Navigation_component from "../components/shared/navigation_component/navi
 	</head>
 	<body>
     <Navigation_component />
+    <Socialmedia_sidebar_component />
 		<slot />
     <Footer_section />
 	</body>
@@ -29,3 +34,24 @@ import Navigation_component from "../components/shared/navigation_component/navi
 		height: 100%;
 	}
 </style>
+
+{isHome && (
+<script>
+    const navbar = document.getElementById("navbar");
+    const hero = document.getElementById("hero");
+
+    if (hero && navbar) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    navbar.classList.replace("bg-transparent", "bg-yellow-400");
+                } else {
+                    navbar.classList.replace("bg-yellow-400", "bg-transparent");
+                }
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(hero);
+    }
+</script>
+    )}
