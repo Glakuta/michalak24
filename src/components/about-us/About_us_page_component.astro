@@ -66,10 +66,9 @@ const areas = ["Kalisz", "Ostrów Wielkopolski", "Jarocin", "Pleszew", "Kępno",
 ---
 
     <main class="bg-black min-h-screen" style="font-family:'Barlow Condensed',sans-serif;">
-        <Navigation_component />
-        <div class="relative h-72 md:h-96 overflow-hidden flex items-end">
-            <div class="absolute inset-0 bg-zinc-900">
-                <div class="w-full h-full bg-gradient-to-br from-zinc-900 to-zinc-800 flex items-center justify-center">
+        <div class="relative h-72 md:h-[50vh] overflow-hidden flex items-end">
+            <div class="absolute inset-0 bg-black">
+                <div class="w-full h-full bg-gradient-to-br from-black to-zinc-800 flex items-center justify-center">
                     <span class="text-zinc-700 text-sm uppercase tracking-widest">[ Twoje zdjęcie tła ]</span>
                 </div>
             </div>
@@ -77,11 +76,6 @@ const areas = ["Kalisz", "Ostrów Wielkopolski", "Jarocin", "Pleszew", "Kępno",
             <div class="absolute top-0 left-0 right-0 h-1 bg-yellow-400"></div>
 
             <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-12 w-full">
-                <div class="flex items-center gap-2 text-sm text-zinc-400 mb-3">
-                    <a href="/" class="hover:text-yellow-400 transition-colors">Strona główna</a>
-                    <span>/</span>
-                    <span class="text-zinc-500">O nas</span>
-                </div>
                 <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Kim jesteśmy</span>
                 <h1 class="mt-1 text-5xl md:text-6xl font-black text-white leading-tight uppercase">
                     O firmie <span class="text-yellow-400">Michalak24</span>
@@ -202,6 +196,5 @@ const areas = ["Kalisz", "Ostrów Wielkopolski", "Jarocin", "Pleszew", "Kępno",
                 </div>
             </div>
         </div>
-        <Footer_section />
 
     </main>

@@ -1,4 +1,7 @@
 ---
+import Image from "astro/components/Image.astro";
+import photo from "../../../assets/20211124_220606-scaled.jpg"
+
 
 const posts = [
     {
@@ -51,18 +54,24 @@ const posts = [
 
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post, i) => (
+            {posts.map((post) => (
 
                 <a href={`/blog/${post.slug}`}
                 class="group flex flex-col bg-zinc-900 border border-zinc-800 hover:border-yellow-400/50 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-yellow-400/5"
                     >
-                    <!-- Category + date bar -->
                         <div class="px-6 pt-6 flex items-center justify-between">
-            <span class="text-xs font-bold uppercase tracking-widest text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full">
-              {post.category}
-            </span>
+                         <span class="text-xs font-bold uppercase tracking-widest text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full">
+                            {post.category}
+                         </span>
                             <span class="text-xs text-zinc-500">{post.date}</span>
                         </div>
+                    <div class="overflow-hidden rounded-2xl mb-8">
+                        <Image
+                                src={photo}
+                                alt="Wnętrze samochodu"
+                                class="w-full h-64 object-cover p-6 "
+                        />
+                    </div>
 
 
                         <div class="flex flex-col gap-3 px-6 py-5 flex-1">
@@ -73,6 +82,7 @@ const posts = [
                                 {post.excerpt}
                             </p>
                         </div>
+
 
 
                         <div class="px-6 pb-6 flex items-center justify-between border-t border-zinc-800 pt-4 mt-auto">
@@ -92,19 +102,5 @@ const posts = [
                 </a>
                 ))}
         </div>
-
-
-        <div class="flex justify-center">
-
-            <a href="/blog"
-            class="inline-flex items-center gap-3 bg-yellow-400 hover:bg-yellow-300 text-black font-black text-base px-10 py-4 rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-yellow-400/20"
-            >
-            Przejdź do bloga
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7v10"/>
-            </svg>
-            </a>
-        </div>
-
     </div>
 </section>

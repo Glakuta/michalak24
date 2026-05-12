@@ -16,9 +16,7 @@ const photos = [
 ];
 ---
 
-<section class="bg-black pt-20">
-
-
+<section class="bg-black pt-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
     <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-12">
         <div class="max-w-2xl">
             <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Galeria</span>
@@ -26,31 +24,38 @@ const photos = [
                 Zobacz nas <span class="text-yellow-400">w akcji</span>
             </h2>
             <p class="mt-4 text-zinc-400 text-base leading-relaxed">
-                Pomoc drogowa w realnych warunkach — śnieg, błoto, nocne wezwania.
+                Pomoc drogowa w każdych warunkach — śnieg, błoto, nocne wezwania.
             </p>
-            <p class="mt-2 text-zinc-400 text-base leading-relaxed">
-                W każdej sytuacji jesteśmy przygotowani, by bezpiecznie zabrać Twój pojazd z miejsca zdarzenia. Laweta Poznań? To my — bez pośredników, bez opóźnień.
+            <p class="mt-2 text-zinc-400 text-base leading-relaxed">Jesteśmy przygotowani do wszystkich sytuacji, by bezpiecznie zabrać Twój pojazd z miejsca zdarzenia. Laweta Kalisz? To my — bez pośredników, bez opóźnień.
             </p>
         </div>
     </div>
 
-    <div class="flex w-full overflow-hidden">
-        {photos.map((photo) => (
-                <div class="relative flex-1 min-w-0 overflow-hidden group cursor-pointer">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 auto-rows-[300px]">
+        {photos.map((photo, index) => (
+                <div class={`relative overflow-hidden group cursor-pointer ${
+                    index === 0 || index === 6 ? 'md:col-span-2 md:row-span-2' : ''
+                } ${index === 3 ? 'md:col-span-2' : ''}`}>
                     <Image
                             src={photo.src}
                             alt={photo.alt}
-                            class="w-full h-64 md:h-80 lg:h-96 object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                            class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                     />
-                    <!-- dark overlay lifted on hover -->
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-all duration-500"></div>
-                    <!-- yellow bottom accent on hover -->
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all duration-500"></div>
                     <div class="absolute bottom-0 left-0 right-0 h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                 </div>
         ))}
     </div>
 
-    <!-- Yellow bottom bar -->
-    <div class="h-4 bg-yellow-400 w-full"></div>
+    <div class="flex justify-center">
+        <a href="/blog"
+           class="inline-flex items-center gap-2 border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black hover:scale-110 font-bold px-6 py-3 rounded-xl transition-all duration-200 w-fit"
+        >
+            Zobacz wszystkie wpisy
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+        </a>
+    </div>
 
 </section>
