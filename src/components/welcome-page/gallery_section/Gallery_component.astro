@@ -31,7 +31,7 @@ const photos = [
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 auto-rows-[300px]">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 auto-rows-[300px] max-w-7xl mx-auto">
         {photos.map((photo, index) => (
                 <div class={`relative overflow-hidden group cursor-pointer ${
                     index === 0 || index === 6 ? 'md:col-span-2 md:row-span-2' : ''
