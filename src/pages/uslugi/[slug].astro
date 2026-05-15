@@ -1,5 +1,8 @@
 ---
+import Image from "astro/components/Image.astro";
 import Layout from "../../layouts/Layout.astro";
+import photo from "../../assets/DAF_hero.jpg";
+import laweta from "../../assets/laweta na lawecie.jpg"
 export const prerender = false;
 
 const { slug } = Astro.params;
@@ -59,94 +62,61 @@ const service = services[slug as string];
 if (!service) return Astro.redirect('/uslugi');
 ---
 
-<Layout>
-        <main class="bg-black min-h-screen" style="font-family:'Barlow Condensed',sans-serif;">
-            <div
-                    class="relative h-80 md:h-[480px] overflow-hidden flex items-end"
-                    style={service.img ? `background-image: url('${service.img}'); background-size: cover; background-position: center;` : ''}
-            >
-                <div class="absolute inset-0 bg-gradient-to-br from-zinc-900 to-zinc-800 flex items-center justify-center">
-                    <span class="text-zinc-700 text-xs uppercase tracking-widest">[ {service.title} ]</span>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                <div class="absolute top-0 left-0 right-0 h-1 bg-yellow-400"></div>
 
-                <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-12 w-full">
-                    <div class="flex items-center gap-2 text-sm text-zinc-400 mb-3">
-                        <a href="/" class="hover:text-yellow-400 transition-colors">Strona główna</a>
-                        <span>/</span>
-                        <a href="/uslugi" class="hover:text-yellow-400 transition-colors">Usługi</a>
-                        <span>/</span>
-                        <span class="text-zinc-500">{service.title}</span>
-                    </div>
-                    <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">{service.short}</span>
-                    <h1 class="mt-1 text-5xl md:text-6xl font-black text-white leading-tight uppercase">
-                        {service.title}
-                    </h1>
-                    <ul class="flex flex-wrap gap-2 mt-4">
-                        {service.bullets.map((b: string) => (
-                                <li class="flex items-center gap-1.5 text-xs text-black font-bold bg-yellow-400 px-3 py-1 rounded-full uppercase">
-                                    <span class="w-1 h-1 rounded-full bg-black/40 inline-block"></span>
-                                    {b}
-                                </li>
-                        ))}
+<Layout>
+    <div>
+        <Image src={photo} alt="Michalak 24" class="w-full object-cover object-center h-[60vh]"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
+    </div>
+    <section class="bg-zinc-900 py-16 flex">
+        <div class="max-w-7xl w-full relative">
+            <div class="relative lg:w-4/5 h-[50vh] border-[4px] border-yellow-500 rounded-sm overflow-hidden shadow-2xl">
+                <Image
+                        src={laweta}
+                        alt="Laweta pomocy drogowej - Michalak 24"
+                        class="w-full object-cover h-full grayscale-[20%]"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
+            </div>
+
+            <div class="flex flex-col gap-4 lg:mt-0 relative z-10 mx-auto lg:absolute lg:-right-1/5 lg:top-1/2 lg:-translate-y-1/2 w-[90%] lg:w-[50%] bg-yellow-500 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-zinc-900 -skew-x-5 h-fit">
+                <h2 class="text-2xl md:text-base font-black leading-tight">
+                            Dlaczego warto korzystać z naszych usług
+                </h2>
+
+                <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                </p>
+
+                <div class="">
+                    <p class="font-bold mb-3 uppercase tracking-wide text-sm">W ramach usług:</p>
+                    <ul class="space-y-2 text-sm md:text-base">
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
+                            Usługa 123432
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
+                            Usługa 123432
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
+                            Usługa 123432
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
+                            Usługa 123432
+                        </li>
                     </ul>
                 </div>
-            </div>
 
-
-            <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-
-                    ->
-                    <div class="lg:col-span-2 flex flex-col gap-10">
-                        <p class="text-zinc-300 text-lg leading-relaxed">{service.desc}</p>
-
-                        <div class="flex flex-col gap-6">
-                            {service.details.map((d: any) => (
-                                    <div class="border-l-4 border-yellow-400 bg-zinc-900 rounded-r-xl px-6 py-5">
-                                        <h3 class="text-white font-black text-xl uppercase mb-2">{d.heading}</h3>
-                                        <p class="text-zinc-400 text-sm leading-relaxed">{d.body}</p>
-                                    </div>
-                            ))}
-                        </div>
-                    </div>
-
-
-                    <div class="flex flex-col gap-4">
-
-                        <div class="bg-yellow-400 rounded-2xl p-6 flex flex-col gap-4">
-                            <h3 class="text-black font-black text-xl uppercase">Potrzebujesz tej usługi?</h3>
-                            <p class="text-black/70 text-sm font-bold">Zadzwoń teraz — wyślemy pomoc w ciągu 30 minut.</p>
-
-                            <a href="tel:571531112"
-                               class="flex items-center justify-center gap-3 bg-black text-white font-black text-sm tracking-widest uppercase px-5 py-3.5 rounded-full transition-all duration-200 hover:-translate-y-0.5"
-                            >
-                        <span class="relative flex items-center justify-center w-7 h-7 bg-green-500 rounded-full shrink-0">
-                <span class="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-50"></span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-white relative z-10 rotate-12" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/>
-                </svg>
-              </span>
-                                571 531 112
-                            </a>
-                        </div>
-                        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col gap-3">
-                            <h3 class="text-white font-black text-lg uppercase">Inne usługi</h3>
-                            {Object.entries(services).filter(([s]) => s !== slug).map(([s, srv]: [string, any]) => (
-
-                                    <a href={`/uslugi/${s}`}
-                                       class="flex items-center gap-2 text-zinc-400 hover:text-yellow-400 text-sm font-bold uppercase tracking-wide transition-colors group"
-                                    >
-                                        <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"></span>
-                                        {srv.title}
-                                    </a>
-                            ))}
-                        </div>
-                    </div>
-
+                <div class="text-lg md:text-base font-black">
+                    Zadzwoń teraz: <a href="tel:571531112" class="hover:underline">571 531 112</a>
                 </div>
             </div>
 
-        </main>
+        </div>
+    </section>
+
 </Layout>
+
