@@ -42,7 +42,7 @@ const posts = [
                 </h2>
             </div>
 
-            <a href="/blog"
+            <a href="/wpisy"
             class="inline-flex items-center gap-2 border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black font-bold px-6 py-3 rounded-xl transition-all duration-200 w-fit"
             >
             Zobacz wszystkie wpisy
@@ -55,9 +55,8 @@ const posts = [
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {posts.map((post) => (
-
-                <a href={`/blog/${post.slug}`}
-                class="group flex flex-col bg-zinc-900 border border-zinc-800 hover:border-yellow-400/50 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-yellow-400/5"
+                    <a href={`/wpisy/${post.slug}`}
+                class="group flex flex-col bg-zinc-900 border border-zinc-800 hover:border-yellow-500/50 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-yellow-400/5"
                     >
                         <div class="px-6 pt-6 flex items-center justify-between">
                          <span class="text-xs font-bold uppercase tracking-widest text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full">
