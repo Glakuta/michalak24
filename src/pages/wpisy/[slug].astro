@@ -1,164 +1,177 @@
 ---
-// src/pages/blog/[slug].astro
+// src/pages/wpisy/[slug].astro
 import Layout from '../../layouts/Layout.astro';
+import photo from "../../assets/20211124_220606-scaled.jpg"
+import Image from "astro/components/Image.astro";
+import { posts } from '../../data/posts.ts'; // Upewnij się, że ścieżka do posts.ts jest poprawna!
 
+// 1. To zadziała, jeśli budujesz stronę statycznie (SSG)
+export async function getStaticPaths() {
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: { post, allPosts: posts },
+    }));
+}
+
+// 2. Pobieramy slug bezpośrednio z adresu URL (działa zawsze, nawet w SSR)
 const { slug } = Astro.params;
-const WP_API = import.meta.env.WP_API_URL; // np. https://twojadomena.pl/wp-json/wp/v2
 
-// Pobierz wpis po slug
-const postRes = await fetch(`${WP_API}/posts?slug=${slug}&_embed`);
-const posts = await postRes.json();
+// 3. KOŁO RATUNKOWE:
+// Jeśli Astro.props.post nie istnieje (bo np. masz włączone SSR),
+// szukamy posta ręcznie w tablicy po slugu.
+const post = Astro.props.post || posts.find(p => p.slug === slug);
+const allPosts = Astro.props.allPosts || posts;
 
-if (!posts.length) {
+// 4. ZABEZPIECZENIE: Jeśli wpisano błędny slug w URL i post nadal jest undefined,
+// przekieruj użytkownika na stronę 404 zamiast wywalać błąd aplikacji.
+if (!post) {
     return Astro.redirect('/404');
 }
 
-const post = posts[0];
-const title = post.title.rendered;
-const content = post.content.rendered;
-const excerpt = post.excerpt.rendered.replace(/<[^>]*>/g, '');
-const date = new Date(post.date).toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
-const author = post._embedded?.['author']?.[0]?.name ?? 'Michalak24';
-const heroImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? null;
-const categories = post._embedded?.['wp:term']?.[0] ?? [];
-const tags = post._embedded?.['wp:term']?.[1] ?? [];
+// Teraz te przypisania są w 100% bezpieczne, bo 'post' na pewno istnieje
+const title = post.title;
+const content = post.excerpt;
+const date = post.date;
+const author = post.author;
+const heroImage = post.image;
+const category = post.category;
+const keywords = post.keywords || [];
 
-// Pobierz powiązane wpisy (z tej samej kategorii)
-const categoryId = categories[0]?.id;
-let relatedPosts = [];
-if (categoryId) {
-    const relRes = await fetch(`${WP_API}/posts?categories=${categoryId}&exclude=${post.id}&per_page=3&_embed`);
-    relatedPosts = await relRes.json();
-}
+const relatedPosts = allPosts
+    .filter(p => p.category === category && p.slug !== post.slug)
+    .slice(0, 3);
 
-// Generuj spis treści z nagłówków w treści
-function extractHeadings(html: string) {
-    const regex = /<h([2-3])[^>]*id="([^"]*)"[^>]*>(.*?)<\/h[2-3]>/g;
-    const headings = [];
-    let match;
-    while ((match = regex.exec(html)) !== null) {
-        headings.push({
-            level: match[1],
-            id: match[2],
-            text: match[3].replace(/<[^>]*>/g, ''),
-        });
-    }
-    return headings;
-}
-
-const headings = extractHeadings(content);
 const currentUrl = Astro.url.href;
 ---
 
 <Layout>
-    <main class="bg-black min-h-screen" style="font-family:'Barlow Condensed',sans-serif;">
+    <main class="bg-black min-h-screen">
 
-        <!-- Hero -->
         <div
                 class="relative h-[50vh] md:h-[65vh] flex items-end overflow-hidden"
-                style={heroImage ? `background-image: url('${heroImage}'); background-size: cover; background-position: center;` : ''}
         >
-            {!heroImage && <div class="absolute inset-0 bg-zinc-900"></div>}
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
-            <div class="absolute top-0 left-0 right-0 h-1 bg-yellow-400"></div>
+           <div class="absolute inset-0 ">
+               <Image src={photo} alt="Image" class="h-[50vh] md:h-[65vh]"/>
+
+               <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+               <div class="absolute top-0 left-0 right-0 h-1 bg-yellow-400"></div>
+           </div>
 
             <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12 pb-12 w-full">
-                <!-- Breadcrumb -->
                 <div class="flex items-center gap-2 text-sm text-zinc-400 mb-4">
                     <a href="/" class="hover:text-yellow-400 transition-colors">Strona główna</a>
                     <span>/</span>
-                    <a href="/blog" class="hover:text-yellow-400 transition-colors">Blog</a>
+                    <a href="/wpisy" class="hover:text-yellow-400 transition-colors">Wpisy</a>
                     <span>/</span>
                     <span class="text-zinc-500 truncate max-w-xs">{title}</span>
                 </div>
 
-                <!-- Category -->
-                {categories[0] && (
+                {category && (
                         <span class="text-xs font-bold uppercase tracking-widest text-black bg-yellow-400 px-3 py-1 rounded-full">
-            {categories[0].name}
-          </span>
+                            {category}
+                        </span>
                 )}
 
-                <h1 class="mt-3 text-3xl md:text-5xl font-black text-white leading-tight uppercase" set:html={title}></h1>
+                <h1 class="mt-3 text-3xl md:text-5xl font-black text-white leading-tight uppercase">
+                    {title}
+                </h1>
 
-                <!-- Meta -->
                 <div class="mt-4 flex flex-wrap items-center gap-4 text-sm text-zinc-400">
-          <span class="flex items-center gap-1.5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-            </svg>
-              {author}
-          </span>
                     <span class="flex items-center gap-1.5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-            </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        {author}
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
                         {date}
-          </span>
+                    </span>
                 </div>
             </div>
         </div>
 
-        <!-- Content area -->
         <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16">
             <div class="flex flex-col lg:flex-row gap-12">
-
-                <!-- Main content -->
                 <article class="flex-1 min-w-0">
                     <div class="prose prose-invert prose-yellow max-w-none
-            prose-headings:font-black prose-headings:text-white
-            prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-yellow-400 prose-h2:uppercase
-            prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-            prose-p:text-zinc-300 prose-p:leading-relaxed prose-p:mb-5
-            prose-a:text-yellow-400 prose-a:no-underline hover:prose-a:underline
-            prose-strong:text-white prose-strong:font-bold
-            prose-ul:text-zinc-300 prose-li:marker:text-yellow-400
-            prose-blockquote:border-yellow-400 prose-blockquote:bg-zinc-900 prose-blockquote:rounded-r-xl prose-blockquote:py-1
-            prose-img:rounded-xl prose-img:w-full
-            prose-code:text-yellow-400 prose-code:bg-zinc-900 prose-code:px-1.5 prose-code:rounded"
-                         set:html={content}
-                    />
+                        prose-headings:font-black prose-headings:text-white
+                        prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-yellow-400 prose-h2:uppercase
+                        prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+                        prose-p:text-zinc-300 prose-p:leading-relaxed prose-p:mb-5
+                        prose-strong:text-white prose-strong:font-bold"
+                    >
+                        <p class="text-white">Akumulator samochodowy ma ograniczoną żywotność, po której zaczyna działać nieprawidłowo. Silnik może nie uruchomić się w najbardziej nieodpowiednim momencie. Oznacza to, że trzeba będzie jak najszybciej wymienić baterię. Nie musisz jechać do serwisu samochodowego, wszystko możesz zrobić sam.
 
-                    <!-- Tags -->
-                    {tags.length > 0 && (
+                            Samodzielna wymiana akumulatora
+                            Usuwanie starego akumulatora
+                            Proces usuwania niesprawnego akumulatora obejmuje następujące czynności:
+
+                            Rozłączenie zacisków.
+                            Używa się do tego klucza 10 mm. Niektóre akumulatory mogą mieć inne rozmiary zacisków. Dlatego przygotuj kilka narzędzi lub kup klucz z wymiennymi końcówkami. Specjaliści zalecają najpierw odłączenie zacisku minusowego. Wykonanie tej czynności w odwrotnej kolejności może spowodować zwarcie.
+
+                            Wyjmowanie baterii.
+                            Specyfika wyjmowania akumulatora zależy od marki i konstrukcji samochodu. Czasami może wystarczyć odłączenie osłon ochronnych. Baterię podnosi się, trzymając za uchwyt. Czasami urządzenie jest przymocowane do podwozia. W takim przypadku należy odkręcić nakrętkę zabezpieczającą. Dlatego tak ważnym jest aby awaryjne uruchamianie pojazdów odbywało się z zachowaniem zasad bezpieczeństwa.
+
+                            Należy zachować ostrożność podczas wyjmowania baterii z obudowy. Urządzenie często waży nawet do 20 kg. Jeśli bateria spadnie, może zranić osobę.
+
+                            Unikanie zakłóceń w pracy instalacji elektrycznej
+                            Wymiana akumulatora w nowoczesnym pojeździe wiąże się z problemem ustawień komputera pokładowego i innych urządzeń elektronicznych. Przywrócenie ustawień użytkownika może zająć bardzo dużo czasu.
+
+                            Istnieją 2 metody utrzymania ustawień:
+
+                            Używanie dodatkowej baterii.
+                            Podczas wymiany baterii można podłączyć zapasowe źródło zasilania o takiej samej pojemności jak stara bateria.
+                            Podłączenie odbywa się za pomocą przewodów do zapalniczki samochodowej. W tym przypadku można zmienić zasilanie bez wpływu na ustawienia elektroniki pojazdu.
+
+                            Kopiowanie ustawień na nośniki.
+                            W tym celu należy wyjąć kluczyk ze stacyjki. Ustawienia komputera pokładowego zapisz na wymiennym nośniku pamięci oraz zapamiętaj kody odblokowujące urządzenia multimedialne. Także samo uruchamianie pojazdu musi być zawsze bezpieczne. W przypadku utraty hasła można odblokować radio poprzez jego demontaż. Na koniec zapisywane są dodatkowe dane użytkownika.
+
+                            Instalacja nowego akumulatora
+                            Instalacja nowego akumulatora obejmuje następujące czynności:
+
+                            Sprawdzenia gniazda akumulatora. W obecności kurzu i brudu miejsce czyści się miękką szmatką.
+                            Czyszczenie przewodów. Końcówki są traktowane papierem szmerglowym. Poprawia to kontakt między kablami i przewodami prądowymi.
+                            Czyszczenie zacisków. Z czasem zaciski utleniają się. Pozostałości elektrolitu można usunąć roztworem sody oczyszczonej, który nakłada się szczoteczką do zębów.
+                            Wkładanie baterii. Zamocuj urządzenie w swoim miejsc
+                            Jak dobrać akumulator do auta?
+                            Pierwsza i chyba najważniejsza rzecz — na baterii koniecznie musi być podany kraj produkcji i zakład, najlepiej z adresem. Do każdej baterii musi być dołączony paszport techniczny, natomiast obecność instrukcji jest opcjonalna. Wynika to z faktu, że na akumulatory prawie nigdy nie są sprzedawane detalicznie, są montowane przez specjalistów na stacjach benzynowych. Po trzecie, dobrej jakości akumulator jest nie do pomyślenia bez dobrej jakości obudowy, dobrych wtyczek i gładkich zacisków ołowianych, często posmarowanych technicznym smarem ochronnym przed utlenianiem i przykrytych kolorowymi plastikowymi kapturkami.
+
+                            Główne parametry przy wyborze akumulatora to:
+
+                            Pojemność elektryczna (nominalna), Ah;
+                            Polaryzacja;
+                            Prąd rozruchowy, A;
+                            Wymiary obudowy akumulatora.</p>
+                    </div>
+
+                    {keywords.length > 0 && (
                             <div class="mt-12 pt-8 border-t border-zinc-800">
                                 <p class="text-xs text-zinc-500 uppercase tracking-widest mb-3">Słowa kluczowe</p>
                                 <div class="flex flex-wrap gap-2">
-                                    {tags.map((tag: any) => (
+                                    {keywords.map((tag) => (
                                             <span class="text-sm text-zinc-400 border border-zinc-700 hover:border-yellow-400 hover:text-yellow-400 transition-colors px-3 py-1 rounded-full cursor-pointer">
-                    #{tag.name}
-                  </span>
+                                                #{tag}
+                                            </span>
                                     ))}
                                 </div>
                             </div>
                     )}
 
-                    <!-- Share -->
                     <div class="mt-10 pt-8 border-t border-zinc-800">
                         <p class="text-xs text-zinc-500 uppercase tracking-widest mb-4">Udostępnij wpis</p>
                         <div class="flex flex-wrap gap-3">
-
-                           <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-zinc-900 hover:bg-blue-600 border border-zinc-700 hover:border-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-200"
+                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="flex items-center gap-2 bg-zinc-900 hover:bg-blue-600 border border-zinc-700 hover:border-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-200"
                             >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                            </svg>
-                            Facebook
+
+                                Facebook
                             </a>
 
-                          <a  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(title)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex items-center gap-2 bg-zinc-900 hover:bg-sky-500 border border-zinc-700 hover:border-sky-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-200"
-                            >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M4 4l16 16M4 20L20 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                            X / Twitter
-                            </a>
                             <button
                                     onclick={`navigator.clipboard.writeText('${currentUrl}'); this.textContent = '✓ Skopiowano!'; setTimeout(() => this.textContent = 'Kopiuj link', 2000)`}
                                     class="flex items-center gap-2 bg-zinc-900 hover:bg-yellow-400 hover:text-black border border-zinc-700 hover:border-yellow-400 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-200"
@@ -168,34 +181,9 @@ const currentUrl = Astro.url.href;
                         </div>
                     </div>
                 </article>
-
-                <!-- Sidebar: TOC -->
-              {headings.length > 0 && (
-                        <aside class="lg:w-64 xl:w-72 shrink-0">
-                            <div class="sticky top-8 bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
-                                <p class="text-xs text-yellow-400 font-bold uppercase tracking-widest mb-4">Spis treści</p>
-                                <nav class="flex flex-col gap-1">
-                                    {headings.map((h) => (
-
-                                     <a   href={`#${h.id}`}
-                                        class={`text-sm leading-snug py-1.5 border-l-2 transition-colors duration-200 hover:text-yellow-400 hover:border-yellow-400
-                      ${h.level === '2'
-                                            ? 'pl-4 text-zinc-300 border-zinc-700 font-semibold'
-                                            : 'pl-7 text-zinc-500 border-zinc-800'
-                                        }`}
-                                        >
-                                        {h.text}
-                                        </a>
-                                        ))}
-                                </nav>
-                            </div>
-                        </aside>
-                )}
-
             </div>
         </div>
 
-        <!-- Related posts -->
         {relatedPosts.length > 0 && (
                 <div class="border-t border-zinc-800 py-16 px-6 md:px-12 lg:px-20">
                     <div class="max-w-7xl mx-auto">
@@ -203,39 +191,36 @@ const currentUrl = Astro.url.href;
                         <h2 class="mt-2 text-3xl font-black text-white uppercase mb-8">Powiązane wpisy</h2>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {relatedPosts.map((related: any) => {
-                                const relImage = related._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? null;
-                                const relDate = new Date(related.date).toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
-                                const relCat = related._embedded?.['wp:term']?.[0]?.[0]?.name ?? '';
+                            {relatedPosts.map((related) => {
                                 return (
+                                        <a  href={`/wpisy/${related.slug}`}
+                                            class="group relative rounded-2xl overflow-hidden h-64 block"
+                                            style={related.image ? `background-image: url('${related.image}'); background-size: cover; background-position: center;` : ''}
+                                        >
+                                            {!related.image && <div class="absolute inset-0 bg-zinc-900"></div>}
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent group-hover:via-black/20 transition-all duration-500"></div>
+                                            <div class="absolute inset-y-0 left-0 w-1 bg-yellow-400 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"></div>
 
-                                  <a  href={`/blog/${related.slug}`}
-                                class="group relative rounded-2xl overflow-hidden h-64 block"
-                                style={relImage ? `background-image: url('${relImage}'); background-size: cover; background-position: center;` : ''}
-                                    >
-                                    {!relImage && <div class="absolute inset-0 bg-zinc-900"></div>}
-                                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent group-hover:via-black/20 transition-all duration-500"></div>
-                                <div class="absolute inset-y-0 left-0 w-1 bg-yellow-400 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"></div>
+                                            {related.category && (
+                                                    <div class="absolute top-4 left-4">
+                                          <span class="text-xs font-bold uppercase tracking-widest text-black bg-yellow-400 px-3 py-1 rounded-full">
+                                            {related.category}
+                                          </span>
+                                                    </div>
+                                            )}
 
-                                {relCat && (
-                                            <div class="absolute top-4 left-4">
-                      <span class="text-xs font-bold uppercase tracking-widest text-black bg-yellow-400 px-3 py-1 rounded-full">
-                        {relCat}
-                      </span>
+                                            <div class="absolute bottom-0 left-0 right-0 p-5">
+                                                <h3 class="text-white font-black text-base uppercase leading-snug group-hover:text-yellow-400 transition-colors duration-200">
+                                                    {related.title}
+                                                </h3>
+                                                <p class="text-zinc-500 text-xs mt-1">{related.date}</p>
                                             </div>
-                                )}
-
-                                <div class="absolute bottom-0 left-0 right-0 p-5">
-                                    <h3 class="text-white font-black text-base uppercase leading-snug group-hover:text-yellow-400 transition-colors duration-200" set:html={related.title.rendered}></h3>
-                                    <p class="text-zinc-500 text-xs mt-1">{relDate}</p>
-                                </div>
-                                </a>
+                                        </a>
                                 );
                             })}
                         </div>
                     </div>
                 </div>
         )}
-
     </main>
 </Layout>
