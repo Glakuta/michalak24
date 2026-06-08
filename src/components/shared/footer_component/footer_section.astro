@@ -82,27 +82,8 @@ const recentPosts = [
 
 
     <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-14">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            <!--<div class="flex flex-col gap-4">-->
-            <!--    <div>-->
-            <!--        <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Nawigacja</p>-->
-            <!--        <h3 class="text-white font-black text-lg">Usługi</h3>-->
-            <!--    </div>-->
-            <!--    <ul class="flex flex-col gap-2">-->
-            <!--        {services.map(link => (-->
-            <!--                <li>-->
-
-            <!--                    <a href={link.href}-->
-            <!--                    class="text-zinc-400 hover:text-yellow-400 text-sm transition-colors duration-200 flex items-center gap-2 group"-->
-            <!--                    >-->
-            <!--                    <span class="w-1 h-1 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>-->
-            <!--                    {link.label}-->
-            <!--                    </a>-->
-            <!--                </li>-->
-            <!--        ))}-->
-            <!--    </ul>-->
-            <!--</div>-->
-            <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-col lg:flex-row items-start justify-between gap-4">
                 <div>
                     <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Znajdź nas</p>
                     <h3 class="text-white font-black text-lg">Kontakt</h3>
@@ -134,7 +115,7 @@ const recentPosts = [
                     </li>
                 </ul>
 
-                <div class="flex flex-col gap-3 mt-2">
+                <div class="flex flex-col gap-3 mt-2 lg:mt-0">
                     <p class="text-white font-black text-lg">Sprawdź nasze Social Media</p>
                     <div class="flex gap-3 mt-2">
                         <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
