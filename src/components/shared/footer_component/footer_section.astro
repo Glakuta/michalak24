@@ -1,9 +1,9 @@
 ---
 import Image from "astro/components/Image.astro";
-import facebook from "../../../assets/facebook_2931615.png"
-import instagram from "../../../assets/instagram_1946461.png"
-import youtube from "../../../assets/video_15522190.png"
-import googleMaps from "../../../assets/google_maps.png"
+import facebook from "../../../assets/icons8-facebook-64.png"
+import instagram from "../../../assets/icons8-instagram-64.png"
+import youtube from "../../../assets/icons8-youtube-64.png"
+import googleMaps from "../../../assets/icons8-google-maps-64.png"
 
 const currentYear = new Date().getFullYear();
 
@@ -54,7 +54,7 @@ const recentPosts = [
     </div>
 
     <div class="border-b border-zinc-800">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="max-w-7xl lg:mx-auto px-6 md:px-12 lg:px-20 py-6 flex flex-col sm:flex-row items-start justify-between gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -65,8 +65,8 @@ const recentPosts = [
             </div>
 
 
-            <p class="text-zinc-400 text-sm text-center">
-                Pomoc drogowa dostępna <span class="text-yellow-400 font-bold">24/7</span> — jesteśmy tam, gdzie nas potrzebujesz.
+            <p class="text-zinc-400 text-sm">
+                Pomoc drogowa <span class="text-yellow-400 font-bold">24/7</span> — jesteśmy tam, gdzie nas potrzebujesz.
             </p>
 
             <a href="tel:+48123456789"
@@ -83,59 +83,36 @@ const recentPosts = [
 
     <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-14">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            <div class="flex flex-col gap-4">
-                <div>
-                    <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Nawigacja</p>
-                    <h3 class="text-white font-black text-lg">Usługi</h3>
-                </div>
-                <ul class="flex flex-col gap-2">
-                    {services.map(link => (
-                            <li>
+            <!--<div class="flex flex-col gap-4">-->
+            <!--    <div>-->
+            <!--        <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Nawigacja</p>-->
+            <!--        <h3 class="text-white font-black text-lg">Usługi</h3>-->
+            <!--    </div>-->
+            <!--    <ul class="flex flex-col gap-2">-->
+            <!--        {services.map(link => (-->
+            <!--                <li>-->
 
-                                <a href={link.href}
-                                class="text-zinc-400 hover:text-yellow-400 text-sm transition-colors duration-200 flex items-center gap-2 group"
-                                >
-                                <span class="w-1 h-1 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                                {link.label}
-                                </a>
-                            </li>
-                    ))}
-                </ul>
-            </div>
-
+            <!--                    <a href={link.href}-->
+            <!--                    class="text-zinc-400 hover:text-yellow-400 text-sm transition-colors duration-200 flex items-center gap-2 group"-->
+            <!--                    >-->
+            <!--                    <span class="w-1 h-1 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>-->
+            <!--                    {link.label}-->
+            <!--                    </a>-->
+            <!--                </li>-->
+            <!--        ))}-->
+            <!--    </ul>-->
+            <!--</div>-->
             <div class="flex flex-col gap-4">
                 <div>
-                    <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Blog</p>
-                    <h3 class="text-white font-black text-lg">Ostatnie wpisy</h3>
-                </div>
-                <div class="flex flex-col gap-4">
-                    {recentPosts.map(post => (
-                            <a href={`/blog/${post.slug}`} class="flex items-start gap-3 group">
-                                <div
-                                        class="w-16 h-16 shrink-0 rounded-lg overflow-hidden bg-zinc-800"
-                                        style={`background-image: url('${post.image}'); background-size: cover; background-position: center;`}
-                                ></div>
-                                <div class="flex flex-col gap-1 min-w-0">
-                                    <p class="text-zinc-300 group-hover:text-yellow-400 text-sm font-semibold leading-snug transition-colors line-clamp-2">
-                                        {post.title}
-                                    </p>
-                                    <p class="text-zinc-600 text-xs">{post.date}</p>
-                                </div>
-                            </a>
-                    ))}
-                </div>
-            </div>
-            <div class="flex flex-col gap-4">
-                <div>
-                    <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Kontakt</p>
-                    <h3 class="text-white font-black text-lg">Znajdź nas</h3>
+                    <p class="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-1">Znajdź nas</p>
+                    <h3 class="text-white font-black text-lg">Kontakt</h3>
                 </div>
                 <ul class="flex flex-col gap-3">
                     <li class="flex items-start gap-3 text-sm text-zinc-400">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                         </svg>
-                        ul. Przykładowa 12, 60-001 Poznań
+                        ul. Stawiszyńska 163, 62-800 Kalisz
                     </li>
                     <li class="flex items-center gap-3 text-sm text-zinc-400">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -157,19 +134,21 @@ const recentPosts = [
                     </li>
                 </ul>
 
-                <div class="flex gap-3 mt-2">
-                    <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
+                <div class="flex flex-col gap-3 mt-2">
+                    <p class="text-white font-black text-lg">Sprawdź nasze Social Media</p>
+                    <div class="flex gap-3 mt-2">
+                        <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
                         <Image src={facebook} alt="Michalak24 - facebook" />
                     </a>
-                    <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
-                        <Image src={instagram} alt="Michalak24 - instagram" />
-                    </a>
-                    <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
-                        <Image src={youtube} alt="Michalak24 - youtube" />
-                    </a>
-                    <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
-                        <Image src={googleMaps} alt="Michalak24 - Google Maps" />
-                    </a>
+                        <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
+                            <Image src={instagram} alt="Michalak24 - instagram" />
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
+                            <Image src={youtube} alt="Michalak24 - youtube" />
+                        </a>
+                        <a href="#" class="w-9 h-9 bg-zinc-900 hover:bg-yellow-400 border border-zinc-800 hover:border-yellow-400 rounded-lg flex items-center justify-center transition-all duration-200 group">
+                            <Image src={googleMaps} alt="Michalak24 - Google Maps" />
+                        </a></div>
                 </div>
             </div>
 
