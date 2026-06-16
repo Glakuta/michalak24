@@ -6,8 +6,8 @@ import laweta from "../../assets/laweta na lawecie.jpg"
 import {getSlugQuery} from "../../data/getSlugQuery.ts";
 import Gallery_component from "../../components/welcome-page/gallery_section/Gallery_component.astro";
 import hotline from "../../assets/icons8-hotline-100.png";
-import towtruck from "../../assets/transport auta - michalak 24.png";
-import protection from "../../assets/icons8-protection-64.png";
+import towtruck from "../../assets/icons8-tow-truck-100.png";
+import protection from "../../assets/icons8-protect-100.png";
 import serviceCall from "../../assets/icons8-online-support-100.png"
 
 const { slug } = Astro.params;
@@ -42,9 +42,9 @@ const prosList: string[] = service?.acf?.zalety_lista
                     Dlaczego warto wybrać pomoc drogową?
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 w-2/3 lg:w-full lg:w-full mx-auto">
                 <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
-                    <div class="relative z-10">
+                    <div class="relative z-10 flex flex-col gap-6 justify-start">
                         <Image src={hotline} alt="Michalak-24-hotline" />
                             <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
                                 <span class="font-bold">Całodobowa dostępność</span> – nawet w nocy i święta. Średni czas dojazdu: <span class="font-bold">20–30 minut</span>
@@ -53,8 +53,8 @@ const prosList: string[] = service?.acf?.zalety_lista
                     </div>
 
                     <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
-                        <Image src={towtruck} alt="Michalak-24-laweta" width={64} height={64}/>
-                        <div class="relative z-10">
+                        <Image src={towtruck} alt="Michalak-24-laweta" />
+                        <div class="relative z-10 flex flex-col gap-6 justify-start">
                             <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
                                 Otrzymasz <span class="font-bold">profesjonalne wyciąganie auta</span> z trudno dostępnego miejsca
                             </p>
@@ -62,8 +62,8 @@ const prosList: string[] = service?.acf?.zalety_lista
                     </div>
 
                     <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
-                        <div class="relative z-10">
-                            <Image src={protection} alt="Michalak-24-protection" width={64} height={64}/>
+                        <div class="relative z-10 flex flex-col gap-6 justify-start">
+                            <Image src={protection} alt="Michalak-24-protection" />
                             <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
                                 Twoje auto zostanie <span class="font-bold">zabezpieczone</span> na każdym etapie
                             </p>
@@ -71,7 +71,7 @@ const prosList: string[] = service?.acf?.zalety_lista
                     </div>
 
                     <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
-                        <div class="relative z-10">
+                        <div class="relative z-10 flex flex-col gap-6 justify-start">
                             <Image src={serviceCall} alt="Michalak-24-call-service" />
                             <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
                                 <span class="font-bold">Pomoc drogowa</span>, którą świadczymy, jest dopasowana do Twojej sytuacji
@@ -80,7 +80,7 @@ const prosList: string[] = service?.acf?.zalety_lista
                     </div>
             </div>
 
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-12">
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-12 w-2/3 lg:w-full mx-auto">
                     <a href="tel:571531112" class="w-full sm:w-auto text-center border-2 border-yellow-500 text-yellow-500 bg-zinc-900 hover:bg-yellow-500 hover:text-zinc-900 font-bold px-8 py-4 rounded-lg transition-colors text-base shadow-sm">
                         Zamów usługę
                     </a>
