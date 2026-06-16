@@ -3,13 +3,13 @@
 import Layout from '../../layouts/Layout.astro';
 import photo from "../../assets/20211124_220606-scaled.jpg"
 import Image from "astro/components/Image.astro";
-import { posts } from '../../data/posts.ts'; // Upewnij się, że ścieżka do posts.ts jest poprawna!
+import { getPostsQuery } from '../../data/getPostsQuery.ts'; // Upewnij się, że ścieżka do getPostsQuery.ts jest poprawna!
 
 // 1. To zadziała, jeśli budujesz stronę statycznie (SSG)
 export async function getStaticPaths() {
-    return posts.map((post) => ({
+    return getPostsQuery.map((post) => ({
         params: { slug: post.slug },
-        props: { post, allPosts: posts },
+        props: { post, allPosts: getPostsQuery },
     }));
 }
 
@@ -19,8 +19,8 @@ const { slug } = Astro.params;
 // 3. KOŁO RATUNKOWE:
 // Jeśli Astro.props.post nie istnieje (bo np. masz włączone SSR),
 // szukamy posta ręcznie w tablicy po slugu.
-const post = Astro.props.post || posts.find(p => p.slug === slug);
-const allPosts = Astro.props.allPosts || posts;
+const post = Astro.props.post || getPostsQuery.find(p => p.slug === slug);
+const allPosts = Astro.props.allPosts || getPostsQuery;
 
 // 4. ZABEZPIECZENIE: Jeśli wpisano błędny slug w URL i post nadal jest undefined,
 // przekieruj użytkownika na stronę 404 zamiast wywalać błąd aplikacji.

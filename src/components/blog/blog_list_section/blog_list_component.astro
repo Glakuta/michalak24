@@ -3,11 +3,11 @@ import Image from "astro/components/Image.astro";
 import hero from "../../../assets/DAF_hero.jpg";
 import special from "../../../assets/gero.jpg"
 import photo from "../../../assets/20211124_220606-scaled.jpg"
-import {posts} from "../../../data/posts.ts";
+import {getPostsQuery} from "../../../data/getPostsQuery.ts";
 
 
 
-const [featured, ...rest] = posts;
+const [featured, ...rest] = getPostsQuery;
 ---
      <main class="bg-black min-h-screen">
          <div class="relative h-[80vh] lg:h-[60vh] m overflow-hidden flex items-end bg-zinc-900">

@@ -3,73 +3,95 @@ import Image from "astro/components/Image.astro";
 import Layout from "../../layouts/Layout.astro";
 import photo from "../../assets/DAF_hero.jpg";
 import laweta from "../../assets/laweta na lawecie.jpg"
-export const prerender = false;
+import {getSlugQuery} from "../../data/getSlugQuery.ts";
+import Gallery_component from "../../components/welcome-page/gallery_section/Gallery_component.astro";
+import hotline from "../../assets/icons8-hotline-100.png";
+import towtruck from "../../assets/transport auta - michalak 24.png";
+import protection from "../../assets/icons8-protection-64.png";
+import serviceCall from "../../assets/icons8-online-support-100.png"
 
 const { slug } = Astro.params;
-
-const services: Record<string, any> = {
-    "holowanie-laweta": {
-        title: "Holowanie i laweta",
-        short: "Bezpieczny transport każdego pojazdu",
-        desc: "Profesjonalne holowanie i transport lawetą...",
-        img: "/images/services/laweta.jpg",
-        bullets: ["Załadunek najazdowy", "Pojazdy do 7 ton", "Holowanie krajowe i zagraniczne"],
-        details: [
-            { heading: "Jak działamy?", body: "Po przyjęciu zlecenia nasz kierowca wyjeżdża natychmiast. Docieramy średnio w 15–30 minut na terenie Kalisza i okolic." },
-            { heading: "Co holujemy?", body: "Osobówki, busy, vany, motocykle oraz pojazdy ciężarowe do 7 ton. Dysponujemy lawetą standardową i ciężką." },
-            { heading: "Ile to kosztuje?", body: "Wycenę podajemy przed przystąpieniem do pracy. Transparentne stawki, zero ukrytych kosztów." },
-        ],
-    },
-    "pomoc-drogowa-24h": {
-        title: "Pomoc drogowa 24h",
-        short: "Jesteśmy tam, gdzie nas potrzebujesz",
-        desc: "Awaria o każdej porze? Docieramy średnio w 15–30 minut.",
-        img: "/images/services/pomoc-drogowa.jpg",
-        bullets: ["Dojazd 15–30 min", "Bez dopłat w nocy", "Cały rok, 365 dni"],
-        details: [
-            { heading: "Dyżurujemy całą dobę", body: "Nasi kierowcy są dostępni 24 godziny na dobę, 7 dni w tygodniu, 365 dni w roku." },
-            { heading: "Zakres pomocy", body: "Rozruch, wymiana koła, otwarcie pojazdu, dostarczenie paliwa, holowanie do warsztatu." },
-            { heading: "Obszar działania", body: "Kalisz, Ostrów Wielkopolski, Jarocin i okoliczne powiaty. Zlecenia ogólnopolskie na zapytanie." },
-        ],
-    },
-    "pomoc-przy-wypadku": {
-        title: "Pomoc przy wypadku",
-        short: "Szybka reakcja w najtrudniejszych chwilach",
-        desc: "Wypadek drogowy to sytuacja kryzysowa. Zabezpieczymy miejsce zdarzenia.",
-        img: "/images/services/wypadek.jpg",
-        bullets: ["Zabezpieczenie miejsca zdarzenia", "Ewakuacja pojazdu", "Wsparcie z ubezpieczycielem"],
-        details: [
-            { heading: "Pierwsza reakcja", body: "Zabezpieczamy miejsce wypadku, pomagamy w kontakcie ze służbami i ubezpieczycielem." },
-            { heading: "Ewakuacja pojazdu", body: "Bezpieczne zabranie uszkodzonego pojazdu z jezdni lub rowu — nawet przy trudnym dostępie." },
-            { heading: "Współpraca z ubezpieczalnią", body: "Obsługujemy zlecenia PZU, Warta, Allianz i wielu innych. Przeprowadzimy Cię przez cały proces." },
-        ],
-    },
-    "uruchomienie-auta-akumulator": {
-        title: "Uruchomienie auta",
-        short: "Martwy akumulator? Zrestartujemy Cię w minuty",
-        desc: "Rozładowany akumulator, zatrzaśnięte kluczyki, brak paliwa.",
-        img: "/images/services/akumulator.jpg",
-        bullets: ["Rozruch z kabli", "Wymiana akumulatora", "Otwarcie pojazdu bez uszkodzeń"],
-        details: [
-            { heading: "Rozruch awaryjny", body: "Uruchamiamy pojazd z kabli lub przenośnego boostera. Szybko i bezpiecznie dla elektroniki auta." },
-            { heading: "Wymiana akumulatora", body: "Przywozimy i wymieniamy akumulator na miejscu. Szeroki wybór rozmiarów w pojeździe serwisowym." },
-            { heading: "Otwarcie pojazdu", body: "Zatrzaśnięte kluczyki? Otwieramy pojazd bez uszkodzeń przy użyciu profesjonalnych narzędzi." },
-        ],
-    },
-};
-
-const service = services[slug as string];
+if (!slug) {
+    return Astro.redirect('/uslugi');
+}
+const serviceArr = await getSlugQuery(slug);
+const service = serviceArr && serviceArr.length > 0 ? serviceArr[0] : null;
 if (!service) return Astro.redirect('/uslugi');
+if (!service) {
+    return Astro.redirect('/uslugi');
+}
+
+const prosList: string[] = service?.acf?.zalety_lista
+    ? service.acf.zalety_lista
+        .split('\n')
+        .map((item: string) => item.trim())
+        .filter((item: string) => item.length > 0)
+        .map((item: string) => item.replace(/,$/, ''))
+    : [];
 ---
 
 
 <Layout>
     <div>
         <Image src={photo} alt="Michalak 24" class="w-full object-cover object-center h-[60vh]"/>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40 h-[60vh]"></div>
     </div>
-    <section class="bg-zinc-900 py-16 flex">
-        <div class="max-w-7xl w-full relative">
+    <section class="py-16 px-4 font-sans overflow-hidden relative">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <h2 class="text-3xl md:text-5xl font-black text-center text-yellow-500 tracking-tight max-w-4xl mx-auto uppercase mb-16 leading-tight">
+                    Dlaczego warto wybrać pomoc drogową?
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
+                    <div class="relative z-10">
+                        <Image src={hotline} alt="Michalak-24-hotline" />
+                            <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
+                                <span class="font-bold">Całodobowa dostępność</span> – nawet w nocy i święta. Średni czas dojazdu: <span class="font-bold">20–30 minut</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
+                        <Image src={towtruck} alt="Michalak-24-laweta" width={64} height={64}/>
+                        <div class="relative z-10">
+                            <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
+                                Otrzymasz <span class="font-bold">profesjonalne wyciąganie auta</span> z trudno dostępnego miejsca
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
+                        <div class="relative z-10">
+                            <Image src={protection} alt="Michalak-24-protection" width={64} height={64}/>
+                            <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
+                                Twoje auto zostanie <span class="font-bold">zabezpieczone</span> na każdym etapie
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
+                        <div class="relative z-10">
+                            <Image src={serviceCall} alt="Michalak-24-call-service" />
+                            <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
+                                <span class="font-bold">Pomoc drogowa</span>, którą świadczymy, jest dopasowana do Twojej sytuacji
+                            </p>
+                        </div>
+                    </div>
+            </div>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-12">
+                    <a href="tel:571531112" class="w-full sm:w-auto text-center border-2 border-yellow-500 text-yellow-500 bg-zinc-900 hover:bg-yellow-500 hover:text-zinc-900 font-bold px-8 py-4 rounded-lg transition-colors text-base shadow-sm">
+                        Zamów usługę
+                    </a>
+                    <a href="/oferta" class="w-full sm:w-auto text-center bg-yellow-500 hover:bg-zinc-900 hover:border-yellow-500 text-zinc-900 hover:text-yellow-500 font-bold px-8 py-4 rounded-lg transition-colors text-base shadow-md">
+                        Sprawdź naszą ofertę
+                    </a>
+                </div>
+            </div>
+    </section>
+    <section class="bg-zinc-900 py-16 flex overflow-x-hidden my-[11vh]">
+        <div class="max-w-7xl w-full relative mr-auto">
             <div class="relative lg:w-4/5 h-[50vh] border-[4px] border-yellow-500 rounded-sm overflow-hidden shadow-2xl">
                 <Image
                         src={laweta}
@@ -79,44 +101,169 @@ if (!service) return Astro.redirect('/uslugi');
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
             </div>
 
+
             <div class="flex flex-col gap-4 lg:mt-0 relative z-10 mx-auto lg:absolute lg:-right-1/5 lg:top-1/2 lg:-translate-y-1/2 w-[90%] lg:w-[50%] bg-yellow-500 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-zinc-900 -skew-x-5 h-fit">
                 <h2 class="text-2xl md:text-base font-black leading-tight">
-                            Dlaczego warto korzystać z naszych usług
+                    {service.acf.zalety_tytul}
                 </h2>
 
                 <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                    {service.acf.zalety_opis_1}
                 </p>
 
-                <div class="">
+                <div>
                     <p class="font-bold mb-3 uppercase tracking-wide text-sm">W ramach usług:</p>
                     <ul class="space-y-2 text-sm md:text-base">
-                        <li class="flex items-center gap-3">
-                            <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
-                            Usługa 123432
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
-                            Usługa 123432
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
-                            Usługa 123432
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
-                            Usługa 123432
-                        </li>
+                        {prosList.map((item: string) => (
+                                <li class="flex items-center gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
+                                    {item}
+                                </li>
+                        ))}
                     </ul>
                 </div>
+
+                <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
+                    {service.acf.zalety_opis_2}
+                </p>
 
                 <div class="text-lg md:text-base font-black">
                     Zadzwoń teraz: <a href="tel:571531112" class="hover:underline">571 531 112</a>
                 </div>
             </div>
-
         </div>
     </section>
+
+    <section class="bg-zinc-900 py-16 flex overflow-x-hidden my-[11vh]">
+        <div class="max-w-7xl w-full relative ml-auto">
+            <div class="relative lg:w-4/5 lg:ml-auto h-[50vh] border-[4px] border-yellow-500 rounded-sm overflow-hidden shadow-2xl">
+                <Image
+                        src={laweta}
+                        alt="Pomoc drogowa Kalisz - Michalak 24"
+                        class="w-full object-cover h-full grayscale-[20%]"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
+            </div>
+            <div class="flex flex-col gap-4 lg:mt-0 relative z-10 mx-auto lg:absolute lg:-left-1/5 lg:top-1/2 lg:-translate-y-1/2 w-[90%] lg:w-[50%] bg-yellow-500 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-zinc-900 skew-x-5 h-fit">
+                <div class="-skew-x-5 flex flex-col gap-4">
+                    <h2 class="text-2xl md:text-3xl font-black leading-tight">
+                        {service.acf.pojzady_tytul}
+                    </h2>
+
+                    <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
+                        {service.acf.pojazdy_opis}
+                    </p>
+
+                    <div>
+                        <p class="font-bold mb-3 uppercase tracking-wide text-sm">Obsługujemy między innymi:</p>
+                        <ul class="space-y-2 text-sm md:text-base">
+                            {prosList.map((item: string) => (
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
+                                        {item}
+                                    </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="text-lg md:text-base font-black mt-2">
+                        Zadzwoń teraz: <a href="tel:571531112" class="hover:underline">571 531 112</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-zinc-900 py-16 flex overflow-x-hidden my-[11vh]">
+
+        <div class="max-w-7xl w-full relative mr-auto">
+            <div class="relative lg:w-4/5 h-[50vh] border-[4px] border-yellow-500 rounded-sm overflow-hidden shadow-2xl">
+                <Image
+                        src={laweta}
+                        alt="Laweta pomocy drogowej - Michalak 24"
+                        class="w-full object-cover h-full grayscale-[20%]"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
+            </div>
+
+
+            <div class="flex flex-col gap-4 lg:mt-0 relative z-10 mx-auto lg:absolute lg:-right-1/5 lg:top-1/2 lg:-translate-y-1/2 w-[90%] lg:w-[50%] bg-yellow-500 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-zinc-900 -skew-x-5 h-fit">
+                <h2 class="text-2xl md:text-base font-black leading-tight">
+                    {service.acf.zalety_tytul}
+                </h2>
+
+                <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
+                    {service.acf.zalety_opis_1}
+                </p>
+
+                <div>
+                    <p class="font-bold mb-3 uppercase tracking-wide text-sm">W ramach usług:</p>
+                    <ul class="space-y-2 text-sm md:text-base">
+                        {prosList.map((item: string) => (
+                                <li class="flex items-center gap-3">
+                                    <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
+                                    {item}
+                                </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
+                    {service.acf.zalety_opis_2}
+                </p>
+
+                <div class="text-lg md:text-base font-black">
+                    Zadzwoń teraz: <a href="tel:571531112" class="hover:underline">571 531 112</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-zinc-900 py-16 flex overflow-x-hidden my-[11vh]">
+        <div class="max-w-7xl w-full relative ml-auto">
+            <div class="relative lg:w-4/5 lg:ml-auto h-[50vh] border-[4px] border-yellow-500 rounded-sm overflow-hidden shadow-2xl">
+                <Image
+                        src={laweta}
+                        alt="Pomoc drogowa Kalisz - Michalak 24"
+                        class="w-full object-cover h-full grayscale-[20%]"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
+            </div>
+            <div class="flex flex-col gap-4 lg:mt-0 relative z-10 mx-auto lg:absolute lg:-left-1/5 lg:top-1/2 lg:-translate-y-1/2 w-[90%] lg:w-[50%] bg-yellow-500 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-zinc-900 skew-x-5 h-fit">
+                <div class="-skew-x-5 flex flex-col gap-4">
+                    <h2 class="text-2xl md:text-3xl font-black leading-tight">
+                        {service.acf.pojzady_tytul}
+                    </h2>
+
+                    <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
+                        {service.acf.pojazdy_opis}
+                    </p>
+
+                    <div>
+                        <p class="font-bold mb-3 uppercase tracking-wide text-sm">Obsługujemy między innymi:</p>
+                        <ul class="space-y-2 text-sm md:text-base">
+                            {prosList.map((item: string) => (
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
+                                        {item}
+                                    </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="text-lg md:text-base font-black mt-2">
+                        Zadzwoń teraz: <a href="tel:571531112" class="hover:underline">571 531 112</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-zinc-900 py-16 flex flex-col overflow-x-hidden max-w-7xl w-full relative mx-auto my-[11vh]">
+        <h3 class="text-4xl md:text-5xl font-black text-white leading-tight">
+            {service.acf.podsumowanie_tytul}
+        </h3>
+        <p class="text-white font-semibold text-base">{service.acf.podsumowanie_opis}</p>
+    </section>
+    <Gallery_component />
 
 </Layout>
 
