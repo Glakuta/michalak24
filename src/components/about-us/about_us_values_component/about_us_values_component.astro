@@ -1,0 +1,45 @@
+---
+const values = [
+    {
+        icon: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
+        title: "Bezpieczeństwo przede wszystkim",
+        desc: "Każde zlecenie realizujemy z najwyższą starannością. Twój pojazd jest u nas bezpieczny od momentu odbioru aż do miejsca docelowego.",
+    },
+    {
+        icon: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
+        title: "Błyskawiczny czas reakcji",
+        desc: "Docieramy na miejsce średnio w 15–30 minut. Działamy całą dobę, 365 dni w roku — bez wyjątków.",
+    },
+    {
+        icon: `<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>`,
+        title: "Uczciwe podejście",
+        desc: "Transparentne ceny, zero ukrytych kosztów. Wycenę otrzymujesz przed przystąpieniem do pracy — zawsze.",
+    },
+    {
+        icon: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+        title: "Obsługa ubezpieczycieli",
+        desc: "Współpracujemy z PZU, Wartą, Allianz i innymi. Przejmiemy całą komunikację z ubezpieczycielem za Ciebie.",
+    },
+];
+---
+<section class="border-t border-zinc-800 py-20 px-6 md:px-12 lg:px-20 bg-zinc-950">
+    <div class="max-w-7xl mx-auto">
+        <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Czym się kierujemy</span>
+        <h2 class="mt-2 text-4xl font-black text-white uppercase mb-12">Nasze wartości</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((v) => (
+                    <li class="bg-yellow-400 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300 skew-x-5">
+                        <!--<div class="w-20 h-20 m-auto  rounded-xl flex items-center justify-center">-->
+                        <!--    <Image src={v.icon} alt="Transport auta - Michalak24" class="w-16 h-16 object-contain"/>-->
+                        <!--</div>-->
+                        <div class="flex flex-col gap-1">
+                            <h3 class="font-extrabold text-xl text-black tracking-tight mx-auto">{v.title}</h3>
+
+                        </div>
+                        <p class="text-black/80 text-sm leading-relaxed">{v.desc}</p>
+                    </li>
+            ))}
+        </div>
+    </div>
+</section>

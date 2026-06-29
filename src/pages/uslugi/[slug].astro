@@ -15,6 +15,7 @@ if (!slug) {
     return Astro.redirect('/uslugi');
 }
 const serviceArr = await getSlugQuery(slug);
+console.log(serviceArr);
 const service = serviceArr && serviceArr.length > 0 ? serviceArr[0] : null;
 if (!service) return Astro.redirect('/uslugi');
 if (!service) {
@@ -32,11 +33,26 @@ const prosList: string[] = service?.acf?.zalety_lista
 
 
 <Layout>
-    <div>
-        <Image src={photo} alt="Michalak 24" class="w-full object-cover object-center h-[60vh]"/>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40 h-[60vh]"></div>
-    </div>
+    <section class="relative h-[60vh] md:h-[60vh] overflow-hidden flex items-end bg-zinc-900">
+        <div class="absolute inset-0 ">
+            <Image src={photo} alt="Michalak 24" class="w-full object-cover object-center h-[60vh]"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-12 w-full">
+            <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">Co oferujemy</span>
+            <h1 class="mt-1 text-5xl md:text-6xl font-black text-white leading-tight uppercase">
+                {service.acf.tytul}
+            </h1>
+        </div>
+    </section>
+
     <section class="py-16 px-4 font-sans overflow-hidden relative">
+        <div class="flex flex-col md:flex-row items-center justify-center my-[11vh] gap-6">
+            <p class="text-zinc-400 text-lg max-w-2xl leading-relaxed">
+                {service.acf.opis_tytul}
+            </p>
+        </div>
         <div class="max-w-7xl mx-auto relative z-10">
             <h2 class="text-3xl md:text-5xl font-black text-center text-yellow-500 tracking-tight max-w-4xl mx-auto uppercase mb-16 leading-tight">
                     Dlaczego warto wybrać pomoc drogową?
@@ -188,11 +204,11 @@ const prosList: string[] = service?.acf?.zalety_lista
 
             <div class="flex flex-col gap-4 lg:mt-0 relative z-10 mx-auto lg:absolute lg:-right-1/5 lg:top-1/2 lg:-translate-y-1/2 w-[90%] lg:w-[50%] bg-yellow-500 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-zinc-900 -skew-x-5 h-fit">
                 <h2 class="text-2xl md:text-base font-black leading-tight">
-                    {service.acf.zalety_tytul}
+                    {service.acf.dlaczego_warto_tytul}
                 </h2>
 
                 <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
-                    {service.acf.zalety_opis_1}
+                    {service.acf.dlaczego_warto_opis_1}
                 </p>
 
                 <div>
@@ -208,7 +224,7 @@ const prosList: string[] = service?.acf?.zalety_lista
                 </div>
 
                 <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
-                    {service.acf.zalety_opis_2}
+                    {service.acf.dlaczego_warto_opis_2}
                 </p>
 
                 <div class="text-lg md:text-base font-black">
@@ -231,11 +247,11 @@ const prosList: string[] = service?.acf?.zalety_lista
             <div class="flex flex-col gap-4 lg:mt-0 relative z-10 mx-auto lg:absolute lg:-left-1/5 lg:top-1/2 lg:-translate-y-1/2 w-[90%] lg:w-[50%] bg-yellow-500 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-zinc-900 skew-x-5 h-fit">
                 <div class="-skew-x-5 flex flex-col gap-4">
                     <h2 class="text-2xl md:text-3xl font-black leading-tight">
-                        {service.acf.pojzady_tytul}
+                        {service.acf.cennik_tytul}
                     </h2>
 
                     <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
-                        {service.acf.pojazdy_opis}
+                        {service.acf.cennik_opis}
                     </p>
 
                     <div>
@@ -249,6 +265,9 @@ const prosList: string[] = service?.acf?.zalety_lista
                             ))}
                         </ul>
                     </div>
+                    <p class="text-sm md:text-base font-medium leading-relaxed opacity-90">
+                        {service.acf.cennik_opis_2}
+                    </p>
 
                     <div class="text-lg md:text-base font-black mt-2">
                         Zadzwoń teraz: <a href="tel:571531112" class="hover:underline">571 531 112</a>

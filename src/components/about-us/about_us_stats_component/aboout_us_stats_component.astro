@@ -1,0 +1,18 @@
+---
+const stats = [
+    { value: "10+", label: "Lat doświadczenia" },
+    { value: "5000+", label: "Zrealizowanych zleceń" },
+    { value: "30 min", label: "Średni czas dojazdu" },
+    { value: "24/7", label: "Dostępność" },
+];
+---
+<section class="bg-yellow-400">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-2 lg:grid-cols-4">
+        {stats.map((s, i) => (
+                <div class={`py-6 px-4 text-center ${i < stats.length - 1 ? 'border-r border-yellow-500' : ''}`}>
+                    <p class="text-4xl font-black text-black leading-none">{s.value}</p>
+                    <p class="mt-1 text-xs font-bold uppercase tracking-widest text-black/60">{s.label}</p>
+                </div>
+        ))}
+    </div>
+</section>
