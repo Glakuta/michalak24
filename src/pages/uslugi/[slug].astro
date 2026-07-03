@@ -29,6 +29,30 @@ const prosList: string[] = service?.acf?.zalety_lista
         .filter((item: string) => item.length > 0)
         .map((item: string) => item.replace(/,$/, ''))
     : [];
+
+const vechiclesList: string[] = service?.acf?.pojazdy_lista
+    ? service.acf.pojazdy_lista
+        .split('\n')
+        .map((item: string) => item.trim())
+        .filter((item: string) => item.length > 0)
+        .map((item: string) => item.replace(/,$/, ''))
+    : [];
+
+const whyWeList: string[] = service?.acf?.dlaczego_warto_lista
+    ? service.acf.dlaczego_warto_lista
+        .split('\n')
+        .map((item: string) => item.trim())
+        .filter((item: string) => item.length > 0)
+        .map((item: string) => item.replace(/,$/, ''))
+    : [];
+
+const priceList: string[] = service?.acf?.cennik_lista
+    ? service.acf.dlaczego_warto_lista
+        .split('\n')
+        .map((item: string) => item.trim())
+        .filter((item: string) => item.length > 0)
+        .map((item: string) => item.replace(/,$/, ''))
+    : [];
 ---
 
 
@@ -106,7 +130,7 @@ const prosList: string[] = service?.acf?.zalety_lista
                 </div>
             </div>
     </section>
-    <section class="bg-zinc-900 py-16 flex overflow-x-hidden my-[11vh]">
+    <section class="bg-zinc-900 py-16 flex overflow-x-hidden my-[11vh] h-fit">
         <div class="max-w-7xl w-full relative mr-auto">
             <div class="relative lg:w-4/5 h-[50vh] border-[4px] border-yellow-500 rounded-sm overflow-hidden shadow-2xl">
                 <Image
@@ -150,7 +174,7 @@ const prosList: string[] = service?.acf?.zalety_lista
         </div>
     </section>
 
-    <section class="bg-zinc-900 py-16 flex overflow-x-hidden my-[11vh]">
+    <section class="py-16 flex overflow-x-hidden my-[11vh]">
         <div class="max-w-7xl w-full relative ml-auto">
             <div class="relative lg:w-4/5 lg:ml-auto h-[50vh] border-[4px] border-yellow-500 rounded-sm overflow-hidden shadow-2xl">
                 <Image
@@ -173,7 +197,7 @@ const prosList: string[] = service?.acf?.zalety_lista
                     <div>
                         <p class="font-bold mb-3 uppercase tracking-wide text-sm">Obsługujemy między innymi:</p>
                         <ul class="space-y-2 text-sm md:text-base">
-                            {prosList.map((item: string) => (
+                            {vechiclesList.map((item: string) => (
                                     <li class="flex items-center gap-3">
                                         <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
                                         {item}
@@ -214,7 +238,7 @@ const prosList: string[] = service?.acf?.zalety_lista
                 <div>
                     <p class="font-bold mb-3 uppercase tracking-wide text-sm">W ramach usług:</p>
                     <ul class="space-y-2 text-sm md:text-base">
-                        {prosList.map((item: string) => (
+                        {whyWeList.map((item: string) => (
                                 <li class="flex items-center gap-3">
                                     <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
                                     {item}
@@ -257,7 +281,7 @@ const prosList: string[] = service?.acf?.zalety_lista
                     <div>
                         <p class="font-bold mb-3 uppercase tracking-wide text-sm">Obsługujemy między innymi:</p>
                         <ul class="space-y-2 text-sm md:text-base">
-                            {prosList.map((item: string) => (
+                            {priceList.map((item: string) => (
                                     <li class="flex items-center gap-3">
                                         <span class="w-1.5 h-1.5 rounded-full border border-zinc-900"></span>
                                         {item}
