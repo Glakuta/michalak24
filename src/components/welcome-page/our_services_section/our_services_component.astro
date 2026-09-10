@@ -7,8 +7,8 @@ import tyre from "../../../assets/przebita opona.png"
 import battery from "../../../assets/akumulator-michalak24.png"
 import fuel from "../../../assets/icons8-petrol-64.png"
 import car from "../../../assets/car.png"
-import lory from "../../../assets/icons8-car-64.png"
-import loryTyre from "../../../assets/icons8-motor-vehicle-64.png"
+import tir from "../../../assets/icons8-car-64.png"
+import tirTyre from "../../../assets/icons8-motor-vehicle-64.png"
 
 const data = [
     {
@@ -51,21 +51,21 @@ const data = [
         title: "Mobilny mechanik TIR",
         points: ["Naprawy", "Diagnostyka", "Serwis"],
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-        icon: lory
+        icon: tir
     },
     {
         title: "Mobilna wulkanizacja TIR",
         points: ["Opony", "Koła", "Serwis"],
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-        icon: loryTyre
+        icon: tirTyre
     },
 ]
 ---
 
-<section class="py-20 px-6 md:px-12 lg:px-20 my-[11vh]">
-    <ul class="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
+<section class="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 my-[11vh]">
+    <ul class="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
         {data.map((item) => (
-                <li class="bg-yellow-400 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]">
+                <li class="bg-yellow-400 backdrop-blur-sm rounded-2xl p-6 sm:p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.34rem)]">
                     <div class="w-20 h-20 m-auto rounded-xl flex items-center justify-center">
                         {item.icon ? (
                                 <Image src={item.icon} alt={item.title} class="w-16 h-16 object-contain"/>
@@ -76,8 +76,8 @@ const data = [
                         )}
                     </div>
                     <div class="flex flex-col gap-1">
-                        <h3 class="font-extrabold text-xl text-black tracking-tight text-center mx-auto">{item.title}</h3>
-                        <div class="flex items-center justify-center gap-2 font-semibold text-sm text-black/70 uppercase tracking-wide mx-auto">
+                        <h3 class="font-extrabold text-lg sm:text-xl text-black tracking-tight text-center mx-auto">{item.title}</h3>
+                        <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-semibold text-xs sm:text-sm text-black/70 uppercase tracking-wide mx-auto text-center">
                             {item.points.map((point, index) => (
                                     <>
                                         <span>{point}</span>
@@ -86,7 +86,7 @@ const data = [
                             ))}
                         </div>
                     </div>
-                    <p class="text-black/80 text-sm leading-relaxed">{item.description}</p>
+                    <p class="text-black/80 text-sm leading-relaxed text-center">{item.description}</p>
                 </li>
         ))}
     </ul>
