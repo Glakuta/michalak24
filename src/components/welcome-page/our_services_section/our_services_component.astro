@@ -30,9 +30,9 @@ const data = [
         icon: tyre
     },
     {
-        title: "Odpalanie z kabli",
-        points: ["Awarie", "Kolizje", "Wypadki"],
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        title: "Odpalanie samochodów",
+        points: ["Osobowe", "Dostawcze", "Ciężarowe"],
+        description: "Słaby lub rozładowany akumulator? Odpalimy Twój samochód przy pomocy profesjonalnych urządzeń rozruchowych.",
         icon: battery
     },
     {
@@ -62,7 +62,7 @@ const data = [
 ]
 ---
 
-<section class="py-16 sm:py-20 px-12 sm:px-6 md:px-12 lg:px-20 my-[11vh]">
+<section class="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 my-[11vh]">
     <ul class="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
         {data.map((item) => (
                 <li class="bg-yellow-400 backdrop-blur-sm rounded-2xl p-6 sm:p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.34rem)]">
@@ -77,12 +77,14 @@ const data = [
                     </div>
                     <div class="flex flex-col gap-1">
                         <h3 class="font-extrabold text-lg sm:text-xl text-black tracking-tight text-center mx-auto">{item.title}</h3>
-                        <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-semibold text-xs sm:text-sm text-black/70 uppercase tracking-wide mx-auto text-center">
+                        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-semibold text-xs sm:text-sm text-black/70 uppercase tracking-wide mx-auto text-center">
                             {item.points.map((point, index) => (
-                                    <>
-                                        <span class="text-xs">{point}</span>
-                                        {index < item.points.length - 1 && <span class="text-black/50 font-bold">·</span>}
-                                    </>
+                                    <span class="inline-flex items-center whitespace-nowrap">
+                                {index > 0 && (
+                                        <span class="text-black/50 font-bold mr-1.5" aria-hidden="true">·</span>
+                                )}
+                                        <span>{point}</span>
+                            </span>
                             ))}
                         </div>
                     </div>
