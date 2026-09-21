@@ -37,7 +37,7 @@ const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url
             <nav class="mb-6 flex items-center gap-2 text-sm text-zinc-500">
                 <a href="/" class="hover:text-[#FF7A00] transition-colors">Główna</a>
                 <span>/</span>
-                <a href="/blog" class="hover:text-[#FF7A00] transition-colors">Blog</a>
+                <a href="/wpisy" class="hover:text-[#FF7A00] transition-colors">Aktualności</a>
                 <span>/</span>
                 <span class="text-zinc-400 truncate max-w-[200px] md:max-w-none" set:html={post.title?.rendered} />
             </nav>
