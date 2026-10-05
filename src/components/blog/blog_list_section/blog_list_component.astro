@@ -1,11 +1,7 @@
 ---
 import Image from "astro/components/Image.astro";
 import hero from "../../../assets/DAF_hero.jpg";
-import special from "../../../assets/gero.jpg"
-import photo from "../../../assets/20211124_220606-scaled.jpg"
-import {getPostsQuery} from "../../../data/getPostsQuery.ts";
-
-
+import { getPostsQuery } from "../../../data/getPostsQuery.ts";
 
 const posts = await getPostsQuery();
 
@@ -13,14 +9,29 @@ if (!posts || posts.length === 0) {
     return Astro.redirect('/404');
 }
 
-// 2. Destrukturyzacja tablicy
 const [featured, ...rest] = posts;
+
+// Helper: wyciąga URL zdjęcia wyróżniającego
+const getFeaturedImage = (post: any) =>
+    post._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.large?.source_url
+    || post._embedded?.['wp:featuredmedia']?.[0]?.source_url
+    || null;
+
+// Helper: wyciąga nazwę pierwszej kategorii
+const getCategoryName = (post: any) => {
+    const terms = post._embedded?.['wp:term']?.[0]; // [0] = kategorie
+    return terms?.[0]?.name || 'Artykuł';
+};
+
+// Helper: czyści encje HTML
+const cleanText = (html: string) =>
+    html?.replace(/<[^>]*>/g, '').replace(/&#(\d+);/g, (_, c) => String.fromCharCode(c)) || '';
 ---
 
 <main class="bg-black min-h-screen">
     <div class="relative h-[80vh] lg:h-[60vh] overflow-hidden flex items-end bg-zinc-900">
-        <div class="absolute inset-0 ">
-            <Image src={hero} alt="Michalak 24" class="w-full object-cover object-center h-[80vh] lg:h-[60vh]"/>
+        <div class="absolute inset-0">
+            <Image src={hero} alt="Michalak 24" class="w-full object-cover object-center h-[80vh] lg:h-[60vh]" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
         </div>
         <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-12 w-full">
@@ -35,16 +46,26 @@ const [featured, ...rest] = posts;
     </div>
 
     <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 flex flex-col gap-8">
+        <!-- WYRÓŻNIONY POST -->
         <a href={`/wpisy/${featured.slug}`} class="group relative rounded-2xl overflow-hidden h-[480px] md:h-[560px] block">
-            <Image src={special} alt="Michalak 24" class="w-full h-full object-cover" />
+            {getFeaturedImage(featured) ? (
+                    <img
+                            src={getFeaturedImage(featured)}
+                            alt={cleanText(featured.title.rendered)}
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            loading="eager"
+                    />
+            ) : (
+                    <Image src={hero} alt="Michalak 24" class="w-full h-full object-cover" />
+            )}
             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent group-hover:via-black/40 transition-all duration-500"></div>
             <div class="absolute top-0 left-0 right-0 h-1 bg-yellow-400"></div>
 
             <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
                 <div class="flex items-center gap-3 mb-4">
                     <span class="text-xs font-bold uppercase tracking-widest text-black bg-yellow-400 px-3 py-1 rounded-full">
-                     {featured.categories?.[0] || 'Artykuł'}
-                   </span>
+                        {getCategoryName(featured)}
+                    </span>
                     <span class="text-zinc-400 text-sm">Wyróżniony wpis</span>
                 </div>
                 <h2 class="text-3xl md:text-4xl font-black text-white leading-tight max-w-3xl group-hover:text-yellow-400 transition-colors duration-300" set:html={featured.title.rendered} />
@@ -55,7 +76,6 @@ const [featured, ...rest] = posts;
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
                         </svg>
-
                         Pomoc Drogowa
                     </div>
                     <div class="flex items-center gap-2 text-zinc-400 text-sm">
@@ -65,25 +85,36 @@ const [featured, ...rest] = posts;
                         {new Date(featured.date).toLocaleDateString('pl-PL')}
                     </div>
                     <span class="text-yellow-400 font-bold text-sm flex items-center gap-1.5 group-hover:gap-3 transition-all duration-200">
-                     Czytaj więcej
-                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                       <path d="M5 12h14M12 5l7 7-7 7"/>
-                     </svg>
-                   </span>
+                        Czytaj więcej
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
                 </div>
             </div>
         </a>
+
+        <!-- POZOSTAŁE POSTY -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {rest.map((post: any) => (
-                    <a href={`/wpisy/${post.slug}`} class="group relative rounded-2xl overflow-hidden h-[400px] block mb-32">
-                        <Image src={photo} alt="Michalak 24" class="w-full h-full object-cover" />
+            {rest.map((post) => (
+                    <a href={`/wpisy/${post.slug}`} class="group relative rounded-2xl overflow-hidden h-[400px] block">
+                        {getFeaturedImage(post) ? (
+                                <img
+                                        src={getFeaturedImage(post)}
+                                        alt={cleanText(post.title.rendered)}
+                                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                        loading="lazy"
+                                />
+                        ) : (
+                                <Image src={hero} alt="Michalak 24" class="w-full h-full object-cover" />
+                        )}
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent group-hover:via-black/30 transition-all duration-500"></div>
                         <div class="absolute inset-y-0 left-0 w-1 bg-yellow-400 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom"></div>
 
                         <div class="absolute top-4 left-4">
-                     <span class="text-xs font-bold uppercase tracking-widest text-black bg-yellow-400 px-3 py-1 rounded-full">
-                       {post.categories?.[0] || 'Artykuł'}
-                     </span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-black bg-yellow-400 px-3 py-1 rounded-full">
+                            {getCategoryName(post)}
+                        </span>
                         </div>
 
                         <div class="absolute bottom-0 left-0 right-0 p-6">
@@ -93,15 +124,15 @@ const [featured, ...rest] = posts;
 
                             <div class="mt-3 flex items-center justify-between">
                                 <div class="flex items-center gap-3">
-                             <span class="text-zinc-500 text-xs flex items-center gap-1">
-                               <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                               </svg>
-                               Michalak24
-                             </span>
+                                <span class="text-zinc-500 text-xs flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                    Michalak24
+                                </span>
                                     <span class="text-zinc-500 text-xs">
-                               {new Date(post.date).toLocaleDateString('pl-PL')}
-                             </span>
+                                    {new Date(post.date).toLocaleDateString('pl-PL')}
+                                </span>
                                 </div>
                             </div>
                         </div>
