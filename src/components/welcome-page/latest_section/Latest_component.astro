@@ -1,34 +1,20 @@
 ---
 import Image from "astro/components/Image.astro";
-import photo from "../../../assets/20211124_220606-scaled.jpg"
+import photo from "../../../assets/20211124_220606-scaled.jpg";
+import { getPostsQuery } from "../../../data/getPostsQuery.ts";
+import {
+    cleanText,
+    formatPostDate,
+    getCategoryName,
+    getFeaturedImage,
+    getPostSummary,
+    getReadTime,
+} from "../../../data/postHelpers.ts";
 
+const LIMIT = 3;
 
-const posts = [
-    {
-        slug: "co-robic-gdy-auto-sie-psuje",
-        date: "12 maja 2025",
-        category: "Porady",
-        title: "Co zrobić gdy auto się psuje na autostradzie?",
-        excerpt: "Awaria na autostradzie to stresująca sytuacja. Dowiedz się jak zachować spokój, zadbać o bezpieczeństwo i szybko uzyskać pomoc drogową.",
-        readTime: "4 min",
-    },
-    {
-        slug: "holowanie-za-granica",
-        date: "28 kwietnia 2025",
-        category: "Holowanie",
-        title: "Holowanie za granicą — co warto wiedzieć przed wyjazdem?",
-        excerpt: "Wyjeżdżasz za granicę? Sprawdź jakie prawa przysługują Ci w razie awarii w Europie i jak działa pomoc drogowa poza Polską.",
-        readTime: "6 min",
-    },
-    {
-        slug: "ubezpieczenie-assistance",
-        date: "10 kwietnia 2025",
-        category: "Ubezpieczenia",
-        title: "Assistance w ubezpieczeniu OC — czy naprawdę Cię chroni?",
-        excerpt: "Wielu kierowców nie wie co obejmuje ich polisa assistance. Wyjaśniamy czego możesz oczekiwać od ubezpieczyciela i kiedy warto dopłacić za rozszerzony pakiet.",
-        readTime: "5 min",
-    },
-];
+const allPosts = await getPostsQuery();
+const posts = (allPosts ?? []).slice(0, LIMIT);
 ---
 
 <section class="bg-black py-20 px-6 md:px-12 lg:px-20">
@@ -54,31 +40,44 @@ const posts = [
 
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post) => (
+            {posts.length === 0 ? (
+                    <p class="md:col-span-2 lg:col-span-3 text-zinc-400 text-center py-12">
+                        Brak wpis\u00f3w do wy\u015bietlenia.
+                    </p>
+            ) : posts.map((post) => (
                     <a href={`/wpisy/${post.slug}`}
                 class="group flex flex-col bg-zinc-900 border border-zinc-800 hover:border-yellow-500/50 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-yellow-400/5"
                     >
                         <div class="px-6 pt-6 flex items-center justify-between">
                          <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">
-                            {post.category}
+                            {getCategoryName(post)}
                          </span>
-                            <span class="text-xs text-zinc-500">{post.date}</span>
+                            <span class="text-xs text-zinc-500">{formatPostDate(post.date)}</span>
                         </div>
                     <div class="overflow-hidden rounded-2xl mb-8">
-                        <Image
-                                src={photo}
-                                alt="Wnętrze samochodu"
-                                class="w-full h-64 object-cover p-6 "
-                        />
+                        {getFeaturedImage(post) ? (
+                                <img
+                                        src={getFeaturedImage(post)!}
+                                        alt={cleanText(post.title.rendered)}
+                                        class="w-full h-64 object-cover p-6"
+                                        loading="lazy"
+                                />
+                        ) : (
+                                <Image
+                                        src={photo}
+                                        alt="Wn\u0119trze samochodu"
+                                        class="w-full h-64 object-cover p-6 "
+                                />
+                        )}
                     </div>
 
 
                         <div class="flex flex-col gap-3 px-6 py-5 flex-1">
                             <h3 class="text-white font-bold text-lg leading-snug group-hover:text-yellow-400 transition-colors duration-200">
-                                {post.title}
+                                {cleanText(post.title.rendered)}
                             </h3>
                             <p class="text-zinc-400 text-sm leading-relaxed line-clamp-3">
-                                {post.excerpt}
+                                {getPostSummary(post)}
                             </p>
                         </div>
 
@@ -89,7 +88,7 @@ const posts = [
               <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
               </svg>
-                {post.readTime} czytania
+                {getReadTime(post)} min czytania
             </span>
                             <span class="text-yellow-400 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
               Czytaj

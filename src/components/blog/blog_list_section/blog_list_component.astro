@@ -2,6 +2,7 @@
 import Image from "astro/components/Image.astro";
 import hero from "../../../assets/DAF_hero.jpg";
 import { getPostsQuery } from "../../../data/getPostsQuery.ts";
+import { cleanText, getCategoryName, getFeaturedImage } from "../../../data/postHelpers.ts";
 
 const posts = await getPostsQuery();
 
@@ -10,22 +11,6 @@ if (!posts || posts.length === 0) {
 }
 
 const [featured, ...rest] = posts;
-
-// Helper: wyciąga URL zdjęcia wyróżniającego
-const getFeaturedImage = (post: any) =>
-    post._embedded?.['wp:featuredmedia']?.[0]?.media_details?.sizes?.large?.source_url
-    || post._embedded?.['wp:featuredmedia']?.[0]?.source_url
-    || null;
-
-// Helper: wyciąga nazwę pierwszej kategorii
-const getCategoryName = (post: any) => {
-    const terms = post._embedded?.['wp:term']?.[0]; // [0] = kategorie
-    return terms?.[0]?.name || 'Artykuł';
-};
-
-// Helper: czyści encje HTML
-const cleanText = (html: string) =>
-    html?.replace(/<[^>]*>/g, '').replace(/&#(\d+);/g, (_, c) => String.fromCharCode(c)) || '';
 ---
 
 <main class="bg-black min-h-screen">
