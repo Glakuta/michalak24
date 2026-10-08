@@ -4,8 +4,13 @@ import Footer_section from "../components/shared/footer_component/footer_section
 import Navigation_component from "../components/shared/navigation_component/navigation_component.astro";
 import Socialmedia_sidebar_component
     from "../components/shared/socialmedia_sidebar_component/socialmedia_sidebar_component.astro";
+import ogImage from "../assets/cropped-24-3.jpg"
 const {pathname} = Astro.url
 const isHome = pathname === "/" || pathname === "/index.html";
+const { title = 'Pomoc drogowa Kalisz 24/7 — Michalak24', description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const image = ogImage.src;
+
 ---
 
 <!doctype html>
@@ -16,7 +21,16 @@ const isHome = pathname === "/" || pathname === "/index.html";
 		<link rel="icon" type="image/svg+xml" href="/src/assets/cropped-24-3.jpg" />
 		<link rel="icon" href="/src/assets/cropped-24-3.jpg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Pomoc drogowa Kalisz - Michalak24</title>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonical} />
+        <!-- Open Graph (Facebook, LinkedIn, itd.) -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:site_name" content="Michalak24" />
 	</head>
 	<body>
     <Navigation_component />

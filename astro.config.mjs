@@ -14,6 +14,7 @@ import robots from 'astro-robots';
 export default defineConfig({
 site: 'https://michalak24.pl',
   integrations: [react(), sitemap(), robots()],
+  trailingSlash: 'never',
   output: 'server',
   adapter: vercel({
   imageService: true,
