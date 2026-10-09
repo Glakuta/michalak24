@@ -1,8 +1,9 @@
 ---
+export const prerender = false;
 import { getKnowledgeBasePostQuery } from "../../../data/getKnowledgeBaseQuery.ts";
 import Layout from "../../../layouts/Layout.astro";
 
-export const prerender = false;
+
 const { slug } = Astro.params;
 if (!slug) {
     return Astro.redirect('/404');

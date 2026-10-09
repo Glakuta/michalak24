@@ -1,11 +1,12 @@
 ---
+export const prerender = false;
 import Image from "astro/components/Image.astro";
 import hero from "../../../assets/DAF_hero.jpg";
 import special from "../../../assets/gero.jpg"
 import photo from "../../../assets/20211124_220606-scaled.jpg"
 import { getKnowledgeBaseQuery } from "../../../data/getKnowledgeBaseQuery.ts";
 
-export const prerender = false;
+
 const [featured, ...rest] = await getKnowledgeBaseQuery();
 ---
 <main class="bg-black min-h-screen">

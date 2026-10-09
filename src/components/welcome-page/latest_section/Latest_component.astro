@@ -1,4 +1,5 @@
 ---
+export const prerender = false;
 import Image from "astro/components/Image.astro";
 import photo from "../../../assets/20211124_220606-scaled.jpg";
 import { getPostsQuery } from "../../../data/getPostsQuery.ts";
@@ -12,7 +13,6 @@ import {
     getReadTime,
 } from "../../../data/postHelpers.ts";
 
-export const prerender = false;
 const LIMIT = 3;
 
 const allPosts = await getPostsQuery();

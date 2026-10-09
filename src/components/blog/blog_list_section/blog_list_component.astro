@@ -1,10 +1,10 @@
 ---
+export const prerender = false;
 import Image from "astro/components/Image.astro";
 import hero from "../../../assets/DAF_hero.jpg";
 import { getPostsQuery } from "../../../data/getPostsQuery.ts";
 import { cleanText, getCategoryName, getFeaturedImage, getFeaturedImageSize } from "../../../data/postHelpers.ts";
 
-export const prerender = false;
 const posts = await getPostsQuery();
 
 if (!posts || posts.length === 0) {
