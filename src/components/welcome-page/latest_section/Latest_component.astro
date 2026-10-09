@@ -12,6 +12,7 @@ import {
     getReadTime,
 } from "../../../data/postHelpers.ts";
 
+export const prerender = false;
 const LIMIT = 3;
 
 const allPosts = await getPostsQuery();
@@ -53,7 +54,7 @@ const posts = (allPosts ?? []).slice(0, LIMIT);
                          <span class="text-yellow-400 text-xs font-bold uppercase tracking-[0.25em]">
                             {getCategoryName(post)}
                          </span>
-                            <span class="text-xs text-zinc-500">{formatPostDate(post.date)}</span>
+                            <span class="text-xs text-zinc-400">{formatPostDate(post.date)}</span>
                         </div>
                     <div class="overflow-hidden rounded-2xl mb-8">
                         {getFeaturedImage(post) ? (
@@ -90,7 +91,7 @@ const posts = (allPosts ?? []).slice(0, LIMIT);
 
 
                         <div class="px-6 pb-6 flex items-center justify-between border-t border-zinc-800 pt-4 mt-auto">
-            <span class="text-xs text-zinc-500 flex items-center gap-1.5">
+            <span class="text-xs text-zinc-400 flex items-center gap-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
               </svg>

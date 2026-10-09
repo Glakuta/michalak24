@@ -15,7 +15,7 @@ export default defineConfig({
 site: 'https://michalak24.pl',
   integrations: [react(), sitemap(), robots()],
   trailingSlash: 'never',
-  output: 'server',
+  output: 'static',
   adapter: vercel({
   imageService: true,
   }),
