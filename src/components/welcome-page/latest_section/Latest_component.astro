@@ -7,6 +7,7 @@ import {
     formatPostDate,
     getCategoryName,
     getFeaturedImage,
+    getFeaturedImageSize,
     getPostSummary,
     getReadTime,
 } from "../../../data/postHelpers.ts";
@@ -60,6 +61,8 @@ const posts = (allPosts ?? []).slice(0, LIMIT);
                                         src={getFeaturedImage(post)!}
                                         alt={cleanText(post.title.rendered)}
                                         class="w-full h-64 object-cover p-6"
+                                        width={getFeaturedImageSize(post).width}
+                                        height={getFeaturedImageSize(post).height}
                                         loading="lazy"
                                 />
                         ) : (
@@ -67,6 +70,9 @@ const posts = (allPosts ?? []).slice(0, LIMIT);
                                         src={photo}
                                         alt="Wn\u0119trze samochodu"
                                         class="w-full h-64 object-cover p-6 "
+                                        width={2560}
+                                        height={1105}
+                                        loading="lazy"
                                 />
                         )}
                     </div>

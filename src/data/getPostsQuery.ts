@@ -12,10 +12,12 @@ export interface WPPost {
         'wp:featuredmedia'?: Array<{
             source_url: string;
             media_details?: {
+                width?: number;
+                height?: number;
                 sizes?: {
-                    large?: { source_url: string };
-                    medium_large?: { source_url: string };
-                    full?: { source_url: string };
+                    large?: { source_url: string; width?: number; height?: number };
+                    medium_large?: { source_url: string; width?: number; height?: number };
+                    full?: { source_url: string; width?: number; height?: number };
                 };
             };
         }>;

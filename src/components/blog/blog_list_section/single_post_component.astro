@@ -23,11 +23,14 @@ const formattedDate = new Date(post.date).toLocaleDateString('pl-PL', {
 });
 
 const media = post._embedded?.['wp:featuredmedia']?.[0];
+const featuredSize = media?.media_details?.sizes?.large
+    || media?.media_details?.sizes?.medium_large;
 const featuredImage =
-    media?.media_details?.sizes?.large?.source_url
-    || media?.media_details?.sizes?.medium_large?.source_url
+    featuredSize?.source_url
     || media?.source_url
     || hero.src;
+const featuredWidth = featuredSize?.width || media?.media_details?.width || 1920;
+const featuredHeight = featuredSize?.height || media?.media_details?.height || 887;
 
 const rawTitle = post.title?.rendered || 'Wpis';
 const plainTitle = rawTitle.replace(/&#(\d+);/g, (_, code) => String.fromCharCode(code));
@@ -50,10 +53,12 @@ const cleanText = (html: string) =>
                         src={featuredImage}
                         alt={plainTitle}
                         class="w-full object-cover object-center h-full"
-                        loading="eager"
+                        width={featuredWidth}
+                        height={featuredHeight}
+                        loading="lazy"
                     />
                 ) : (
-                    <Image src={hero} alt="Michalak 24" class="w-full object-cover object-center h-full" />
+                    <Image src={hero} alt="Michalak 24" class="w-full object-cover object-center h-full" width={1920} height={887} loading="lazy" />
                 )}
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
             </div>

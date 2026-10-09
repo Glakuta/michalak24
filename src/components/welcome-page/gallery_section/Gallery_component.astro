@@ -8,11 +8,11 @@ import photo4 from '../../../assets/WhatsApp Image 2026-09-19 at 20.30.42.jpeg';
 import photo5 from '../../../assets/WhatsApp Image 2026-09-19 at 20.35.12.jpeg';
 
 const photos = [
-    { src: photo1, alt: "Holowanie wózka widłowego - Michalak24" },
-    { src: photo2, alt: "Pomoc drogowa przy wypadku - Michalak24" },
-    { src: photo3, alt: "Laweta na drodze - Michalak24" },
-    { src: photo4, alt: "Transport auta przy stadionie - Michalak24" },
-    { src: photo5, alt: "Holowanie w deszczu - Michalak24" },
+    { src: photo1, alt: "Holowanie wózka widłowego - Michalak24", width: 2048, height: 1365 },
+    { src: photo2, alt: "Pomoc drogowa przy wypadku - Michalak24", width: 1643, height: 2048 },
+    { src: photo3, alt: "Laweta na drodze - Michalak24", width: 1718, height: 1838 },
+    { src: photo4, alt: "Transport auta przy stadionie - Michalak24", width: 1586, height: 2048 },
+    { src: photo5, alt: "Holowanie w deszczu - Michalak24", width: 1594, height: 2048 },
 ];
 ---
 
@@ -40,6 +40,9 @@ const photos = [
                             src={photo.src}
                             alt={photo.alt}
                             class="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                            width={photo.width}
+                            height={photo.height}
+                            loading="lazy"
                     />
                     <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all duration-500"></div>
                     <div class="absolute bottom-0 left-0 right-0 h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>

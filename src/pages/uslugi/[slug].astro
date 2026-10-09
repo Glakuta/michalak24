@@ -59,7 +59,7 @@ const priceList: string[] = service?.acf?.cennik_lista
 <Layout>
     <section class="relative h-[60vh] md:h-[60vh] overflow-hidden flex items-end bg-zinc-900">
         <div class="absolute inset-0 ">
-            <Image src={photo} alt="Michalak 24" class="w-full object-cover object-center h-[60vh]"/>
+            <Image src={photo} alt="Michalak 24" class="w-full object-cover object-center h-[60vh]" width={1920} height={887} loading="lazy"/>
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
         </div>
 
@@ -85,7 +85,7 @@ const priceList: string[] = service?.acf?.cennik_lista
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 w-2/3 lg:w-full  mx-auto">
                 <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
                     <div class="relative z-10 flex flex-col gap-6 justify-start">
-                        <Image src={hotline} alt="Michalak-24-hotline" />
+                        <Image src={hotline} alt="Michalak-24-hotline" width={100} height={100} loading="lazy" />
                             <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
                                 <span class="font-bold">Całodobowa dostępność</span> – nawet w nocy i święta. Średni czas dojazdu: <span class="font-bold">20–30 minut</span>
                             </p>
@@ -93,7 +93,7 @@ const priceList: string[] = service?.acf?.cennik_lista
                     </div>
 
                     <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
-                        <Image src={towtruck} alt="Michalak-24-laweta" />
+                        <Image src={towtruck} alt="Michalak-24-laweta" width={100} height={100} loading="lazy" />
                         <div class="relative z-10 flex flex-col gap-6 justify-start">
                             <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
                                 Otrzymasz <span class="font-bold">profesjonalne wyciąganie auta</span> z trudno dostępnego miejsca
@@ -103,7 +103,7 @@ const priceList: string[] = service?.acf?.cennik_lista
 
                     <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
                         <div class="relative z-10 flex flex-col gap-6 justify-start">
-                            <Image src={protection} alt="Michalak-24-protection" />
+                            <Image src={protection} alt="Michalak-24-protection" width={100} height={100} loading="lazy" />
                             <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
                                 Twoje auto zostanie <span class="font-bold">zabezpieczone</span> na każdym etapie
                             </p>
@@ -112,7 +112,7 @@ const priceList: string[] = service?.acf?.cennik_lista
 
                     <div class="bg-yellow-500 rounded-xl p-8 shadow-md relative overflow-hidden flex flex-col justify-between min-h-[260px] border">
                         <div class="relative z-10 flex flex-col gap-6 justify-start">
-                            <Image src={serviceCall} alt="Michalak-24-call-service" />
+                            <Image src={serviceCall} alt="Michalak-24-call-service" width={100} height={100} loading="lazy" />
                             <p class="text-zinc-800 text-sm md:text-base font-medium leading-relaxed">
                                 <span class="font-bold">Pomoc drogowa</span>, którą świadczymy, jest dopasowana do Twojej sytuacji
                             </p>
@@ -137,6 +137,9 @@ const priceList: string[] = service?.acf?.cennik_lista
                         src={laweta}
                         alt="Laweta pomocy drogowej - Michalak 24"
                         class="w-full object-cover h-full grayscale-[20%]"
+                        width={2048}
+                        height={1153}
+                        loading="lazy"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
             </div>
@@ -181,6 +184,9 @@ const priceList: string[] = service?.acf?.cennik_lista
                         src={laweta}
                         alt="Pomoc drogowa Kalisz - Michalak 24"
                         class="w-full object-cover h-full grayscale-[20%]"
+                        width={2048}
+                        height={1153}
+                        loading="lazy"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
             </div>
@@ -221,6 +227,9 @@ const priceList: string[] = service?.acf?.cennik_lista
                         src={laweta}
                         alt="Laweta pomocy drogowej - Michalak 24"
                         class="w-full object-cover h-full grayscale-[20%]"
+                        width={2048}
+                        height={1153}
+                        loading="lazy"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
             </div>
@@ -265,6 +274,9 @@ const priceList: string[] = service?.acf?.cennik_lista
                         src={laweta}
                         alt="Pomoc drogowa Kalisz - Michalak 24"
                         class="w-full object-cover h-full grayscale-[20%]"
+                        width={2048}
+                        height={1153}
+                        loading="lazy"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-white/40"></div>
             </div>
