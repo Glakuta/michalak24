@@ -13,8 +13,9 @@ import robots from 'astro-robots';
 // https://astro.build/config
 export default defineConfig({
 site: 'https://michalak24.pl',
-  integrations: [react(), sitemap(), robots()],
+  integrations: [react(), robots()],
   trailingSlash: 'never',
+  prefetchAll: true,
   output: 'static',
   adapter: vercel({
   imageService: true,

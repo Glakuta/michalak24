@@ -12,15 +12,10 @@ import protection from "../../assets/icons8-protect-100.png";
 import serviceCall from "../../assets/icons8-online-support-100.png"
 
 const { slug } = Astro.params;
-if (!slug) {
-    return Astro.redirect('/uslugi');
-}
-const serviceArr = await getSlugQuery(slug);
-console.log(serviceArr);
+const serviceArr = slug ? await getSlugQuery(slug) : null;
 const service = serviceArr && serviceArr.length > 0 ? serviceArr[0] : null;
-if (!service) return Astro.redirect('/uslugi');
 if (!service) {
-    return Astro.redirect('/uslugi');
+    return Astro.rewrite('/404');
 }
 
 const prosList: string[] = service?.acf?.zalety_lista

@@ -1,20 +1,7 @@
 ---
-export const prerender = false;
-import { getKnowledgeBasePostQuery } from "../../../data/getKnowledgeBaseQuery.ts";
 import Layout from "../../../layouts/Layout.astro";
 
-
-const { slug } = Astro.params;
-if (!slug) {
-    return Astro.redirect('/404');
-}
-
-const postsRaw = await getKnowledgeBasePostQuery(slug);
-const post = postsRaw && postsRaw.length > 0 ? postsRaw[0] : null;
-
-if (!post) {
-    return Astro.redirect('/404');
-}
+const { post } = Astro.props;
 
 const formattedDate = new Date(post.date).toLocaleDateString('pl-PL', {
     year: 'numeric',

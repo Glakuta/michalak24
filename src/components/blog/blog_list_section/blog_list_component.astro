@@ -1,5 +1,6 @@
 ---
 export const prerender = false;
+import { getPostUrl } from '../../../data/postHelpers.ts';
 import Image from "astro/components/Image.astro";
 import hero from "../../../assets/DAF_hero.jpg";
 import { getPostsQuery } from "../../../data/getPostsQuery.ts";
@@ -32,8 +33,7 @@ const [featured, ...rest] = posts;
     </div>
 
     <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 flex flex-col gap-8">
-        <!-- WYRÓŻNIONY POST -->
-        <a href={`/wpisy/${featured.slug}`} class="group relative rounded-2xl overflow-hidden h-[480px] md:h-[560px] block">
+        <a href={getPostUrl(featured)} class="group relative rounded-2xl overflow-hidden h-[480px] md:h-[560px] block">
             {getFeaturedImage(featured) ? (
                     <img
                             src={getFeaturedImage(featured)}
@@ -85,7 +85,7 @@ const [featured, ...rest] = posts;
         <!-- POZOSTAŁE POSTY -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map((post) => (
-                    <a href={`/wpisy/${post.slug}`} class="group relative rounded-2xl overflow-hidden h-[400px] block">
+                    <a href={getPostUrl(post)} class="group relative rounded-2xl overflow-hidden h-[400px] block">
                         {getFeaturedImage(post) ? (
                                 <img
                                         src={getFeaturedImage(post)}

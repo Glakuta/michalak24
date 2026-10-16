@@ -1,6 +1,15 @@
 ---
 export const prerender = false;
+import { getSinglePostQuery } from "../../data/getSinglePost.ts";
 import Single_post_component from "../../components/blog/blog_list_section/single_post_component.astro";
+
+const { slug } = Astro.params;
+const postsRaw = slug ? await getSinglePostQuery(slug) : null;
+const post = postsRaw && postsRaw.length > 0 ? postsRaw[0] : null;
+
+if (!post) {
+    return Astro.rewrite('/404');
+}
 ---
 
-<Single_post_component />
+<Single_post_component post={post} />

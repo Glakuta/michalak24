@@ -1,6 +1,15 @@
 ---
 export const prerender = false;
+import { getKnowledgeBasePostQuery } from "../../data/getKnowledgeBaseQuery.ts";
 import Knowledge_base_single_post_component from "../../components/knowledge-base/knowledge_base_list_section/knowledge_base_single_post_component.astro";
+
+const { slug } = Astro.params;
+const postsRaw = slug ? await getKnowledgeBasePostQuery(slug) : null;
+const post = postsRaw && postsRaw.length > 0 ? postsRaw[0] : null;
+
+if (!post) {
+    return Astro.rewrite('/404');
+}
 ---
 
-<Knowledge_base_single_post_component />
+<Knowledge_base_single_post_component post={post} />

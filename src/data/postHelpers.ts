@@ -20,6 +20,23 @@ const NAMED_ENTITIES: Record<string, string> = {
     '&eacute;': '\u00e9',
 };
 
+const CATEGORY_URL_MAP: Record<number, string> = {
+    1:  '/wpisy',
+    12: '/baza-wiedzy',
+};
+
+export function getPostUrl(post: {
+    slug: string;
+    categories?: number[];
+}): string {
+    const categoryId = post.categories?.[0];
+    const prefix = categoryId && CATEGORY_URL_MAP[categoryId]
+        ? CATEGORY_URL_MAP[categoryId]
+        : '/wpisy';   // fallback
+
+    return `${prefix}/${post.slug}`;
+}
+
 /** Strip HTML tags and decode entities from a WordPress rendered field. */
 export const cleanText = (html?: string): string => {
     if (!html) return '';
