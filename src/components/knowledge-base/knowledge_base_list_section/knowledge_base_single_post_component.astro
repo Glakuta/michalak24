@@ -1,5 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import hero from "../../../assets/DAF_hero.jpg";
 
 const { post } = Astro.props;
 
@@ -12,10 +13,11 @@ const formattedDate = new Date(post.date).toLocaleDateString('pl-PL', {
 const media = post._embedded?.['wp:featuredmedia']?.[0];
 const featuredSize = media?.media_details?.sizes?.large
     || media?.media_details?.sizes?.medium_large;
-const featuredImage = media?.source_url
-    || '/images/default-blog-hero.jpg';
-const featuredWidth = featuredSize?.width || media?.media_details?.width || 1200;
-const featuredHeight = featuredSize?.height || media?.media_details?.height || 675;
+const featuredImage = featuredSize?.source_url
+    || media?.source_url
+    || hero.src;
+const featuredWidth = featuredSize?.width || media?.media_details?.width || 1920;
+const featuredHeight = featuredSize?.height || media?.media_details?.height || 887;
 ---
 
 <Layout title={`${post.title?.rendered || 'Artykuł'} - Baza wiedzy Michalak24`}>

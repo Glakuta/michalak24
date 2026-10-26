@@ -1,4 +1,6 @@
 import type { WPPost } from './getPostsQuery';
+import { BLOG_CATEGORY_ID } from './getPostsQuery';
+import { KNOWLEDGE_BASE_CATEGORY_ID } from './getKnowledgeBaseQuery';
 
 const NAMED_ENTITIES: Record<string, string> = {
     '&nbsp;': ' ',
@@ -21,8 +23,8 @@ const NAMED_ENTITIES: Record<string, string> = {
 };
 
 const CATEGORY_URL_MAP: Record<number, string> = {
-    1:  '/wpisy',
-    12: '/baza-wiedzy',
+    [BLOG_CATEGORY_ID]:  '/wpisy',
+    [KNOWLEDGE_BASE_CATEGORY_ID]: '/baza-wiedzy',
 };
 
 export function getPostUrl(post: {

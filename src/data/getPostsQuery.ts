@@ -1,4 +1,4 @@
-import {getEnv} from "astro/env/runtime";
+export const BLOG_CATEGORY_ID = 1;
 
 export interface WPPost {
     id: number;
@@ -26,13 +26,14 @@ export interface WPPost {
             name: string;
             taxonomy: string;
         }>>;
+        'author'?: Array<{ name?: string }>;
     };
 }
 
 export const getPostsQuery = async (): Promise<WPPost[]> => {
     try {
         const response = await fetch(
-            `${import.meta.env.BACKEND_URL}/wp/v2/posts?_embed&per_page=20`
+            `${import.meta.env.BACKEND_URL}/wp/v2/posts?_embed&per_page=20&categories=${BLOG_CATEGORY_ID}`
         );
         if (!response.ok) {
             console.error('WP API error:', response.status);

@@ -10,7 +10,12 @@ const isHome = pathname === "/" || pathname === "/index.html";
 const { title = 'Pomoc drogowa Kalisz 24/7 — Michalak24', description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const image = ogImage.src;
-
+interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+    type?: 'website' | 'article';
+}
 ---
 
 <!doctype html>
