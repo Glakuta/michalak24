@@ -1,4 +1,10 @@
 import type { APIRoute } from 'astro';
+import { BLOG_CATEGORY_ID } from '../data/getPostsQuery';
+import { KNOWLEDGE_BASE_CATEGORY_ID } from '../data/getKnowledgeBaseQuery';
+
+// Renderowany na żądanie (SSR), aby nowe wpisy z WordPressa trafiały do mapy
+// automatycznie, bez konieczności ponownego budowania strony.
+export const prerender = false;
 
 // --- Typy ---
 
@@ -18,38 +24,61 @@ interface SitemapEntry {
     priority?: string;
 }
 
-interface WpPost {
+interface WpItem {
     slug: string;
-    date: string;        // ISO z WP
-    modified: string;    // ISO z WP
-    status: string;
+    modified?: string;
+    acf?: Record<string, unknown>;
 }
 
-interface WpEndpoint {
-    restBase: string;
+// Jeden "feed" = jeden prefiks URL w sitemapce.
+// REST nie ma endpointu `/baza-wiedzy` ani `/uslugi` — wpisy bazy wiedzy
+// żyją w `posts` (kategoria 12), a usługi w `pages`.
+interface WpFeed {
+    base: 'posts' | 'pages';
+    params: Record<string, string>;
     urlPrefix: string;
     changefreq: ChangeFreq;
     priority: string;
+    include?: (item: WpItem) => boolean;
 }
 
-// --- Konfiguracja endpointów WP ---
+// --- Konfiguracja feedów WP ---
 
-const WP_API_BASE = import.meta.env.WP_API_URL ?? 'https://twoj-cms.pl/wp-json/wp/v2';
-
-const WP_ENDPOINTS: readonly WpEndpoint[] = [
-    { restBase: 'posts',        urlPrefix: '/wpisy',        changefreq: 'monthly', priority: '0.7' },
-    { restBase: 'baza-wiedzy',  urlPrefix: '/baza-wiedzy',  changefreq: 'monthly', priority: '0.7' },
-    { restBase: 'uslugi',       urlPrefix: '/uslugi',       changefreq: 'monthly', priority: '0.8' },
+const WP_FEEDS: readonly WpFeed[] = [
+    {
+        base: 'posts',
+        params: { categories: String(BLOG_CATEGORY_ID) },
+        urlPrefix: '/wpisy',
+        changefreq: 'monthly',
+        priority: '0.7',
+    },
+    {
+        base: 'posts',
+        params: { categories: String(KNOWLEDGE_BASE_CATEGORY_ID) },
+        urlPrefix: '/baza-wiedzy',
+        changefreq: 'monthly',
+        priority: '0.7',
+    },
+    {
+        base: 'pages',
+        params: {},
+        urlPrefix: '/uslugi',
+        changefreq: 'monthly',
+        priority: '0.8',
+        // Do /uslugi trafiają tylko strony z danymi usługi (ACF),
+        // dzięki czemu strona placeholder WP nie ląduje w sitemapce.
+        include: (item) => Boolean(item.acf && Object.keys(item.acf).length > 0),
+    },
 ] as const;
 
-// --- Statyczne trasy ---
+// --- Statyczne trasy (trailingSlash: 'never' → bez końcowego "/") ---
 
 const STATIC_PAGES: readonly SitemapEntry[] = [
-    { url: '/',        changefreq: 'weekly',  priority: '1.0' },
-    { url: '/uslugi/', changefreq: 'weekly',  priority: '0.9' },
-    { url: '/o-nas/',  changefreq: 'monthly', priority: '0.7' },
-    { url: '/wpisy/',        changefreq: 'weekly', priority: '0.8' },
-    { url: '/baza-wiedzy/',  changefreq: 'weekly', priority: '0.8' },
+    { url: '/',         changefreq: 'weekly',  priority: '1.0' },
+    { url: '/uslugi',   changefreq: 'weekly',  priority: '0.9' },
+    { url: '/o-nas',    changefreq: 'monthly', priority: '0.7' },
+    { url: '/wpisy',    changefreq: 'weekly',  priority: '0.8' },
+    { url: '/baza-wiedzy', changefreq: 'weekly', priority: '0.8' },
 ] as const;
 
 // --- Helpery ---
@@ -76,30 +105,30 @@ function renderUrl(entry: SitemapEntry): string {
 }
 
 /**
- * Pobiera WSZYSTKIE wpisy z danego endpointu WP, obsługując paginację.
- * WP REST API domyślnie zwraca max 100 wpisów na stronę.
+ * Pobiera WSZYSTKIE elementy danego feedu WP, obsługując paginację.
+ * WP REST API domyślnie zwraca max 100 rekordów na stronę.
  */
-async function fetchAllWpPosts(restBase: string): Promise<WpPost[]> {
-    const base = `${import.meta.env.BACKEND_URL}/wp/v2/posts`;
-    if (!base) {
+async function fetchAllWpItems(feed: WpFeed): Promise<WpItem[]> {
+    const backendUrl = import.meta.env.BACKEND_URL;
+    if (!backendUrl) {
         console.error('[sitemap] Brak BACKEND_URL w zmiennych środowiskowych');
         return [];
     }
 
-    const cleanBase = base.replace(/\/$/, '');
-    const all: WpPost[] = [];
-    let page = 1;
+    const base = `${backendUrl.replace(/\/$/, '')}/wp/v2/${feed.base}`;
+    const all: WpItem[] = [];
     const perPage = 100;
+    let page = 1;
 
     while (true) {
-        const url = new URL(`${cleanBase}/${restBase}`);
-        console.log(url.toString());
+        const url = new URL(base);
         url.searchParams.set('per_page', String(perPage));
         url.searchParams.set('page', String(page));
         url.searchParams.set('status', 'publish');
-        url.searchParams.set('_fields', 'slug,date,modified,status');
-
-        console.log(`[sitemap] Fetch: ${url.toString()}`);
+        url.searchParams.set('_fields', 'slug,date,modified,acf');
+        for (const [key, value] of Object.entries(feed.params)) {
+            url.searchParams.set(key, value);
+        }
 
         const res = await fetch(url.toString(), {
             headers: {
@@ -108,22 +137,21 @@ async function fetchAllWpPosts(restBase: string): Promise<WpPost[]> {
             },
         });
 
-        if (res.status === 400) {
-            // WP zwraca 400, gdy page > total pages
-            console.log(`[sitemap] ${restBase}: koniec paginacji na page=${page}`);
+        if (res.status === 400 || res.status === 404) {
+            // 400: page > total pages; 404: endpoint nie istnieje
             break;
         }
 
         if (!res.ok) {
-            console.warn(`[sitemap] ${restBase}: HTTP ${res.status} dla ${url}`);
+            console.warn(`[sitemap] ${feed.base}: HTTP ${res.status} dla ${url}`);
             break;
         }
 
-        const batch = (await res.json()) as WpPost[];
+        const batch = (await res.json()) as WpItem[];
         if (!Array.isArray(batch) || batch.length === 0) break;
 
-        all.push(...batch);
-        console.log(`[sitemap] ${restBase}: page=${page}, +${batch.length} (razem ${all.length})`);
+        const included = feed.include ? batch.filter(feed.include) : batch;
+        all.push(...included);
 
         if (batch.length < perPage) break;
         page += 1;
@@ -149,20 +177,23 @@ export const GET: APIRoute = async ({ site }) => {
 
     const dynamicEntries: SitemapEntry[] = [];
 
-    for (const cfg of WP_ENDPOINTS) {
+    for (const feed of WP_FEEDS) {
         try {
-            const posts = await fetchAllWpPosts(cfg.restBase);
+            const items = await fetchAllWpItems(feed);
 
-            for (const post of posts) {
+            for (const item of items) {
+                if (!item.slug) continue;
                 dynamicEntries.push({
-                    url: toAbsoluteUrl(site, `${cfg.urlPrefix}/${post.slug}/`),
-                    lastmod: post.modified ? new Date(post.modified).toISOString() : undefined,
-                    changefreq: cfg.changefreq,
-                    priority: cfg.priority,
+                    url: toAbsoluteUrl(site, `${feed.urlPrefix}/${item.slug}`),
+                    lastmod: item.modified
+                        ? new Date(item.modified).toISOString()
+                        : undefined,
+                    changefreq: feed.changefreq,
+                    priority: feed.priority,
                 });
             }
         } catch (err) {
-            console.error(`[sitemap] Błąd przy pobieraniu ${cfg.restBase}:`, err);
+            console.error(`[sitemap] Błąd przy pobieraniu ${feed.base}:`, err);
             // Kontynuujemy — lepiej zwrócić częściową mapę niż 500
         }
     }
@@ -177,7 +208,9 @@ ${allEntries.map(renderUrl).join('\n')}
     return new Response(xml, {
         headers: {
             'Content-Type': 'application/xml; charset=utf-8',
-            'Cache-Control': 'public, max-age=3600',
+            // Krótki cache w przeglądarce + cache na krawędzi Vercel,
+            // dzięki czemu nowe wpisy pojawiają się w mapie maksymalnie po ~1h.
+            'Cache-Control': 'public, max-age=600, s-maxage=3600, stale-while-revalidate=86400',
         },
     });
 };
