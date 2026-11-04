@@ -5,17 +5,19 @@ import Navigation_component from "../components/shared/navigation_component/navi
 import Socialmedia_sidebar_component
     from "../components/shared/socialmedia_sidebar_component/socialmedia_sidebar_component.astro";
 import ogImage from "../assets/cropped-24-3.jpg"
-const {pathname} = Astro.url
-const isHome = pathname === "/" || pathname === "/index.html";
-const { title = 'Pomoc drogowa Kalisz 24/7 — Michalak24', description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const image = ogImage.src;
+
 interface Props {
     title: string;
     description?: string;
     image?: string;
     type?: 'website' | 'article';
 }
+
+const {pathname} = Astro.url
+const isHome = pathname === "/" || pathname === "/index.html";
+const { title = 'Pomoc drogowa Kalisz 24/7 — Michalak24', description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const image = ogImage.src;
 ---
 
 <!doctype html>
