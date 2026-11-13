@@ -78,10 +78,10 @@ const data = [
 ---
 
 <section class="py-16 sm:py-20 px-4 sm:px-6 md:px-12 lg:px-20 my-[11vh]">
-    <ul class="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
+    <ul class="services-grid max-w-6xl mx-auto">
         {data.map((item) => (
-                <li class="bg-yellow-400 backdrop-blur-sm rounded-2xl p-6 sm:p-8 flex flex-col gap-4 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.34rem)]">
-                    <div class="w-20 h-20 m-auto rounded-xl flex items-center justify-center">
+                <li class="service-card bg-yellow-400 backdrop-blur-sm rounded-2xl p-6 sm:p-8 hover:bg-white/30 hover:-translate-y-1 transition-all duration-300">
+                    <div class="service-icon w-20 h-20 rounded-xl flex items-center justify-center">
                         {item.icon ? (
                                 <Image src={item.icon} alt={item.title} class="w-16 h-16 object-contain" width={item.width} height={item.height} loading="lazy"/>
                         ) : (
@@ -90,21 +90,82 @@ const data = [
                                 </div>
                         )}
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <h3 class="font-extrabold text-lg sm:text-xl text-black tracking-tight text-center mx-auto">{item.title}</h3>
-                        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-semibold text-xs sm:text-sm text-black/70 uppercase tracking-wide mx-auto text-center">
-                            {item.points.map((point, index) => (
-                                    <span class="inline-flex items-center whitespace-nowrap">
-                                {index > 0 && (
-                                        <span class="text-black/50 font-bold mr-1.5" aria-hidden="true">·</span>
-                                )}
-                                        <span>{point}</span>
-                            </span>
-                            ))}
-                        </div>
+                    <h3 class="service-title font-extrabold text-lg sm:text-xl text-black tracking-tight text-center">{item.title}</h3>
+                    <div class="service-points flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-semibold text-xs sm:text-sm text-black/70 uppercase tracking-wide text-center">
+                        {item.points.map((point, index) => (
+                                <span class="inline-flex items-center whitespace-nowrap">
+                            {index > 0 && (
+                                    <span class="text-black/50 font-bold mr-1.5" aria-hidden="true">·</span>
+                            )}
+                                    <span>{point}</span>
+                        </span>
+                        ))}
                     </div>
-                    <p class="text-black/80 text-sm leading-relaxed text-center">{item.description}</p>
+                    <p class="service-description text-black/80 text-sm leading-relaxed text-center">{item.description}</p>
                 </li>
         ))}
     </ul>
 </section>
+
+<style>
+    .services-grid {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .service-card {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .service-icon {
+        margin-inline: auto;
+    }
+
+    .service-title {
+        display: block;
+        text-align: center;
+    }
+
+    .service-points {
+        align-content: flex-start;
+    }
+
+    .service-description {
+        text-align: center;
+    }
+
+    @media (min-width: 640px) {
+        .services-grid {
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            width: calc(50% - 0.75rem);
+        }
+
+        .service-title {
+            min-height: 3.5rem;
+        }
+
+        .service-points {
+            min-height: 2.75rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .services-grid {
+            gap: 2rem;
+        }
+
+        .service-card {
+            width: calc(33.333% - 1.334rem);
+        }
+    }
+</style>
